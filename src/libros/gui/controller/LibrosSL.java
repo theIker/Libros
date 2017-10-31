@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package librossl;
+package libros.gui.controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,18 +13,24 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author ubuntu
+ * @author iker
  */
 public class LibrosSL extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
-        Scene scene = new Scene(root);
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/LoginFinal.fxml"));
         
-        stage.setScene(scene);
-        //stage.show();
+        Parent root =(Parent)loader.load();
+        
+        LoginFinalController controller= ((LoginFinalController) loader.getController());
+        controller.setStage(stage);
+        controller.initStage(root);
+        
+        
+       
+
     }
 
     /**
