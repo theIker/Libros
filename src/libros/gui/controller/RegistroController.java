@@ -107,7 +107,19 @@ public class RegistroController implements Initializable {
              Alert alert = new Alert(AlertType.ERROR, "Rellene todos los campos");
              alert.showAndWait();
         }else{
-            
+            if (textEmail.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
+                if(aceptarTerminos.isSelected()){
+                    Alert alert = new Alert(AlertType.INFORMATION, "Registro completado");
+                    alert.showAndWait();
+                    stage.close();
+                }else{
+                     Alert alert = new Alert(AlertType.ERROR, "Acepte los terminos primero");
+                     alert.showAndWait();
+                }
+            }else{
+                 Alert alert = new Alert(AlertType.ERROR, "Email Incorrecto");
+                 alert.showAndWait();
+            }
         }
         
         
