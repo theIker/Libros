@@ -105,7 +105,7 @@
                         </GridPane>
                         <HBox layoutX="8.0" layoutY="339.0" prefHeight="90.0" prefWidth="592.0">
                            <children>
-                              <Button fx:id="btnInsertar" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Insertar">
+                              <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#insertarLibro" prefHeight="40.0" prefWidth="120.0" text="Insertar">
                                  <HBox.margin>
                                     <Insets left="400.0" top="20.0" />
                                  </HBox.margin>
@@ -124,15 +124,15 @@
                                     <Insets top="20.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button fx:id="btnaddGen" mnemonicParsing="false" text="+">
+                              <Button fx:id="btnaddGen" mnemonicParsing="false" onAction="#añadirGen" text="+">
                                  <HBox.margin>
                                     <Insets top="20.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
-                        <TextArea fx:id="textAreaGeneros" editable="false" layoutX="86.0" layoutY="249.0" prefHeight="79.0" prefWidth="187.0" />
-                        <Button fx:id="btnlimpGeneros" layoutX="283.0" layoutY="276.0" mnemonicParsing="false" text="LImpiar" />
+                        <TextArea fx:id="textAreaGeneros" disable="true" editable="false" layoutX="86.0" layoutY="249.0" prefHeight="79.0" prefWidth="187.0" />
+                        <Button fx:id="btnlimpGeneros" layoutX="283.0" layoutY="276.0" mnemonicParsing="false" onAction="#limpiarGen" text="LImpiar" />
                      </children>
                   </AnchorPane>
             </content>
@@ -163,42 +163,42 @@
                               <Label text="Fecha publicacion:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <Label text="Precio:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <Label text="Stock:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <TextField fx:id="TextIsbn1" GridPane.columnIndex="1">
+                              <TextField fx:id="TextIsbn1" disable="true" GridPane.columnIndex="1">
                                  <GridPane.margin>
                                     <Insets right="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="TextTitulo1" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <TextField fx:id="TextTitulo1" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets right="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="TextAutor1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <TextField fx:id="TextAutor1" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets right="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="TextEditorial1" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <TextField fx:id="TextEditorial1" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets right="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="TextDescripcion1" GridPane.columnIndex="3">
+                              <TextField fx:id="TextDescripcion1" disable="true" GridPane.columnIndex="3">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="TextPrecio1" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                              <TextField fx:id="TextPrecio1" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <TextField fx:id="TextStock1" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                              <TextField fx:id="TextStock1" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <DatePicker fx:id="dateFechaPub1" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                              <DatePicker fx:id="dateFechaPub1" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
                                  </GridPane.margin>
@@ -207,12 +207,12 @@
                         </GridPane>
                         <HBox layoutX="50.0" layoutY="340.0" prefHeight="90.0" prefWidth="592.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Borrar libro">
+                              <Button fx:id="btnBorrar" disable="true" mnemonicParsing="false" onAction="#borrar" prefHeight="40.0" prefWidth="120.0" text="Borrar libro">
                                  <HBox.margin>
                                     <Insets left="60.0" top="30.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Modificar">
+                              <Button fx:id="btnModi" disable="true" mnemonicParsing="false" onAction="#modificar" prefHeight="40.0" prefWidth="120.0" text="Modificar">
                                  <HBox.margin>
                                     <Insets left="150.0" top="30.0" />
                                  </HBox.margin>
@@ -226,21 +226,21 @@
                                     <Insets top="25.0" />
                                  </HBox.margin>
                               </Label>
-                              <ComboBox fx:id="comboGeneros1" prefWidth="150.0">
+                              <ComboBox fx:id="comboGeneros1" disable="true" prefWidth="150.0">
                                  <HBox.margin>
                                     <Insets top="20.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button fx:id="btnaddGen1" mnemonicParsing="false" text="+">
+                              <Button fx:id="btnaddGen1" disable="true" mnemonicParsing="false" onAction="#añadirGen2" text="+">
                                  <HBox.margin>
                                     <Insets top="20.0" />
                                  </HBox.margin>
                               </Button>
                            </children>
                         </HBox>
-                        <TextArea fx:id="textAreaGeneros1" editable="false" layoutX="86.0" layoutY="276.0" prefHeight="79.0" prefWidth="187.0" />
-                        <Button fx:id="btnlimpGeneros1" layoutX="286.0" layoutY="270.0" mnemonicParsing="false" text="LImpiar" />
-                        <Button fx:id="btnBUscar" layoutX="86.0" layoutY="24.0" mnemonicParsing="false" text="Buscar" />
+                        <TextArea fx:id="textAreaGeneros1" disable="true" editable="false" layoutX="86.0" layoutY="276.0" prefHeight="79.0" prefWidth="187.0" />
+                        <Button fx:id="btnlimpGeneros1" disable="true" layoutX="286.0" layoutY="270.0" mnemonicParsing="false" onAction="#limpiarGen2" text="LImpiar" />
+                        <Button fx:id="btnBuscar" layoutX="86.0" layoutY="24.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
                      </children>
                   </AnchorPane>
                </content>
@@ -251,13 +251,13 @@
                      <children>
                         <Label layoutX="67.0" layoutY="59.0" text="Genero:" />
                         <TextField fx:id="textGenero" layoutX="129.0" layoutY="54.0" />
-                        <Button fx:id="btnInsertgen" layoutX="316.0" layoutY="54.0" mnemonicParsing="false" text="Insertar" />
+                        <Button fx:id="btnInsertgen" layoutX="316.0" layoutY="54.0" mnemonicParsing="false" onAction="#insertarGenero" text="Insertar" />
                         <TableView fx:id="tablaGeneros" layoutX="115.0" layoutY="110.0" prefHeight="277.0" prefWidth="142.0">
                           <columns>
-                            <TableColumn prefWidth="141.0" text="Genero" />
+                            <TableColumn fx:id="tableGenero" prefWidth="141.0" text="Genero" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnBorrar" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" text="Borrar" />
+                        <Button fx:id="btnBorrar" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" onAction="#borrarGenero" text="Borrar" />
                      </children>
                   </AnchorPane>
                </content>

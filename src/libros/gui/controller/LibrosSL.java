@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import libros.datos.mana.GenerosManager;
+import libros.datos.mana.GenerosManagerTestDataGenerator;
 
 /**
  *
@@ -19,6 +21,8 @@ public class LibrosSL extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        GenerosManager generoManager= 
+                new GenerosManagerTestDataGenerator();
         
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/LoginFinal.fxml"));
         
@@ -26,6 +30,7 @@ public class LibrosSL extends Application {
         
         LoginFinalController controller= ((LoginFinalController) loader.getController());
         controller.setStage(stage);
+        controller.setGenManager(generoManager);
         controller.initStage(root);
         
         

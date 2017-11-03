@@ -7,6 +7,9 @@ package libros.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -14,11 +17,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import libros.datos.beans.GeneroBean;
+import libros.datos.mana.GenerosManager;
 
 /**
  * FXML Controller class
@@ -27,6 +33,7 @@ import javafx.stage.WindowEvent;
  */
 public class AdminController implements Initializable {
    private Stage stage;
+   private GenerosManager generosManager;
     @FXML
     private TextField TextIsbn;
     @FXML
@@ -84,9 +91,11 @@ public class AdminController implements Initializable {
     @FXML
     private Button btnInsertgen;
     @FXML
-    private TableView<?> tablaGeneros;
+    private TableView<GeneroBean> tablaGeneros;
     @FXML
     private Button btnBorrar;
+    @FXML
+    private TableColumn tableGenero;
 
     /**
      * Initializes the controller class.
@@ -104,13 +113,74 @@ public class AdminController implements Initializable {
    public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setOnShowing(this::handleWindowShowing);
+        //Codificar comportamiento
+        
+        
+        cargarTabla();
         stage.show();
     }
     
-    public void handleWindowShowing(WindowEvent event){
-           //se ejecuta antes de iniciar la ventana
-
+   @FXML
+    public void añadirGen(ActionEvent event){
+        
     }
     
+    @FXML
+    public void limpiarGen(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void insertarLibro(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void buscar(ActionEvent event){
+        
+    }
+   
+    @FXML
+    public void añadirGen2(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void limpiarGen2(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void borrar(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void modificar(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void insertarGenero(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void borrarGenero(ActionEvent event){
+        
+    }
+
+    private void cargarTabla() {
+       tableGenero.setCellValueFactory(new PropertyValueFactory<> ("Genero"));
+        
+      ObservableList<GeneroBean> list=FXCollections.observableArrayList(generosManager.getAllGeneros());
+       
+        
+      tablaGeneros.setItems(list);
+     
+    }
+
+    void setGenManager(GenerosManager gen) {
+        this.generosManager=gen;
+    }
 }

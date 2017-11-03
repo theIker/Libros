@@ -109,7 +109,7 @@ public class RegistroController implements Initializable {
         }else{
             if (textEmail.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
                 if(aceptarTerminos.isSelected()){
-                    Alert alert = new Alert(AlertType.INFORMATION, "Registro completado");
+                    Alert alert = new Alert(AlertType.INFORMATION, "Registro completado podra acceder con el usuario u:u");
                     alert.showAndWait();
                     stage.close();
                 }else{
