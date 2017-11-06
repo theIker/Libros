@@ -114,7 +114,7 @@ public class LoginFinalController implements Initializable {
         
     }
 
-    void setGenManager(GenerosManager generoManager) {
+    public void setGenManager(GenerosManager generoManager) {
         this.gen=generoManager;
     }
     

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package libros.gui.controller;
+package libros.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import libros.datos.mana.GenerosManager;
 import libros.datos.mana.GenerosManagerTestDataGenerator;
+import libros.gui.controller.LoginFinalController;
 
 /**
  *

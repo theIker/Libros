@@ -71,41 +71,38 @@ public class LibroBean implements Serializable {
     }
 
     public void setEditorial(String editorial) {
-        this.editorial = editorial;
+        this.editorial.set(editorial);
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion.get();
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion.set(descripcion);
     }
 
     public String getFechaPub() {
-        return fechaPub;
+        return this.fechaPub.get();
     }
 
     public void setFechaPub(String fechaPub) {
-        this.fechaPub = fechaPub;
+        this.fechaPub.set(fechaPub);
     }
 
     public Float getPrecio() {
-        return precio;
+        return this.precio.get();
     }
 
     public void setPrecio(Float precio) {
-        this.precio = precio;
+        this.precio.set(precio);
     }
 
     public Integer getStock() {
-        return stock;
+        return this.stock.get();
     }
 
     public void setStock(Integer stock) {
-        this.stock = stock;
+        this.stock.set(stock);    
     }
-    
-   
-    
 }
