@@ -27,6 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import libros.datos.beans.GeneroBean;
 import libros.datos.mana.GenerosManager;
+import libros.datos.mana.LibrosManager;
 
 /**
  * FXML Controller class
@@ -36,6 +37,8 @@ import libros.datos.mana.GenerosManager;
 public class AdminController implements Initializable {
    private Stage stage;
    private GenerosManager generosManager;
+   private LibrosManager lib;
+   
     @FXML
     private TextField TextIsbn;
     @FXML
@@ -145,6 +148,7 @@ public class AdminController implements Initializable {
         Parent root =(Parent)loader.load();
         
        BusquedaLibroController controller= ((BusquedaLibroController) loader.getController());
+        controller.setLibroManager(lib);
         controller.setStage(reg);
         controller.initStage(root);
     }
@@ -191,5 +195,9 @@ public class AdminController implements Initializable {
 
     void setGenManager(GenerosManager gen) {
         this.generosManager=gen;
+    }
+
+    void setLibroManager(LibrosManager lib) {
+        this.lib=lib;
     }
 }

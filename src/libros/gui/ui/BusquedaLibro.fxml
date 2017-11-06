@@ -17,13 +17,13 @@
             <Button fx:id="btnBuscar" layoutX="580.0" layoutY="39.0" mnemonicParsing="false" onAction="#buscar" prefHeight="26.0" prefWidth="104.0" text="Buscar" />
             <TableView fx:id="tablaBusqueda" layoutX="15.0" layoutY="98.0" prefHeight="283.0" prefWidth="724.0">
                <columns>
-                  <TableColumn prefWidth="75.0" text="ISBN" />
-                  <TableColumn prefWidth="75.0" text="Titulo" />
-                  <TableColumn prefWidth="75.0" text="Autor" />
-                  <TableColumn prefWidth="75.0" text="Editorial" />
-                  <TableColumn prefWidth="76.0" text="Precio" />
-                  <TableColumn prefWidth="73.0" text="FechaP" />
-                  <TableColumn prefWidth="349.0" text="Descripcion" />
+                  <TableColumn fx:id="isbn" prefWidth="75.0" text="ISBN" />
+                  <TableColumn fx:id="titulo" prefWidth="75.0" text="Titulo" />
+                  <TableColumn fx:id="autor" prefWidth="75.0" text="Autor" />
+                  <TableColumn fx:id="editorial" prefWidth="75.0" text="Editorial" />
+                  <TableColumn fx:id="precio" prefWidth="76.0" text="Precio" />
+                  <TableColumn fx:id="fechaP" prefWidth="73.0" text="FechaP" />
+                  <TableColumn fx:id="descripcion" prefWidth="349.0" text="Descripcion" />
                </columns>
             </TableView>
             <Button fx:id="btnCargar" layoutX="391.0" layoutY="417.0" mnemonicParsing="false" onAction="#cargarLibro" prefHeight="43.0" prefWidth="127.0" text="Cargar" visible="false" />

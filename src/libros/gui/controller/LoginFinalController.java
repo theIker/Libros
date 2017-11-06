@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import libros.datos.mana.GenerosManager;
+import libros.datos.mana.LibrosManager;
 
 /**
  * FXML Controller class
@@ -31,6 +32,8 @@ import libros.datos.mana.GenerosManager;
 public class LoginFinalController implements Initializable {
     private Stage stage;
     private GenerosManager gen;
+    private LibrosManager lib;
+    
     @FXML
     private TextField textFieldNombreU;
     @FXML
@@ -72,6 +75,7 @@ public class LoginFinalController implements Initializable {
         AdminController controller= ((AdminController) loader.getController());
         controller.setStage(stage);
         controller.setGenManager(gen);
+        controller.setLibroManager(lib);
         
         controller.initStage(root);
         }
@@ -116,6 +120,10 @@ public class LoginFinalController implements Initializable {
 
     public void setGenManager(GenerosManager generoManager) {
         this.gen=generoManager;
+    }
+
+    public void setLibroManager(LibrosManager libroManager) {
+        this.lib=libroManager;
     }
     
     
