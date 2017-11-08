@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -19,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.AdminController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.AdminController">
    <children>
       <HBox layoutX="-5.0" layoutY="-8.0" prefHeight="79.0" prefWidth="609.0" style="-fx-background-color: #505050;">
          <children>
@@ -37,7 +36,7 @@
         <tabs>
           <Tab text="Insertar libro">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="600.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="604.0">
                      <children>
                         <GridPane layoutX="25.0" layoutY="27.0" prefHeight="171.0" prefWidth="551.0">
                           <columnConstraints>
@@ -103,7 +102,7 @@
                               </DatePicker>
                            </children>
                         </GridPane>
-                        <HBox layoutX="8.0" layoutY="339.0" prefHeight="90.0" prefWidth="592.0">
+                        <HBox layoutY="255.0" prefHeight="90.0" prefWidth="600.0">
                            <children>
                               <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#insertarLibro" prefHeight="40.0" prefWidth="120.0" text="Insertar">
                                  <HBox.margin>
@@ -124,15 +123,8 @@
                                     <Insets top="20.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button fx:id="btnaddGen" mnemonicParsing="false" onAction="#añadirGen" text="+">
-                                 <HBox.margin>
-                                    <Insets top="20.0" />
-                                 </HBox.margin>
-                              </Button>
                            </children>
                         </HBox>
-                        <TextArea fx:id="textAreaGeneros" disable="true" editable="false" layoutX="86.0" layoutY="249.0" prefHeight="79.0" prefWidth="187.0" />
-                        <Button fx:id="btnlimpGeneros" layoutX="283.0" layoutY="276.0" mnemonicParsing="false" onAction="#limpiarGen" text="LImpiar" />
                      </children>
                   </AnchorPane>
             </content>
@@ -205,7 +197,7 @@
                               </DatePicker>
                            </children>
                         </GridPane>
-                        <HBox layoutX="50.0" layoutY="340.0" prefHeight="90.0" prefWidth="592.0">
+                        <HBox layoutX="8.0" layoutY="255.0" prefHeight="90.0" prefWidth="592.0">
                            <children>
                               <Button fx:id="btnBorrar" disable="true" mnemonicParsing="false" onAction="#borrar" prefHeight="40.0" prefWidth="120.0" text="Borrar libro">
                                  <HBox.margin>
@@ -219,7 +211,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox layoutX="26.0" layoutY="224.0" prefHeight="79.0" prefWidth="291.0" spacing="10.0">
+                        <HBox layoutX="254.0" layoutY="1.0" prefHeight="79.0" prefWidth="342.0" spacing="10.0">
                            <children>
                               <Label text="Genero:">
                                  <HBox.margin>
@@ -228,18 +220,11 @@
                               </Label>
                               <ComboBox fx:id="comboGeneros1" disable="true" prefWidth="150.0">
                                  <HBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets left="65.0" top="20.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button fx:id="btnaddGen1" disable="true" mnemonicParsing="false" onAction="#añadirGen2" text="+">
-                                 <HBox.margin>
-                                    <Insets top="20.0" />
-                                 </HBox.margin>
-                              </Button>
                            </children>
                         </HBox>
-                        <TextArea fx:id="textAreaGeneros1" disable="true" editable="false" layoutX="86.0" layoutY="276.0" prefHeight="79.0" prefWidth="187.0" />
-                        <Button fx:id="btnlimpGeneros1" disable="true" layoutX="286.0" layoutY="270.0" mnemonicParsing="false" onAction="#limpiarGen2" text="LImpiar" />
                         <Button fx:id="btnBuscar" layoutX="86.0" layoutY="24.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
                      </children>
                   </AnchorPane>
@@ -252,7 +237,7 @@
                         <Label layoutX="67.0" layoutY="59.0" text="Genero:" />
                         <TextField fx:id="textGenero" layoutX="129.0" layoutY="54.0" />
                         <Button fx:id="btnInsertgen" layoutX="316.0" layoutY="54.0" mnemonicParsing="false" onAction="#insertarGenero" text="Insertar" />
-                        <TableView fx:id="tablaGeneros" layoutX="115.0" layoutY="110.0" prefHeight="277.0" prefWidth="142.0">
+                        <TableView fx:id="tablaGeneros" layoutX="115.0" layoutY="110.0" prefHeight="206.0" prefWidth="142.0">
                           <columns>
                             <TableColumn fx:id="tableGenero" prefWidth="141.0" text="Genero" />
                           </columns>

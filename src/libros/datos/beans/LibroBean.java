@@ -28,6 +28,8 @@ public class LibroBean implements Serializable {
     private final SimpleIntegerProperty stock;
 
     
+
+    
      public LibroBean(String isbn,String titulo,String autor,
             String editorial,String descripcion,String fechaPub,Float precio,Integer stock){
         

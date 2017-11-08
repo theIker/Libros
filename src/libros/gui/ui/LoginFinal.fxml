@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.LoginFinalController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.LoginFinalController">
    <children>
       <GridPane layoutX="111.0" layoutY="56.0" prefHeight="124.0" prefWidth="278.0">
         <columnConstraints>
@@ -34,11 +34,11 @@
             <PasswordField fx:id="textFieldContra" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <HBox layoutY="-2.0" prefHeight="58.0" prefWidth="535.0">
+      <HBox layoutY="-2.0" prefHeight="58.0" prefWidth="480.0">
          <children>
-            <HBox prefHeight="58.0" prefWidth="539.0" style="-fx-background-color: #505050;">
+            <HBox prefHeight="58.0" prefWidth="480.0" style="-fx-background-color: #505050;">
                <children>
-                  <Label text="Logueate en tu cuenta de Libros S.A" textFill="WHITE">
+                  <Label text="Identificate en tu cuenta de Libros S.A" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="25.0" top="13.0" />
                      </HBox.margin>
@@ -49,22 +49,25 @@
                </HBox.margin>
             </HBox>
          </children></HBox>
-      <HBox layoutX="2.0" layoutY="185.0" prefHeight="58.0" prefWidth="533.0">
+      <HBox layoutX="2.0" layoutY="185.0" prefHeight="58.0" prefWidth="480.0">
          <children>
-            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#entrar" prefHeight="48.0" prefWidth="119.0" text="Login" />
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#entrar" prefHeight="39.0" prefWidth="110.0" text="Login" />
          </children>
          <padding>
-            <Insets left="190.0" />
+            <Insets left="210.0" />
          </padding>
       </HBox>
-      <HBox layoutX="-6.0" layoutY="268.0" prefHeight="58.0" prefWidth="541.0" style="-fx-background-color: DarkGray;">
+      <HBox layoutX="-6.0" layoutY="256.0" prefHeight="107.0" prefWidth="488.0" style="-fx-background-color: DarkGray;">
          <children>
             <Label id="lblregistro" text="No tienes cuenta?">
                <HBox.margin>
-                  <Insets top="5.0" />
+                  <Insets top="25.0" />
                </HBox.margin>
             </Label>
-            <Hyperlink fx:id="HyperLinkRegistro" onAction="#registrar" text="Crear cuenta ahora &gt;&gt;" />
+            <Hyperlink fx:id="HyperLinkRegistro" onAction="#registrar" text="Crear cuenta ahora &gt;&gt;">
+               <HBox.margin>
+                  <Insets top="20.0" />
+               </HBox.margin></Hyperlink>
          </children>
          <padding>
             <Insets left="70.0" top="10.0" />
