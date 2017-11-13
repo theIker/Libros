@@ -6,7 +6,10 @@
 package libros.gui.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -84,6 +87,9 @@ public class BusquedaLibroController implements Initializable {
     
     @FXML
     private void buscar(ActionEvent event) {
+       
+       
+      
     }
     
     @FXML
@@ -105,7 +111,7 @@ public class BusquedaLibroController implements Initializable {
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOnShowing(this::handleWindowShowing);
-        stage.show();
+        stage.showAndWait();
     }
     
     public void handleWindowShowing(WindowEvent event){

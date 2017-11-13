@@ -199,12 +199,12 @@
                         </GridPane>
                         <HBox layoutX="8.0" layoutY="255.0" prefHeight="90.0" prefWidth="592.0">
                            <children>
-                              <Button fx:id="btnBorrar" disable="true" mnemonicParsing="false" onAction="#borrar" prefHeight="40.0" prefWidth="120.0" text="Borrar libro">
+                              <Button fx:id="btnBorrar" mnemonicParsing="false" onAction="#borrar" prefHeight="40.0" prefWidth="120.0" text="Borrar libro">
                                  <HBox.margin>
                                     <Insets left="60.0" top="30.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button fx:id="btnModi" disable="true" mnemonicParsing="false" onAction="#modificar" prefHeight="40.0" prefWidth="120.0" text="Modificar">
+                              <Button fx:id="btnModi" mnemonicParsing="false" onAction="#modificar" prefHeight="40.0" prefWidth="120.0" text="Modificar">
                                  <HBox.margin>
                                     <Insets left="150.0" top="30.0" />
                                  </HBox.margin>
@@ -230,7 +230,7 @@
                             <TableColumn fx:id="tableGenero" prefWidth="141.0" text="Genero" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnBorrar" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" onAction="#borrarGenero" text="Borrar" />
+                        <Button fx:id="btnBorrar2" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" onAction="#borrarGenero" text="Borrar" />
                      </children>
                   </AnchorPane>
                </content>

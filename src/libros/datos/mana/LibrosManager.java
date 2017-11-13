@@ -14,5 +14,7 @@ import java.util.Collection;
 public interface LibrosManager {
     
      public Collection getAllLibros();
+     
+     public Collection getLibrosIsbn(String isbn);
     
 }

@@ -5,6 +5,7 @@
  */
 package libros.gui.controller;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -14,7 +15,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +28,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -49,7 +54,7 @@ public class AdminController implements Initializable {
    private GenerosManager generosManager;
    private LibrosManager lib;
    private LibroBean libro;
-   
+   private final static Logger logger= Logger.getLogger("libros.gui.controller");
     @FXML
     private TextField TextIsbn;
     @FXML
@@ -135,8 +140,10 @@ public class AdminController implements Initializable {
 
    public void initStage(Parent root) {
         Scene scene = new Scene(root);
-        stage.setScene(scene);
+        stage.setScene(scene);  
         //Codificar comportamiento
+        btnBorrar.setDisable(true);
+        btnModi.setDisable(true);
         
         
         cargarTabla();
@@ -202,7 +209,7 @@ public class AdminController implements Initializable {
         controller.setStage(reg);
         controller.setAdminController(this);
         controller.initStage(root);
-        
+        logger.info("Despues de Buscar(Ventana)");
      
     }
    
@@ -218,6 +225,16 @@ public class AdminController implements Initializable {
     
     @FXML
     public void borrar(ActionEvent event){
+        Alert alert = new Alert(AlertType.WARNING, 
+                        "Seguro que quiere borrar el libro?", 
+                        ButtonType.YES, ButtonType.NO);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.YES){
+              lib.getAllLibros().remove(libro);
+              limpiarModificar();
+        }
+        
         
     }
     
@@ -240,7 +257,7 @@ public class AdminController implements Initializable {
             
             try{
                 LibroBean modificado=new LibroBean(TextIsbn1.getText(),TextTitulo1.getText(),TextAutor1.getText(),
-                TextEditorial1.getText(),TextDescripcion1.getText(),dateFechaPub1.getValue().toString(),Float.parseFloat(TextPrecio.getText()),
+                TextEditorial1.getText(),TextDescripcion1.getText(),dateFechaPub1.getValue().toString(),Float.parseFloat(TextPrecio1.getText()),
                 Integer.parseInt(TextStock1.getText()),((String)comboGeneros1.getSelectionModel().getSelectedItem()));
                 lib.getAllLibros().remove(libro);
                 lib.getAllLibros().add(modificado);
@@ -360,6 +377,7 @@ public class AdminController implements Initializable {
            TextDescripcion1.setDisable(false);
            comboGeneros1.setDisable(false);
            dateFechaPub1.setDisable(false);
+           
            btnBorrar.setDisable(false);  // No habilita el boton Borrar
            btnModi.setDisable(false);
            
@@ -371,8 +389,12 @@ public class AdminController implements Initializable {
            TextStock1.setText(libro.getStock().toString());
            TextDescripcion1.setText(libro.getDescripcion());
            TextTitulo1.setText(libro.getTitulo());
+           String s=libro.getFechaPub();  
+           String fecha;
+           fecha=s.substring(8,10)+"/"+s.substring(5,7)+"/"+s.substring(0,4);
+           
            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-           LocalDate localDate = LocalDate.parse(libro.getFechaPub(), formatter);
+           LocalDate localDate = LocalDate.parse(fecha,formatter);
            dateFechaPub1.setValue(localDate);
            
            comboGeneros1.getSelectionModel().select(libro.getGenero());
