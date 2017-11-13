@@ -19,7 +19,7 @@ public class LibrosManagerTestDataGenerator implements LibrosManager {
     public LibrosManagerTestDataGenerator(){
         x= new ArrayList<LibroBean>();
         for (int i = 0; i < 15; i++) {
-            x.add(new LibroBean("isbn"+i,"titulo"+i,"autor"+i,"editorial"+i,"Descripcion"+i,"2017/11/"+i,(float)i,i));
+            x.add(new LibroBean("isbn"+i,"titulo"+i,"autor"+i,"editorial"+i,"Descripcion"+i,i+"/11/2017",(float)i,i,"Genero"+i));
         }
     }
     

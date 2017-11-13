@@ -26,12 +26,13 @@ public class LibroBean implements Serializable {
     private final SimpleStringProperty fechaPub;
     private final SimpleFloatProperty precio;
     private final SimpleIntegerProperty stock;
+    private final SimpleStringProperty genero;
 
     
 
     
      public LibroBean(String isbn,String titulo,String autor,
-            String editorial,String descripcion,String fechaPub,Float precio,Integer stock){
+            String editorial,String descripcion,String fechaPub,Float precio,Integer stock,String genero){
         
         this.isbn= new SimpleStringProperty(isbn);
         this.titulo= new SimpleStringProperty(titulo);
@@ -41,6 +42,7 @@ public class LibroBean implements Serializable {
         this.fechaPub= new SimpleStringProperty(fechaPub);
         this.precio= new SimpleFloatProperty(precio);
         this.stock= new SimpleIntegerProperty (stock);
+         this.genero= new SimpleStringProperty(genero);
         
 }
 
@@ -106,5 +108,12 @@ public class LibroBean implements Serializable {
 
     public void setStock(Integer stock) {
         this.stock.set(stock);    
+    }
+    public void setGenero(String Genero) {
+        this.genero.set(Genero);
+    }
+
+    public String getGenero() {
+        return this.genero.get();
     }
 }

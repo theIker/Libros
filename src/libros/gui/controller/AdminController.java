@@ -7,14 +7,21 @@ package libros.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -41,7 +48,7 @@ public class AdminController implements Initializable {
    private Stage stage;
    private GenerosManager generosManager;
    private LibrosManager lib;
-   private LibroBean aux;
+   private LibroBean libro;
    
     @FXML
     private TextField TextIsbn;
@@ -62,7 +69,7 @@ public class AdminController implements Initializable {
     @FXML
     private Button btnInsertar;
     @FXML
-    private ComboBox<GeneroBean> comboGeneros;
+    private ComboBox comboGeneros;
     @FXML
     private Button btnaddGen;
     @FXML
@@ -86,7 +93,7 @@ public class AdminController implements Initializable {
     @FXML
     private DatePicker dateFechaPub1;
     @FXML
-    private ComboBox<?> comboGeneros1;
+    private ComboBox comboGeneros1;
     @FXML
     private Button btnaddGen1;
     @FXML
@@ -104,7 +111,14 @@ public class AdminController implements Initializable {
     @FXML
     private Button btnBorrar;
     @FXML
+    private Button btnModi;
+    @FXML
     private TableColumn tableGenero;
+    
+    
+    public void setLibro(LibroBean libro){
+        this.libro=libro;
+    }
 
     /**
      * Initializes the controller class.
@@ -143,21 +157,30 @@ public class AdminController implements Initializable {
     public void insertarLibro(ActionEvent event){
         if(TextIsbn.getText().equals("")||TextAutor.getText().equals("")||TextDescripcion.getText().equals("")
                 || TextEditorial.getText().equals("")||TextPrecio.getText().equals("")||TextStock.getText().equals("")
-                ||TextTitulo.getText().equals("")||comboGeneros.getSelectionModel().getSelectedItem().toString().equals("")){
+                ||TextTitulo.getText().equals("")||comboGeneros.getSelectionModel().getSelectedIndex()==-1){
                 
-            //
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Rellena todos los campos");
+                   alert.showAndWait(); 
+            
         }else{
             
             try{
                 LibroBean aux= new LibroBean(TextIsbn.getText(),TextTitulo.getText(),TextAutor.getText(),
                 TextEditorial.getText(),TextDescripcion.getText(),dateFechaPUb.getValue().toString(),Float.parseFloat(TextPrecio.getText()),
-                Integer.parseInt(TextStock.getText()));      
+                Integer.parseInt(TextStock.getText()),((String)comboGeneros.getSelectionModel().getSelectedItem()));      
                 lib.getAllLibros().add(aux);
                 limpiarInsertar();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Insertado");
+                alert.showAndWait(); 
             }catch(NumberFormatException e){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa el formato de los campos");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Precio y stock deben ser numericos");
                alert.showAndWait(); 
-            }
+            }catch(NullPointerException ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
+               alert.showAndWait(); 
+                    
+             }
+                    
             
             
             
@@ -177,10 +200,10 @@ public class AdminController implements Initializable {
        BusquedaLibroController controller= ((BusquedaLibroController) loader.getController());
         controller.setLibroManager(lib);
         controller.setStage(reg);
-        controller.getAdminController(this);
+        controller.setAdminController(this);
         controller.initStage(root);
         
-        
+     
     }
    
     @FXML
@@ -198,8 +221,46 @@ public class AdminController implements Initializable {
         
     }
     
+    
+    /**
+     * 
+     * @param event 
+     * modifica el libro cargado
+     */
     @FXML
     public void modificar(ActionEvent event){
+        if(TextIsbn1.getText().equals("")||TextAutor1.getText().equals("")||TextDescripcion1.getText().equals("")
+                || TextEditorial1.getText().equals("")||TextPrecio1.getText().equals("")||TextStock1.getText().equals("")
+                ||TextTitulo1.getText().equals("")||comboGeneros1.getSelectionModel().getSelectedIndex()==-1){
+                
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Rellena todos los campos");
+            alert.showAndWait(); 
+            
+        }else{
+            
+            try{
+                LibroBean modificado=new LibroBean(TextIsbn1.getText(),TextTitulo1.getText(),TextAutor1.getText(),
+                TextEditorial1.getText(),TextDescripcion1.getText(),dateFechaPub1.getValue().toString(),Float.parseFloat(TextPrecio.getText()),
+                Integer.parseInt(TextStock1.getText()),((String)comboGeneros1.getSelectionModel().getSelectedItem()));
+                lib.getAllLibros().remove(libro);
+                lib.getAllLibros().add(modificado);
+                limpiarModificar();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Modificado");
+                alert.showAndWait(); 
+            }catch(NumberFormatException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Precio y stock deben ser numericos");
+               alert.showAndWait(); 
+            }catch(NullPointerException ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
+               alert.showAndWait(); 
+                    
+             }
+                    
+            
+            
+            
+            
+        }
         
     }
     
@@ -213,18 +274,27 @@ public class AdminController implements Initializable {
         
     }
 
+    /**
+     * Carga la tabla generos y los combos que contienen generos
+     */
     private void cargarTabla() {
-       tableGenero.setCellValueFactory(new PropertyValueFactory<> ("Genero"));
+       ArrayList <GeneroBean> generos=(ArrayList <GeneroBean>) generosManager.getAllGeneros();
+       Collection generosC= generos.stream().map(gen -> gen.getGenero()).collect(Collectors.toList());
+       ObservableList<String> list=FXCollections.observableArrayList(generosC);
+       ObservableList<GeneroBean> lista=FXCollections.observableArrayList(generosManager.getAllGeneros());
         
-      ObservableList<GeneroBean> list=FXCollections.observableArrayList(generosManager.getAllGeneros());
-       
-        
-      tablaGeneros.setItems(list);
+      tableGenero.setCellValueFactory(new PropertyValueFactory<> ("Genero"));
+      
+      comboGeneros.setItems(list);
+      comboGeneros1.setItems(list);
+      
+      tablaGeneros.setItems(lista);
+      
       tablaGeneros.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
       
       
       
-      comboGeneros.setItems(list);
+     
      
     }
 
@@ -235,7 +305,9 @@ public class AdminController implements Initializable {
     void setLibroManager(LibrosManager lib) {
         this.lib=lib;
     }
-    
+    /**
+     * Limpia la pestaña insertar una vez se ha insertado un libro
+     */
 
     private void limpiarInsertar() {
         TextIsbn.setText("");
@@ -245,31 +317,72 @@ public class AdminController implements Initializable {
         TextPrecio.setText("");
         TextTitulo.setText("");
         dateFechaPUb.setValue(null);
-        TextEditorial.setText("");
-         
+        TextEditorial.setText("");    
         comboGeneros.getSelectionModel().clearSelection();
-       
+    }
+    
+    private void limpiarModificar(){
+        TextIsbn1.setText("");
+        TextAutor1.setText("");
+        TextDescripcion1.setText("");
+        TextStock1.setText("");
+        TextPrecio1.setText("");
+        TextTitulo1.setText("");
+        dateFechaPub1.setValue(null);
+        TextEditorial1.setText("");    
+        comboGeneros1.getSelectionModel().clearSelection();
         
+        TextAutor1.setDisable(true);
+        TextTitulo1.setDisable(true);
+        TextEditorial1.setDisable(true);
+        TextPrecio1.setDisable(true);
+        TextStock1.setDisable(true);
+        TextDescripcion1.setDisable(true);
+        comboGeneros1.setDisable(true);
+        dateFechaPub1.setDisable(true);
+        
+        btnBorrar.setDisable(true);  
+        btnModi.setDisable(true);
     }
 
-    void getLibro(LibroBean aux) {
-           this.aux=aux;
-           TextIsbn1.setDisable(false);
+    /** 
+     * 
+     * Carga un libro que se ha seleccionado en otra ventana (BusquedaLibro)
+     */
+    void cargarLibro(LibroBean libro) {
+            this.libro=libro;
+            
            TextAutor1.setDisable(false);
-           TextTitulo.setDisable(false);
+           TextTitulo1.setDisable(false);
            TextEditorial1.setDisable(false);
            TextPrecio1.setDisable(false);
            TextStock1.setDisable(false);
            TextDescripcion1.setDisable(false);
            comboGeneros1.setDisable(false);
+           dateFechaPub1.setDisable(false);
+           btnBorrar.setDisable(false);  // No habilita el boton Borrar
+           btnModi.setDisable(false);
            
-           TextIsbn1.setText(aux.getIsbn());
-           TextAutor1.setText(aux.getAutor());
-           TextEditorial1.setText(aux.getEditorial());
-           TextPrecio1.setText(aux.getPrecio().toString());
-           TextStock1.setText(aux.getStock().toString());
-           TextDescripcion1.setText(aux.getDescripcion());
-           TextTitulo.setText(aux.getTitulo());
-           //dateFechaPub1.setValue(aux.getFechaPub());
+           
+           TextIsbn1.setText(libro.getIsbn());
+           TextAutor1.setText(libro.getAutor());
+           TextEditorial1.setText(libro.getEditorial());
+           TextPrecio1.setText(libro.getPrecio().toString());
+           TextStock1.setText(libro.getStock().toString());
+           TextDescripcion1.setText(libro.getDescripcion());
+           TextTitulo1.setText(libro.getTitulo());
+           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+           LocalDate localDate = LocalDate.parse(libro.getFechaPub(), formatter);
+           dateFechaPub1.setValue(localDate);
+           
+           comboGeneros1.getSelectionModel().select(libro.getGenero());
+           
+           
+         
+           
+             
+           
+          
+           
     }
 }

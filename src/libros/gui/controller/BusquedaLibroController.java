@@ -35,7 +35,7 @@ import libros.datos.mana.LibrosManager;
 public class BusquedaLibroController implements Initializable {
     private Stage stage;
     private LibrosManager librosManager;
-    private AdminController x= new AdminController();
+    private AdminController x;
     @FXML
     private ComboBox<String> comboBusqueda;
     @FXML
@@ -88,13 +88,11 @@ public class BusquedaLibroController implements Initializable {
     
     @FXML
     private void cargarLibro(ActionEvent event) {
-        LibroBean aux= tablaBusqueda.getSelectionModel().getSelectedItem();
-        x.getLibro(aux);
-        Stage y= (Stage) btnBuscar.getScene().getWindow();
-        y.close();
+        LibroBean libro= tablaBusqueda.getSelectionModel().getSelectedItem();
+        x.cargarLibro(libro);
+        stage.close();
         
     }
-
     @FXML
     private void comprarLibro(ActionEvent event) {
     }
@@ -144,7 +142,7 @@ public class BusquedaLibroController implements Initializable {
         this.librosManager=lib;
     }
     
-    void getAdminController(AdminController x){
+    void setAdminController(AdminController x){
         this.x=x;
     }
     

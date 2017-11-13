@@ -133,7 +133,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="600.0">
                      <children>
-                        <GridPane layoutX="25.0" layoutY="62.0" prefHeight="171.0" prefWidth="551.0">
+                        <GridPane layoutX="21.0" layoutY="89.0" prefHeight="171.0" prefWidth="551.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="66.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="163.0" />
@@ -211,21 +211,9 @@
                               </Button>
                            </children>
                         </HBox>
-                        <HBox layoutX="254.0" layoutY="1.0" prefHeight="79.0" prefWidth="342.0" spacing="10.0">
-                           <children>
-                              <Label text="Genero:">
-                                 <HBox.margin>
-                                    <Insets top="25.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <ComboBox fx:id="comboGeneros1" disable="true" prefWidth="150.0">
-                                 <HBox.margin>
-                                    <Insets left="65.0" top="20.0" />
-                                 </HBox.margin>
-                              </ComboBox>
-                           </children>
-                        </HBox>
                         <Button fx:id="btnBuscar" layoutX="86.0" layoutY="24.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+                        <Label layoutX="253.0" layoutY="32.0" text="Genero:" />
+                        <ComboBox fx:id="comboGeneros1" disable="true" layoutX="374.0" layoutY="30.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                </content>
