@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -78,35 +79,7 @@ public class BusquedaLibroController implements Initializable {
         // TODO
     }    
 
-    
-    
-    
-    
-    
-    
-    
-    @FXML
-    private void buscar(ActionEvent event) {
-       
-       
-      
-    }
-    
-    @FXML
-    private void cargarLibro(ActionEvent event) {
-        LibroBean libro= tablaBusqueda.getSelectionModel().getSelectedItem();
-        x.cargarLibro(libro);
-        stage.close();
-        
-    }
-    @FXML
-    private void comprarLibro(ActionEvent event) {
-    }
-    
-    public void setStage(Stage stage){
-        this.stage=stage;
-    }
-    public void initStage(Parent root) {
+     public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -122,12 +95,66 @@ public class BusquedaLibroController implements Initializable {
             "ISBN",
             "Titulo",
             "Autor"
-);
-          this.cargarTabla();
+            );
+           comboBusqueda.setPromptText("Criterio");
+           textFieldBusqueda.setPromptText("Parametro de Busqueda");
+           stage.setTitle("Busqueda Libro");
+           
+          ObservableList<LibroBean> list=FXCollections.observableArrayList(librosManager.getAllLibros());
+          this.cargarTabla(list);
     } 
 
-    private void cargarTabla() {
-      isbn.setCellValueFactory(new PropertyValueFactory<> ("isbn"));
+    
+    
+    
+    
+    
+    
+    @FXML
+    private void buscar(ActionEvent event) {
+         ObservableList<LibroBean> lista = null;
+      if(comboBusqueda.getSelectionModel().getSelectedIndex()!=-1){
+          if(comboBusqueda.getSelectionModel().getSelectedIndex()==0){
+            lista=FXCollections.observableArrayList(librosManager.getLibrosIsbn((String)textFieldBusqueda.getText()));
+           
+         }else if(comboBusqueda.getSelectionModel().getSelectedIndex()==1){
+            lista=FXCollections.observableArrayList(librosManager.getLibrosTitulo((String)textFieldBusqueda.getText()));
+        }else if(comboBusqueda.getSelectionModel().getSelectedIndex()==2){
+            lista=FXCollections.observableArrayList(librosManager.getLibrosAutor((String)textFieldBusqueda.getText()));
+       }
+           cargarTabla(lista);
+      }
+       
+       
+      
+    }
+    
+    @FXML
+    private void cargarLibro(ActionEvent event) {
+        if(tablaBusqueda.getSelectionModel().getSelectedIndex()==-1){
+             Alert alert = new Alert(Alert.AlertType.ERROR, "Seleccione un libro");
+             alert.showAndWait(); 
+        }else{
+         LibroBean libro= tablaBusqueda.getSelectionModel().getSelectedItem();
+         x.cargarLibro(libro);
+         textFieldBusqueda.setText("");
+        comboBusqueda.setValue("");
+         stage.close();
+        }
+       
+        
+    }
+    @FXML
+    private void comprarLibro(ActionEvent event) {
+    }
+    
+    public void setStage(Stage stage){
+        this.stage=stage;
+    }
+   
+    private void cargarTabla(ObservableList<LibroBean> list) {
+       if(list !=null){
+           isbn.setCellValueFactory(new PropertyValueFactory<> ("isbn"));
       titulo.setCellValueFactory(new PropertyValueFactory<> ("titulo"));
       autor.setCellValueFactory(new PropertyValueFactory<> ("autor"));
       editorial.setCellValueFactory(new PropertyValueFactory<> ("editorial"));
@@ -135,13 +162,11 @@ public class BusquedaLibroController implements Initializable {
       fechaP.setCellValueFactory(new PropertyValueFactory<> ("fechaPub"));
       descripcion.setCellValueFactory(new PropertyValueFactory<> ("descripcion"));
       
-      
-        
-      ObservableList<LibroBean> list=FXCollections.observableArrayList(librosManager.getAllLibros());
        
    
       tablaBusqueda.setItems(list); 
       tablaBusqueda.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+       }
     }
 
     void setLibroManager(LibrosManager lib) {

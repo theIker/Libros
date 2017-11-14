@@ -7,6 +7,7 @@ package libros.datos.mana;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import libros.datos.beans.LibroBean;
 
 /**
@@ -32,11 +33,22 @@ public class LibrosManagerTestDataGenerator implements LibrosManager {
         return x;
     }
     public Collection getLibrosIsbn(String isbn){
-       ArrayList <LibroBean> y= new ArrayList<LibroBean>();
-       y=(ArrayList<LibroBean>) x.stream().filter(libro->libro.getIsbn().equalsIgnoreCase(isbn));
-            
-       return y;
+       Collection Bisbn= x.stream().filter(libro->libro.getIsbn().toLowerCase().contains(isbn)).collect(Collectors.toList());    
+       return Bisbn;
         }
+
+    @Override
+    public Collection getLibrosTitulo(String titulo) {
+        
+        Collection Btitulo=x.stream().filter(libro->libro.getTitulo().toLowerCase().contains(titulo)).collect(Collectors.toList());    
+        return Btitulo;
+    }
+
+    @Override
+    public Collection getLibrosAutor(String autor) { 
+        Collection Bautor= x.stream().filter(libro->libro.getTitulo().toLowerCase().contains(autor)).collect(Collectors.toList());    
+        return Bautor;
+    }
         
          
     }

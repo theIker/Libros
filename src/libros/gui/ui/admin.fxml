@@ -85,6 +85,11 @@
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </TextField>
+                              <DatePicker fx:id="dateFechaPUb" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="30.0" />
+                                 </GridPane.margin>
+                              </DatePicker>
                               <TextField fx:id="TextPrecio" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
@@ -95,23 +100,10 @@
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <DatePicker fx:id="dateFechaPUb" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets right="30.0" />
-                                 </GridPane.margin>
-                              </DatePicker>
+                              
                            </children>
                         </GridPane>
-                        <HBox layoutY="255.0" prefHeight="90.0" prefWidth="600.0">
-                           <children>
-                              <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#insertarLibro" prefHeight="40.0" prefWidth="120.0" text="Insertar">
-                                 <HBox.margin>
-                                    <Insets left="400.0" top="20.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox layoutX="25.0" layoutY="198.0" prefHeight="79.0" prefWidth="291.0" spacing="10.0">
+                        <HBox layoutX="249.0" layoutY="202.0" prefHeight="79.0" prefWidth="291.0" spacing="10.0">
                            <children>
                               <Label text="Genero:">
                                  <HBox.margin>
@@ -120,11 +112,20 @@
                               </Label>
                               <ComboBox fx:id="comboGeneros" prefWidth="150.0">
                                  <HBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets left="72.0" top="20.0" />
                                  </HBox.margin>
                               </ComboBox>
                            </children>
                         </HBox>
+                        <HBox layoutY="255.0" prefHeight="90.0" prefWidth="600.0">
+                           <children>
+                              <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#insertarLibro" prefHeight="40.0" prefWidth="120.0" text="Insertar">
+                                 <HBox.margin>
+                                    <Insets left="400.0" top="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>  
                      </children>
                   </AnchorPane>
             </content>
@@ -133,6 +134,8 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="600.0">
                      <children>
+                        <Button fx:id="btnBuscar" layoutX="86.0" layoutY="24.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+                        <ComboBox fx:id="comboGeneros1" disable="true" layoutX="374.0" layoutY="30.0" prefWidth="150.0" />
                         <GridPane layoutX="21.0" layoutY="89.0" prefHeight="171.0" prefWidth="551.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="66.0" />
@@ -180,6 +183,11 @@
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </TextField>
+                               <DatePicker fx:id="dateFechaPub1" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="30.0" />
+                                 </GridPane.margin>
+                              </DatePicker>
                               <TextField fx:id="TextPrecio1" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets right="30.0" />
@@ -190,11 +198,7 @@
                                     <Insets right="30.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <DatePicker fx:id="dateFechaPub1" disable="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets right="30.0" />
-                                 </GridPane.margin>
-                              </DatePicker>
+                             
                            </children>
                         </GridPane>
                         <HBox layoutX="8.0" layoutY="255.0" prefHeight="90.0" prefWidth="592.0">
@@ -211,9 +215,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <Button fx:id="btnBuscar" layoutX="86.0" layoutY="24.0" mnemonicParsing="false" onAction="#buscar" text="Buscar" />
                         <Label layoutX="253.0" layoutY="32.0" text="Genero:" />
-                        <ComboBox fx:id="comboGeneros1" disable="true" layoutX="374.0" layoutY="30.0" prefWidth="150.0" />
                      </children>
                   </AnchorPane>
                </content>

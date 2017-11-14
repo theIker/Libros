@@ -7,6 +7,7 @@ package libros.datos.mana;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import libros.datos.beans.GeneroBean;
 
 /**
@@ -27,6 +28,12 @@ public class GenerosManagerTestDataGenerator implements GenerosManager{
     public Collection getAllGeneros() {
         return x;
     }
+
+    @Override
+    public Collection getNombresGenero() {
+        Collection generosC= x.stream().map(gen -> gen.getGenero()).collect(Collectors.toList());
+        return generosC;
+  }
 
     
 }

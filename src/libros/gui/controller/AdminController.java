@@ -38,6 +38,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import libros.datos.beans.GeneroBean;
 import libros.datos.beans.LibroBean;
@@ -133,32 +134,27 @@ public class AdminController implements Initializable {
         // TODO
     }
     
-    
-        public void setStage(Stage stage) {
-        this.stage=stage;
-    }
-
-   public void initStage(Parent root) {
+     public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);  
         //Codificar comportamiento
         btnBorrar.setDisable(true);
         btnModi.setDisable(true);
+        TextIsbn.requestFocus();
         
+        stage.setTitle("Administrador");
         
         cargarTabla();
         stage.show();
     }
     
-   @FXML
-    public void añadirGen(ActionEvent event){
-        
+        public void setStage(Stage stage) {
+        this.stage=stage;
     }
+
+  
     
-    @FXML
-    public void limpiarGen(ActionEvent event){
-        
-    }
+  
     
     @FXML
     public void insertarLibro(ActionEvent event){
@@ -184,18 +180,10 @@ public class AdminController implements Initializable {
                alert.showAndWait(); 
             }catch(NullPointerException ex){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
-               alert.showAndWait(); 
-                    
-             }
-                    
-            
-            
-            
-            
+               alert.showAndWait();        
+             }  
         }
-        
-        
-    }
+}
     
     @FXML
     public void buscar(ActionEvent event) throws IOException{
@@ -295,9 +283,7 @@ public class AdminController implements Initializable {
      * Carga la tabla generos y los combos que contienen generos
      */
     private void cargarTabla() {
-       ArrayList <GeneroBean> generos=(ArrayList <GeneroBean>) generosManager.getAllGeneros();
-       Collection generosC= generos.stream().map(gen -> gen.getGenero()).collect(Collectors.toList());
-       ObservableList<String> list=FXCollections.observableArrayList(generosC);
+       ObservableList<String> list=FXCollections.observableArrayList(generosManager.getNombresGenero());
        ObservableList<GeneroBean> lista=FXCollections.observableArrayList(generosManager.getAllGeneros());
         
       tableGenero.setCellValueFactory(new PropertyValueFactory<> ("Genero"));
@@ -378,7 +364,7 @@ public class AdminController implements Initializable {
            comboGeneros1.setDisable(false);
            dateFechaPub1.setDisable(false);
            
-           btnBorrar.setDisable(false);  // No habilita el boton Borrar
+           btnBorrar.setDisable(false);  
            btnModi.setDisable(false);
            
            
@@ -397,14 +383,18 @@ public class AdminController implements Initializable {
            LocalDate localDate = LocalDate.parse(fecha,formatter);
            dateFechaPub1.setValue(localDate);
            
-           comboGeneros1.getSelectionModel().select(libro.getGenero());
+           comboGeneros1.getSelectionModel().select(libro.getGenero());     
            
-           
-         
-           
-             
-           
-          
-           
+           comboGeneros1.requestFocus();
+    }
+    
+     @FXML
+    public void añadirGen(ActionEvent event){
+        
+    }
+    
+    @FXML
+    public void limpiarGen(ActionEvent event){
+        
     }
 }

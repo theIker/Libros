@@ -16,4 +16,6 @@ public interface GenerosManager {
     
     public Collection getAllGeneros();
     
+    public Collection getNombresGenero();
+    
 }

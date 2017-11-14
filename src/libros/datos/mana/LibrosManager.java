@@ -16,5 +16,9 @@ public interface LibrosManager {
      public Collection getAllLibros();
      
      public Collection getLibrosIsbn(String isbn);
+     
+      public Collection getLibrosTitulo(String titulo);
+      
+       public Collection getLibrosAutor(String autor);
     
 }
