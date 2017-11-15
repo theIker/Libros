@@ -5,12 +5,21 @@
  */
 package libros.gui.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -18,15 +27,13 @@ import javafx.scene.control.PasswordField;
  * @author iker
  */
 public class CambiarPassController implements Initializable {
-
+    private Stage stage;
     @FXML
     private PasswordField contraAnt;
     @FXML
     private PasswordField nuevaContra;
     @FXML
     private PasswordField nuevaContra2;
-    @FXML
-    private Button btnAtras;
     @FXML
     private Button btnCambiarPass;
 
@@ -37,5 +44,67 @@ public class CambiarPassController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+         public void setStage(Stage stage) {
+        this.stage=stage;
+    }
+
+   public void initStage(Parent root) {
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOnShowing(this::handleWindowShowing);
+        stage.show();
+    }
+    
+    public void handleWindowShowing(WindowEvent event){
+           //se ejecuta antes de iniciar la ventana
+
+    } 
+    
+    @FXML
+    public void cambiarPass(ActionEvent even) throws IOException{
+         if(!(contraAnt.getText().equals("")||nuevaContra.getText().equals("")||nuevaContra2.getText().equals(""))){
+             if(contraAnt.getText().equals("u")){
+                 
+                 if(nuevaContra.getText().equals(nuevaContra2.getText())){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Hecho");
+                    alert.setContentText("Contraseña cambiada");
+                    alert.showAndWait();
+                    
+                     Stage y=(Stage) btnCambiarPass.getScene().getWindow();
+                     y.close();
+
+                 }
+                 else {
+                      Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("La nueva contraseña no coincide");
+                alert.showAndWait();
+                     
+                 }
+                 
+             }
+             else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("La contraseña antigua no coincide");
+                alert.showAndWait();
+             }
+             
+         }
+         
+         else{
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Rellena los campos");
+                alert.showAndWait();
+         }
+        
+        
+    }
+
+   
     
 }

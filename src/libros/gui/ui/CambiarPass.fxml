@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="361.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.CambiarPassController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.CambiarPassController">
    <children>
       <GridPane layoutX="34.0" layoutY="45.0" prefHeight="237.0" prefWidth="304.0">
         <columnConstraints>
@@ -33,14 +33,9 @@
       </GridPane>
       <HBox layoutY="261.0" prefHeight="100.0" prefWidth="452.0" spacing="75.0">
          <children>
-            <Button fx:id="btnAtras" mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" text="Atras">
+            <Button fx:id="btnCambiarPass" mnemonicParsing="false" onAction="#cambiarPass" prefHeight="46.0" prefWidth="173.0" text="Efectuar cambios">
                <HBox.margin>
-                  <Insets top="35.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="btnCambiarPass" mnemonicParsing="false" prefHeight="46.0" prefWidth="173.0" text="Efectuar Cambios">
-               <HBox.margin>
-                  <Insets top="35.0" />
+                  <Insets left="140.0" top="35.0" />
                </HBox.margin>
             </Button>
          </children>
@@ -48,7 +43,7 @@
             <Insets left="40.0" />
          </padding>
       </HBox>
-      <HBox layoutX="-3.0" prefHeight="58.0" prefWidth="461.0" style="-fx-background-color: #505050;">
+      <HBox layoutX="-3.0" prefHeight="58.0" prefWidth="487.0" style="-fx-background-color: #505050;">
          <children>
             <Label text="Cambie su contraseña" textFill="WHITE">
                <HBox.margin>

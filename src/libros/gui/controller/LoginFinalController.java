@@ -21,6 +21,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import libros.datos.mana.ComprasManager;
 import libros.datos.mana.GenerosManager;
 import libros.datos.mana.LibrosManager;
 
@@ -33,6 +34,7 @@ public class LoginFinalController implements Initializable {
     private Stage stage;
     private GenerosManager gen;
     private LibrosManager lib;
+    private ComprasManager comprasManager;
     
     @FXML
     private TextField textFieldNombreU;
@@ -51,6 +53,19 @@ public class LoginFinalController implements Initializable {
         // TODO
     }    
 
+     public void setComprasManager(ComprasManager comprasManager) {
+        this.comprasManager=comprasManager;
+    }
+    
+     public void setGenManager(GenerosManager generoManager) {
+        this.gen=generoManager;
+    }
+
+    public void setLibroManager(LibrosManager libroManager) {
+        this.lib=libroManager;
+    }
+    
+
     @FXML
     private void entrar(ActionEvent event) throws IOException {
         
@@ -61,7 +76,9 @@ public class LoginFinalController implements Initializable {
         Parent root =(Parent)loader.load();
         
         UsuController controller= ((UsuController) loader.getController());
-        controller.setStage(stage);
+        controller.setComprasManager(comprasManager);
+        controller.setLibrosManager(lib);
+        controller.setStage(stage,textFieldNombreU.getText());
         controller.initStage(root);
        
         }
@@ -118,14 +135,7 @@ public class LoginFinalController implements Initializable {
         
     }
 
-    public void setGenManager(GenerosManager generoManager) {
-        this.gen=generoManager;
-    }
-
-    public void setLibroManager(LibrosManager libroManager) {
-        this.lib=libroManager;
-    }
-    
+   
     
     
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.ConfirmarCompraController">
+   <children>
+      <AnchorPane prefHeight="450.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="btnConfirmarCompra" layoutX="494.0" layoutY="395.0" mnemonicParsing="false" onAction="#confirmarCompra" text="Confirmar" />
+            <TableView fx:id="tablaCompra" layoutX="23.0" layoutY="15.0" prefHeight="372.0" prefWidth="540.0">
+              <columns>
+                <TableColumn fx:id="colTitulo" prefWidth="75.0" text="Titulo" />
+                <TableColumn fx:id="colAutor" prefWidth="75.0" text="Autor" />
+                  <TableColumn fx:id="colEditorial" prefWidth="154.0" text="Editorial" />
+                  <TableColumn fx:id="colPrecio" prefWidth="97.0" text="Precio" />
+                  <TableColumn fx:id="colUnidades" prefWidth="138.0" text="Unidades" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnQuitarCompra" layoutX="312.0" layoutY="395.0" mnemonicParsing="false" onAction="#quitarCompra" prefHeight="25.0" prefWidth="61.0" text="Quitar" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>

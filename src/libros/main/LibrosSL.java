@@ -8,8 +8,9 @@ package libros.main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import libros.datos.mana.ComprasManager;
+import libros.datos.mana.ComprasManagerDataGenerator;
 import libros.datos.mana.GenerosManager;
 import libros.datos.mana.GenerosManagerTestDataGenerator;
 import libros.datos.mana.LibrosManager;
@@ -28,6 +29,8 @@ public class LibrosSL extends Application {
                 new GenerosManagerTestDataGenerator();
        LibrosManager libroManager= 
                 new LibrosManagerTestDataGenerator();
+       ComprasManager comprasManager=
+               new ComprasManagerDataGenerator();
         
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/LoginFinal.fxml"));
         
@@ -37,6 +40,7 @@ public class LibrosSL extends Application {
         controller.setStage(stage);
         controller.setGenManager(generoManager);
         controller.setLibroManager(libroManager);
+        controller.setComprasManager(comprasManager);
         controller.initStage(root);
         
         

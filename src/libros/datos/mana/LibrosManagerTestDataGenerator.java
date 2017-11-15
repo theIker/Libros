@@ -46,7 +46,7 @@ public class LibrosManagerTestDataGenerator implements LibrosManager {
 
     @Override
     public Collection getLibrosAutor(String autor) { 
-        Collection Bautor= x.stream().filter(libro->libro.getTitulo().toLowerCase().contains(autor)).collect(Collectors.toList());    
+        Collection Bautor= x.stream().filter(libro->libro.getAutor().toLowerCase().contains(autor)).collect(Collectors.toList());    
         return Bautor;
     }
         
