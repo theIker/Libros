@@ -174,6 +174,7 @@ public class UsuController implements Initializable {
 
             LoginFinalController controller= ((LoginFinalController) loader.getController());
             controller.setComprasManager(comprasManager);
+            controller.setLibroManager(librosManager);
             controller.setStage(stage);
             controller.initStage(root);
 
@@ -192,6 +193,7 @@ public class UsuController implements Initializable {
         
         LoginFinalController controller= ((LoginFinalController) loader.getController());
         controller.setComprasManager(comprasManager);
+        controller.setLibroManager(librosManager);
         controller.setStage(stage);
         controller.initStage(root);
         
