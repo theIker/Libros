@@ -179,9 +179,8 @@ public class BusquedaLibroController implements Initializable {
     private void cargarLibro(ActionEvent event) {
        
         LibroBean aux= tablaBusqueda.getSelectionModel().getSelectedItem();
-        x.setLibro(aux);
-        Stage y= (Stage) btnBuscar.getScene().getWindow();
-        y.close();  
+        x.cargarLibro(aux);
+        stage.close();
     }
 
     @FXML
@@ -230,6 +229,7 @@ public class BusquedaLibroController implements Initializable {
            btnCargar.setVisible(true);
            btnAdd.setVisible(false);
            btnComprar.setVisible(false);
+           textFieldUnidades.setVisible(false);
         
           
     } 
@@ -251,8 +251,8 @@ public class BusquedaLibroController implements Initializable {
 
     void setLibroManager(LibrosManager lib) {
         this.librosManager=lib;
-          ObservableList<LibroBean> list=FXCollections.observableArrayList(librosManager.getAllLibros());
-          this.cargarTabla(list);
+         ObservableList<LibroBean> list=FXCollections.observableArrayList(librosManager.getAllLibros());
+         this.cargarTabla(list);
     }
     
     void setAdminController(AdminController x){

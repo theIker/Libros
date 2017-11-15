@@ -259,7 +259,7 @@ public class AdminController implements Initializable {
     }
     
     @FXML
-    public void borrar(){
+    public void borrar(){ //Mirar el alert para que no se seleccione el YES si le doy enter
         Alert alert = new Alert(AlertType.WARNING, 
                         "Seguro que quiere borrar el libro?", 
                         ButtonType.YES, ButtonType.NO);
