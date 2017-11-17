@@ -100,6 +100,48 @@ public class UsuController implements Initializable {
     }    
    
     
+   public void initStage(Parent root) throws IOException {
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        
+         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
+          Parent pane = null; 
+          pane = loader.load();
+          BusquedaLibroController controller= ((BusquedaLibroController) loader.getController());
+         controller.setUsuController(this);
+          controller.setLibroManager(librosManager);
+          controller.setComprasManager(comprasManager);
+         
+            tabLibro.setContent(pane);
+            stage.show();
+          
+          cargarTabla();
+
+       
+    }
+   
+   public void setStage(Stage stage, String e) {
+        this.stage=stage;
+        lblUsu.setText(e);
+    }
+   
+     public void setComprasManager(ComprasManager comprasManager) {
+        this.comprasManager=comprasManager;
+    }
+    
+    public void setLibrosManager(LibrosManager lib){
+        this.librosManager=lib;
+    }
+    
+    public void setHistorial(Collection<ComprasBean> historial){
+        this.historial=historial;
+        
+        ObservableList<ComprasBean>comprasData;
+        comprasData=FXCollections.observableArrayList(this.historial);
+        tableHisto.setItems(comprasData);
+    }
+    
+    
     public void cambiarPass(ActionEvent event) throws IOException{
          Stage reg = new Stage();
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/CambiarPass.fxml"));
@@ -113,11 +155,6 @@ public class UsuController implements Initializable {
         
         
     }
-    
-    
-  
-    
-    
     
     @FXML
     public void actualizarUsu(ActionEvent event){
@@ -201,30 +238,7 @@ public class UsuController implements Initializable {
 
     
     
-   public void setStage(Stage stage, String e) {
-        this.stage=stage;
-        lblUsu.setText(e);
-    }
-
-   public void initStage(Parent root) throws IOException {
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        
-         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
-          Parent pane = null; 
-          pane = loader.load();
-          BusquedaLibroController controller= ((BusquedaLibroController) loader.getController());
-         controller.setUsuController(this);
-          controller.setLibroManager(librosManager);
-          controller.setComprasManager(comprasManager);
-         
-            tabLibro.setContent(pane);
-            stage.show();
-          
-          cargarTabla();
-
-       
-    }
+ 
 
     private void cargarTabla() {
         tbTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
@@ -238,25 +252,10 @@ public class UsuController implements Initializable {
         tableHisto.setItems(comprasData);
         tableHisto.refresh();
         
-         
-        
+    
     }
 
-    public void setComprasManager(ComprasManager comprasManager) {
-        this.comprasManager=comprasManager;
-    }
-    
-    public void setLibrosManager(LibrosManager lib){
-        this.librosManager=lib;
-    }
-    
-    public void setHistorial(Collection<ComprasBean> historial){
-        this.historial=historial;
-        
-        ObservableList<ComprasBean>comprasData;
-        comprasData=FXCollections.observableArrayList(this.historial);
-        tableHisto.setItems(comprasData);
-    }
+ 
     
     
 

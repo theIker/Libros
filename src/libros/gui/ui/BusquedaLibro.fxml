@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.BusquedaLibroController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.BusquedaLibroController">
    <children>
       <AnchorPane layoutX="-1.0" layoutY="-5.0" minHeight="0.0" minWidth="0.0" prefHeight="585.0" prefWidth="780.0">
          <children>
             <ComboBox fx:id="comboBusqueda" layoutX="38.0" layoutY="39.0" prefHeight="26.0" prefWidth="256.0" />
             <TextField fx:id="textFieldBusqueda" layoutX="320.0" layoutY="39.0" prefHeight="26.0" prefWidth="229.0" />
-            <Button fx:id="btnBuscar" layoutX="580.0" layoutY="39.0" mnemonicParsing="false" onAction="#buscar" prefHeight="26.0" prefWidth="104.0" text="Buscar" />
+            <Button fx:id="btnBuscar" layoutX="580.0" layoutY="39.0" mnemonicParsing="false" onAction="#buscar" onKeyPressed="#buscar2" prefHeight="26.0" prefWidth="104.0" text="Buscar" />
             <TableView fx:id="tablaBusqueda" layoutX="15.0" layoutY="98.0" prefHeight="295.0" prefWidth="724.0">
                <columns>
                   <TableColumn fx:id="isbn" prefWidth="75.0" text="ISBN" />
@@ -27,10 +27,10 @@
                   <TableColumn fx:id="descripcion" prefWidth="349.0" text="Descripcion" />
                </columns>
             </TableView>
-            <Button fx:id="btnCargar" layoutX="286.0" layoutY="409.0" mnemonicParsing="false" onAction="#cargarLibro" prefHeight="43.0" prefWidth="127.0" text="Cargar" visible="false" />
-            <Button fx:id="btnComprar" layoutX="577.0" layoutY="409.0" mnemonicParsing="false" onAction="#comprarLibro" prefHeight="43.0" prefWidth="111.0" text="Comprar" visible="false" />
-            <Button fx:id="btnAdd" layoutX="369.0" layoutY="409.0" mnemonicParsing="false" onAction="#anadirCompra" prefHeight="43.0" prefWidth="111.0" text="Añadir" />
+            <Button fx:id="btnCargar" layoutX="286.0" layoutY="409.0" mnemonicParsing="false" onAction="#cargarLibro" onKeyPressed="#cargarLibro2" prefHeight="43.0" prefWidth="127.0" text="Cargar" visible="false" />
+            <Button fx:id="btnAdd" layoutX="369.0" layoutY="409.0" mnemonicParsing="false" onAction="#anadirCompra" onKeyPressed="#anadirCompra2" prefHeight="43.0" prefWidth="111.0" text="Añadir" />
             <TextField fx:id="textFieldUnidades" layoutX="499.0" layoutY="418.0" prefHeight="26.0" prefWidth="47.0" />
+            <Button fx:id="btnComprar" layoutX="577.0" layoutY="409.0" mnemonicParsing="false" onAction="#comprarLibro" onKeyPressed="#comprarLibro2" prefHeight="43.0" prefWidth="111.0" text="Comprar" visible="false" />
             <HBox layoutY="485.0" prefHeight="100.0" prefWidth="780.0" style="-fx-background-color: #505050;" />
          </children>
       </AnchorPane>

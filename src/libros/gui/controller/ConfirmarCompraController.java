@@ -5,6 +5,7 @@
  */
 package libros.gui.controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -73,13 +76,44 @@ public class ConfirmarCompraController implements Initializable {
           
     }    
 
+     public void initStage(Parent root) {
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOnShowing(this::handleWindowShowing);
+        stage.show();
+    }
+    
+    public void handleWindowShowing(WindowEvent event){
+           
+       
+      cargarTablaCompras();
+
+    } 
+
+   
+
+    void setStage(Stage reg, Button btnComprar, ArrayList<LibroBean> compras) {
+         this.stage=reg;
+        this.compra=btnComprar;
+        this.compras=compras;
+    }
+    
+     void setUsuController(UsuController usu) {
+      this.usu=usu;
+    }
+
+    void setComprasManager(ComprasManager comprasManager) {
+        this.compMana=comprasManager;
+    }
+    
     
     @FXML
-   private void quitarCompra(ActionEvent event){
+   private void quitarCompra(){
         if(tablaCompra.getSelectionModel().getSelectedItem()!=null){
             
             compras.remove(tablaCompra.getSelectionModel().getSelectedItem());
-            cargarTablaComras();
+            cargarTablaCompras();
             
         }
         else{
@@ -92,9 +126,16 @@ public class ConfirmarCompraController implements Initializable {
         }
    }
    
+    @FXML
+    public void quitarCompra2(KeyEvent event) throws IOException{
+        if(event.getCode() == KeyCode.SPACE) {
+         quitarCompra();
+     }
+    }
+   
    
     @FXML
-    private void confirmarCompra(ActionEvent event) {
+    private void confirmarCompra() {
        
         
         BusquedaLibroController controller= new BusquedaLibroController();
@@ -129,32 +170,19 @@ public class ConfirmarCompraController implements Initializable {
                      compra.setVisible(false);
     }
     
+    @FXML
+    public void confirmarCompra2(KeyEvent event) throws IOException{
+        if(event.getCode() == KeyCode.SPACE) {
+         confirmarCompra();
+     }
+    }
+   
+    
  
 
-   public void initStage(Parent root) {
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOnShowing(this::handleWindowShowing);
-        stage.show();
-    }
-    
-    public void handleWindowShowing(WindowEvent event){
-           
-       
-      cargarTablaComras();
+  
 
-    } 
-
-   
-
-    void setStage(Stage reg, Button btnComprar, ArrayList<LibroBean> compras) {
-         this.stage=reg;
-        this.compra=btnComprar;
-        this.compras=compras;
-    }
-
-    private void cargarTablaComras() {
+    private void cargarTablaCompras() {
           colTitulo.setCellValueFactory(new PropertyValueFactory<> ("titulo"));
         colAutor.setCellValueFactory(new PropertyValueFactory<> ("autor"));
         colEditorial.setCellValueFactory(new PropertyValueFactory<> ("editorial"));
@@ -167,13 +195,7 @@ public class ConfirmarCompraController implements Initializable {
             tablaCompra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
-    void setUsuController(UsuController usu) {
-      this.usu=usu;
-    }
-
-    void setComprasManager(ComprasManager comprasManager) {
-        this.compMana=comprasManager;
-    }
+   
 
    
     

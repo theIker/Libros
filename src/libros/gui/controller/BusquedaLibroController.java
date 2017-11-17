@@ -25,6 +25,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -114,13 +116,34 @@ public class BusquedaLibroController implements Initializable {
         
     }    
 
+    void setLibroManager(LibrosManager lib) {
+         this.librosManager=lib;
+         ObservableList<LibroBean> list=FXCollections.observableArrayList(librosManager.getAllLibros());
+         this.cargarTabla(list);
+    }
     
+    void setAdminController(AdminController x){
+        this.x=x;
+    }
+    
+    void resetCompras(){
+        compras.clear();
+    }
+
+    void setUsuController(UsuController aThis) {
+        this.usu=aThis;
+    }
+
+    void setComprasManager(ComprasManager comprasManager) {
+        
+       this.comprasManager=comprasManager;
+    }
     
     
     
     
     @FXML
-   private void anadirCompra(ActionEvent event){
+   private void anadirCompra(){
        
      
        if(!(textFieldUnidades.getText().equals(""))&&tablaBusqueda.getSelectionModel().getSelectedItem()!=null){
@@ -139,15 +162,23 @@ public class BusquedaLibroController implements Initializable {
                 alert.setTitle("Error");
                 alert.setContentText("Inserta unidades");
                 alert.showAndWait();
-       }
-     
-     
-   
-       
+       }    
    }
+   
+    @FXML
+    public void anadirCompra2(KeyEvent event) throws IOException{
+        if(event.getCode() == KeyCode.SPACE) {
+         anadirCompra();
+     }
+    }
+   
+   /**
+    * Se encarga de buscar el libro dependiendo el filtro que le haya asignado el usuario.
+    * Se ejecuta cuando se clica sobre el boton btnBuscar.
+    */
     
     @FXML
-    private void buscar(ActionEvent event) {
+    private void buscar() {
         ObservableList<LibroBean> lista = null;
       	if(comboBusqueda.getSelectionModel().getSelectedIndex()!=-1){
           	if(comboBusqueda.getSelectionModel().getSelectedIndex()==0){
@@ -174,17 +205,37 @@ public class BusquedaLibroController implements Initializable {
         
         
     }
+    /**
+     * 
+     * @param event
+     * @throws IOException 
+     * Hace una llamada al metodo buscar cuando se pulsa el espacio y el elemento btnBuscar tiene el foco
+     */
     
     @FXML
-    private void cargarLibro(ActionEvent event) {
+    public void buscar2(KeyEvent event) throws IOException{
+        if(event.getCode() == KeyCode.SPACE) {
+         buscar();
+     }
+    }
+    
+    @FXML
+    private void cargarLibro() {
        
         LibroBean aux= tablaBusqueda.getSelectionModel().getSelectedItem();
         x.cargarLibro(aux);
         stage.close();
     }
+    
+    @FXML
+    public void cargarLibro2(KeyEvent event) throws IOException{
+        if(event.getCode() == KeyCode.SPACE) {
+         buscar();
+     }
+    }
 
     @FXML
-    private void comprarLibro(ActionEvent event) throws IOException {
+    private void comprarLibro() throws IOException {
      if(compras.size()>0){
 		Stage reg = new Stage();
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/confirmarCompra.fxml"));
@@ -207,11 +258,28 @@ public class BusquedaLibroController implements Initializable {
      }
     }
     
+     @FXML
+    public void comprarLibro2(KeyEvent event) throws IOException{
+        if(event.getCode() == KeyCode.SPACE) {
+         comprarLibro();
+     }
+    }
+    
+    /**
+     * 
+     * @param stage 
+     * Coge la stage utilizada por la ventana anterior
+     */
     public void setStage(Stage stage){
       
         this.stage=stage;
-       
     }
+    
+    /**
+     * 
+     * @param root
+     * Se ejecuta cuando esta es iniciada como una ventana nueva
+     */
     public void initStage(Parent root) {
         
         Scene scene = new Scene(root);
@@ -223,7 +291,11 @@ public class BusquedaLibroController implements Initializable {
     }
     
  
-    
+    /**
+     * 
+     * @param event 
+     * metodo que se llama al iniciar la ventana(InitStage)
+     */
     public void handleWindowShowing(WindowEvent event){
            //se ejecuta antes de iniciar la ventana
            btnCargar.setVisible(true);
@@ -233,6 +305,12 @@ public class BusquedaLibroController implements Initializable {
         
           
     } 
+    
+    /**
+     * 
+     * @param list 
+     * Recibe un ObservableList y se ocupa de mostrarlo en la tableView (tablaBusqueda)
+     */
 
     private void cargarTabla(ObservableList<LibroBean> list) {
        if(list !=null){
@@ -249,28 +327,7 @@ public class BusquedaLibroController implements Initializable {
        }
     }
 
-    void setLibroManager(LibrosManager lib) {
-        this.librosManager=lib;
-         ObservableList<LibroBean> list=FXCollections.observableArrayList(librosManager.getAllLibros());
-         this.cargarTabla(list);
-    }
-    
-    void setAdminController(AdminController x){
-        this.x=x;
-    }
-    
-    void resetCompras(){
-        compras.clear();
-    }
 
-    void setUsuController(UsuController aThis) {
-        this.usu=aThis;
-    }
-
-    void setComprasManager(ComprasManager comprasManager) {
-        
-       this.comprasManager=comprasManager;
-    }
     
 }
 

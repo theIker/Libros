@@ -51,7 +51,7 @@
          </children></HBox>
       <HBox layoutX="2.0" layoutY="185.0" prefHeight="58.0" prefWidth="480.0">
          <children>
-            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#entrar" prefHeight="39.0" prefWidth="110.0" text="Login" />
+            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#entrar" onKeyPressed="#entrar2" prefHeight="39.0" prefWidth="110.0" text="Login" />
          </children>
          <padding>
             <Insets left="210.0" />
@@ -64,7 +64,7 @@
                   <Insets top="25.0" />
                </HBox.margin>
             </Label>
-            <Hyperlink fx:id="HyperLinkRegistro" onAction="#registrar" text="Crear cuenta ahora &gt;&gt;">
+            <Hyperlink fx:id="HyperLinkRegistro" onAction="#registrar" onKeyPressed="#registrar2" text="Crear cuenta ahora &gt;&gt;">
                <HBox.margin>
                   <Insets top="20.0" />
                </HBox.margin></Hyperlink>

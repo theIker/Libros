@@ -19,6 +19,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import libros.datos.mana.ComprasManager;
@@ -67,7 +69,7 @@ public class LoginFinalController implements Initializable {
     
 
     @FXML
-    private void entrar(ActionEvent event) throws IOException {
+    private void entrar() throws IOException {
         
         if(textFieldNombreU.getText().equals("u") && textFieldContra.getText().equals("u")){
               
@@ -106,7 +108,13 @@ public class LoginFinalController implements Initializable {
     }
 
     @FXML
-    private void registrar(ActionEvent event) throws IOException {
+    public void entrar2(KeyEvent event) throws IOException{
+        if(event.getCode() == KeyCode.SPACE) {
+         entrar();
+     }
+    }
+    @FXML
+    private void registrar() throws IOException {
         Stage reg = new Stage();
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/registro.fxml"));
         
@@ -115,6 +123,12 @@ public class LoginFinalController implements Initializable {
        RegistroController controller= ((RegistroController) loader.getController());
         controller.setStage(reg);
         controller.initStage(root);
+    }
+     @FXML
+    public void registrar2(KeyEvent event) throws IOException {
+        if(event.getCode() == KeyCode.SPACE) {
+         registrar();
+     }
     }
 
     public void setStage(Stage stage) {

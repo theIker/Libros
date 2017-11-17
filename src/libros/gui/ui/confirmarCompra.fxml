@@ -10,7 +10,7 @@
    <children>
       <AnchorPane prefHeight="450.0" prefWidth="600.0">
          <children>
-            <Button fx:id="btnConfirmarCompra" layoutX="494.0" layoutY="395.0" mnemonicParsing="false" onAction="#confirmarCompra" text="Confirmar" />
+            <Button fx:id="btnConfirmarCompra" layoutX="494.0" layoutY="395.0" mnemonicParsing="false" onAction="#confirmarCompra" onKeyPressed="#confirmarCompra2" text="Confirmar" />
             <TableView fx:id="tablaCompra" layoutX="23.0" layoutY="15.0" prefHeight="372.0" prefWidth="540.0">
               <columns>
                 <TableColumn fx:id="colTitulo" prefWidth="75.0" text="Titulo" />
@@ -20,7 +20,7 @@
                   <TableColumn fx:id="colUnidades" prefWidth="138.0" text="Unidades" />
               </columns>
             </TableView>
-            <Button fx:id="btnQuitarCompra" layoutX="312.0" layoutY="395.0" mnemonicParsing="false" onAction="#quitarCompra" prefHeight="25.0" prefWidth="61.0" text="Quitar" />
+            <Button fx:id="btnQuitarCompra" layoutX="312.0" layoutY="395.0" mnemonicParsing="false" onAction="#quitarCompra" onKeyPressed="#quitarCompra2" prefHeight="25.0" prefWidth="61.0" text="Quitar" />
          </children>
       </AnchorPane>
    </children>
