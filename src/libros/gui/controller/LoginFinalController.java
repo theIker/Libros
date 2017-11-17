@@ -8,6 +8,7 @@ package libros.gui.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,6 +38,7 @@ public class LoginFinalController implements Initializable {
     private GenerosManager gen;
     private LibrosManager lib;
     private ComprasManager comprasManager;
+    private final static Logger logger= Logger.getLogger("libros.gui.controller");
     
     @FXML
     private TextField textFieldNombreU;
@@ -54,9 +56,26 @@ public class LoginFinalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+     public void initStage(Parent root){
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setOnShowing(this::handleWindowShowing);
+        stage.show();
+        
+    }
+    
+    public void handleWindowShowing(WindowEvent event){
+        //se ejecuta antes de iniciar la ventana
+         
+        
+    }
 
      public void setComprasManager(ComprasManager comprasManager) {
         this.comprasManager=comprasManager;
+    }
+     
+    public void setStage(Stage stage) {
+          this.stage=stage;
     }
     
      public void setGenManager(GenerosManager generoManager) {
@@ -76,7 +95,7 @@ public class LoginFinalController implements Initializable {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/Usu.fxml"));
         
         Parent root =(Parent)loader.load();
-        
+        logger.info("Entrando a Usuario(Ventana)");
         UsuController controller= ((UsuController) loader.getController());
         controller.setComprasManager(comprasManager);
         controller.setLibrosManager(lib);
@@ -91,7 +110,7 @@ public class LoginFinalController implements Initializable {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/admin.fxml"));
         
         Parent root =(Parent)loader.load();
-        
+        logger.info("Entrando a Administrador(Ventana)");
         AdminController controller= ((AdminController) loader.getController());
         controller.setStage(stage);
         controller.setGenManager(gen);
@@ -105,6 +124,7 @@ public class LoginFinalController implements Initializable {
                 alert.setTitle("Error");
                 alert.setContentText("Usuario/contraseña incorrecta");
                 alert.showAndWait();
+                logger.info("Credenciales Incorrectas");
         }
     }
 
@@ -120,7 +140,7 @@ public class LoginFinalController implements Initializable {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/registro.fxml"));
         
         Parent root =(Parent)loader.load();
-        
+         logger.info("Entrando a Registro(Ventana)");
        RegistroController controller= ((RegistroController) loader.getController());
         controller.setStage(reg);
         controller.initStage(root);
@@ -130,27 +150,5 @@ public class LoginFinalController implements Initializable {
         if(event.getCode() == KeyCode.SPACE) {
          registrar();
      }
-    }
-
-    public void setStage(Stage stage) {
-          this.stage=stage;
-    }
-    
-    public void initStage(Parent root){
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setOnShowing(this::handleWindowShowing);
-        stage.show();
-        
-    }
-    
-    public void handleWindowShowing(WindowEvent event){
-        //se ejecuta antes de iniciar la ventana
-         
-        
-    }
-
-   
-    
-    
+    }  
 }

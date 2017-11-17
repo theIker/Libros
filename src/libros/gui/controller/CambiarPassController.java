@@ -8,6 +8,7 @@ package libros.gui.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,8 @@ import javafx.stage.WindowEvent;
  */
 public class CambiarPassController implements Initializable {
     private Stage stage;
+    private final static Logger logger= Logger.getLogger("libros.gui.controller");
+    
     @FXML
     private PasswordField contraAnt;
     @FXML
@@ -71,6 +74,7 @@ public class CambiarPassController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Hecho");
                     alert.setContentText("Contraseña cambiada");
+                    logger.info("Contraseña cambiada");
                     alert.showAndWait();
                     
                      Stage y=(Stage) btnCambiarPass.getScene().getWindow();

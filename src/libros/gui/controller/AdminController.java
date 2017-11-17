@@ -55,6 +55,7 @@ public class AdminController implements Initializable {
    private LibroBean libro;
    private final static Logger logger= Logger.getLogger("libros.gui.controller");
    
+   //InsertarLibro
     @FXML
     private TextField TextIsbn;
     @FXML
@@ -75,12 +76,8 @@ public class AdminController implements Initializable {
     private Button btnInsertar;
     @FXML
     private ComboBox comboGeneros;
-    @FXML
-    private Button btnaddGen;
-    @FXML
-    private TextArea textAreaGeneros;
-    @FXML
-    private Button btnlimpGeneros;
+
+    //ModificarBorrarDisco
     @FXML
     private TextField TextIsbn1;
     @FXML
@@ -100,23 +97,23 @@ public class AdminController implements Initializable {
     @FXML
     private ComboBox comboGeneros1;
     @FXML
-    private Button btnaddGen1;
-    @FXML
-    private TextArea textAreaGeneros1;
-    @FXML
-    private Button btnlimpGeneros1;
-    @FXML
     private Button btnBUscar;
     @FXML
+    private Button btnModi;
+    @FXML
+    private Button btnBorrar;
+   
+    //InsertarBorrarGenero
+     @FXML
     private TextField textGenero;
     @FXML
     private Button btnInsertgen;
     @FXML
     private TableView<GeneroBean> tablaGeneros;
-    @FXML
-    private Button btnBorrar;
-    @FXML
-    private Button btnModi;
+     @FXML
+    private Button btnBorrar2;
+   
+   
     @FXML
     private TableColumn tableGenero;
     
@@ -145,6 +142,7 @@ public class AdminController implements Initializable {
         
         cargarTabla();
         stage.show();
+        logger.info("Despues de mostrar ventana Administrador");
     }
     
         public void setStage(Stage stage) {
@@ -177,6 +175,7 @@ public class AdminController implements Initializable {
                 TextEditorial.getText(),TextDescripcion.getText(),dateFechaPUb.getValue().toString(),Float.parseFloat(TextPrecio.getText()),
                 Integer.parseInt(TextStock.getText()),((String)comboGeneros.getSelectionModel().getSelectedItem()));      
                 lib.getAllLibros().add(aux);
+                logger.info("Libro "+aux.getIsbn()+" insertado");
                 limpiarInsertar();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Insertado");
                 alert.showAndWait(); 
@@ -203,7 +202,7 @@ public class AdminController implements Initializable {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
         
         Parent root =(Parent)loader.load();
-        
+        logger.info("Abriendo Ventana Busqueda Libro");
        BusquedaLibroController controller= ((BusquedaLibroController) loader.getController());
         controller.setLibroManager(lib);
         controller.setStage(reg);
@@ -238,6 +237,7 @@ public class AdminController implements Initializable {
                 Integer.parseInt(TextStock1.getText()),((String)comboGeneros1.getSelectionModel().getSelectedItem()));
                 lib.getAllLibros().remove(libro);
                 lib.getAllLibros().add(modificado);
+                logger.info("Disco "+libro.getIsbn()+" modificado");
                 limpiarModificar();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Modificado");
                 alert.showAndWait(); 
@@ -267,6 +267,7 @@ public class AdminController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES){
               lib.getAllLibros().remove(libro);
+              logger.info("Disco "+libro.getIsbn()+" borrado");
               limpiarModificar();
         } else{
             
@@ -279,6 +280,48 @@ public class AdminController implements Initializable {
           borrar();
      }
  }
+    @FXML
+    public void insertarGenero(){
+        if(!generosManager.getNombresGenero().contains((String) textGenero.getText())){
+            generosManager.getAllGeneros().add(new GeneroBean(generosManager.getAllGeneros().size()+1,(String) textGenero.getText()));
+            cargarTabla();
+            logger.info("Genero insertado");
+             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Genero Introducido");
+             alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Genero existente");
+             alert.showAndWait();
+        }   
+    }
+    
+     @FXML
+    public void insertarGenero2(KeyEvent event){
+    if(event.getCode() == KeyCode.SPACE){
+          insertarGenero();
+     }
+ }
+    
+    @FXML
+    public void borrarGenero(){
+       if(tablaGeneros.getSelectionModel().getSelectedIndex()!= -1){
+         generosManager.getAllGeneros().remove(tablaGeneros.getSelectionModel().getSelectedItem());
+         cargarTabla();
+         logger.info("Genero borrado");
+         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Genero borrado");
+         alert.showAndWait();
+         
+       }else{
+           Alert alert = new Alert(Alert.AlertType.INFORMATION, "Selecciona un genero");
+           alert.showAndWait();
+       }  
+    } 
+    
+     @FXML
+    public void borrarGenero2(KeyEvent event){
+    if(event.getCode() == KeyCode.SPACE){
+          borrarGenero();
+     }
+ }
 
     /**
      * Carga la tabla generos y los combos que contienen generos
@@ -288,6 +331,7 @@ public class AdminController implements Initializable {
        ObservableList<GeneroBean> lista=FXCollections.observableArrayList(generosManager.getAllGeneros());
     
       tableGenero.setCellValueFactory(new PropertyValueFactory<> ("Genero"));
+      
       
       comboGeneros.setItems(list);
       comboGeneros1.setItems(list);
@@ -379,34 +423,9 @@ public class AdminController implements Initializable {
            comboGeneros1.getSelectionModel().select(libro.getGenero());     
            
            comboGeneros1.requestFocus();
+           
+           logger.info("Despues de cargar el libro");
     }
     
-    @FXML
-    public void insertarGenero(ActionEvent event){
-        
-    }
-    
-    @FXML
-    public void borrarGenero(ActionEvent event){
-        
-    }
-     @FXML
-    public void añadirGen(ActionEvent event){
-        
-    }
-    
-    @FXML
-    public void limpiarGen(ActionEvent event){
-        
-    }
-     @FXML
-    public void añadirGen2(ActionEvent event){
-        
-    }
-    
-    @FXML
-    public void limpiarGen2(ActionEvent event){
-        
-    }
     
 }

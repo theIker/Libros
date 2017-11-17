@@ -226,13 +226,13 @@
                      <children>
                         <Label layoutX="67.0" layoutY="59.0" text="Genero:" />
                         <TextField fx:id="textGenero" layoutX="129.0" layoutY="54.0" />
-                        <Button fx:id="btnInsertgen" layoutX="316.0" layoutY="54.0" mnemonicParsing="false" onAction="#insertarGenero" text="Insertar" />
+                        <Button fx:id="btnInsertgen" layoutX="316.0" layoutY="54.0" mnemonicParsing="false" onAction="#insertarGenero" onKeyPressed="#insertarGenero2" text="Insertar" />
                         <TableView fx:id="tablaGeneros" layoutX="115.0" layoutY="110.0" prefHeight="206.0" prefWidth="142.0">
                           <columns>
                             <TableColumn fx:id="tableGenero" prefWidth="141.0" text="Genero" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnBorrar2" id="borrarGen" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" onAction="#borrarGenero" text="Borrar" />
+                        <Button fx:id="btnBorrar2" id="borrarGen" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" onAction="#borrarGenero" onKeyPressed="#borrarGenero2" text="Borrar" />
                      </children>
                   </AnchorPane>
                </content>

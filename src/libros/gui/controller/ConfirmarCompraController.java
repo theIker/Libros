@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,6 +42,8 @@ import libros.datos.mana.ComprasManager;
 public class ConfirmarCompraController implements Initializable {
     private UsuController usu= new UsuController();
     private Stage stage;
+    private final static Logger logger= Logger.getLogger("libros.gui.controller");
+    
     @FXML
     private Button btnConfirmarCompra;
     @FXML
@@ -113,11 +116,13 @@ public class ConfirmarCompraController implements Initializable {
         if(tablaCompra.getSelectionModel().getSelectedItem()!=null){
             
             compras.remove(tablaCompra.getSelectionModel().getSelectedItem());
+            logger.info("Borrando linea compra");
             if(compras.size()==0){
                 stage.close();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Error");
                 alert.setContentText("Carrito vacio, se ha cerrado la ventana");
+                logger.info("Carro vacio cerrando ventana");
                 alert.showAndWait();
                 compra.setVisible(false);
             }
@@ -144,8 +149,6 @@ public class ConfirmarCompraController implements Initializable {
    
     @FXML
     private void confirmarCompra() {
-       
-        
         BusquedaLibroController controller= new BusquedaLibroController();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
@@ -157,7 +160,7 @@ public class ConfirmarCompraController implements Initializable {
             
             ComprasBean comp = new ComprasBean(String.valueOf(i) , compras.get(i).getIsbn(), dateFormat.format(date),compras.get(i).getTitulo(), compras.get(i).getStock()*compras.get(i).getPrecio(), compras.get(i).getStock());
        
-      
+            logger.info("Compra realizada y guardada");
             histo.add(comp);
        }
       

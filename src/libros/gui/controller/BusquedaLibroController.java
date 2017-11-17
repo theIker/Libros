@@ -42,24 +42,15 @@ import libros.datos.mana.LibrosManager;
  * @author ubuntu
  */
 public class BusquedaLibroController implements Initializable {
-    
-    /*
+
     private Stage stage;
     private LibrosManager librosManager;
     private ComprasManager comprasManager;
     private UsuController usu= new UsuController();
     private AdminController x= new AdminController();
+    private ArrayList<LibroBean>compras= new ArrayList<LibroBean>();
+    private final static Logger logger= Logger.getLogger("libros.gui.controller");
     
-    */
-    
-    
-       private Stage stage;
-       private LibrosManager librosManager;
-       private ComprasManager comprasManager;
-       private UsuController usu= new UsuController();
-       private AdminController x= new AdminController();
-       private ArrayList<LibroBean>compras= new ArrayList<LibroBean>();
-       private final static Logger logger= Logger.getLogger("libros.gui.controller");
     @FXML
     private ComboBox<String> comboBusqueda;
     @FXML
@@ -90,13 +81,7 @@ public class BusquedaLibroController implements Initializable {
     private TableColumn descripcion; 
     @FXML
     private TextField textFieldUnidades;
-   
-    
-   
-    
-    
-    
-      
+
 
     /**
      * Initializes the controller class.
@@ -114,7 +99,42 @@ public class BusquedaLibroController implements Initializable {
       textFieldBusqueda.setPromptText("Parametro de Busqueda");
        
         
+    }
+
+   public void initStage(Parent root) {
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOnShowing(this::handleWindowShowing);
+        stage.showAndWait();
+        
     }    
+    /**
+     * 
+     * @param event 
+     * metodo que se llama al iniciar la ventana(InitStage)
+     */
+    public void handleWindowShowing(WindowEvent event){
+           //se ejecuta antes de iniciar la ventana
+           btnCargar.setVisible(true);
+           btnAdd.setVisible(false);
+           btnComprar.setVisible(false);
+           textFieldUnidades.setVisible(false);
+           stage.setTitle("Busqueda Libro");
+        
+          
+    } 
+    
+    /**
+     * 
+     * @param stage 
+     * Coge la stage utilizada por la ventana anterior
+     */
+    public void setStage(Stage stage){
+      
+        this.stage=stage;
+    }
 
     void setLibroManager(LibrosManager lib) {
          this.librosManager=lib;
@@ -165,7 +185,7 @@ public class BusquedaLibroController implements Initializable {
        if(!esta){
           compras.add(libro);
        }
-        
+        logger.info("Añadido al carro");
         textFieldUnidades.setText("");
         btnComprar.setVisible(true);
         
@@ -210,6 +230,7 @@ public class BusquedaLibroController implements Initializable {
            	 lista=FXCollections.observableArrayList(librosManager.getLibrosAutor((String)textFieldBusqueda.getText()));
        }
            cargarTabla(lista);
+           logger.info("Busqueda realizada");
       }
         
         else{
@@ -218,12 +239,7 @@ public class BusquedaLibroController implements Initializable {
                 alert.setTitle("Error");
                 alert.setContentText("Selecciona criterio de busqueda");
                 alert.showAndWait();
-            
-        }
-        
-        
-        
-        
+        } 
     }
     /**
      * 
@@ -244,6 +260,7 @@ public class BusquedaLibroController implements Initializable {
        
         LibroBean aux= tablaBusqueda.getSelectionModel().getSelectedItem();
         x.cargarLibro(aux);
+        logger.info("Libro cargado en administrador(Ventana)");
         stage.close();
     }
     
@@ -261,7 +278,7 @@ public class BusquedaLibroController implements Initializable {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/confirmarCompra.fxml"));
         
         Parent root =(Parent)loader.load();
-        
+        logger.info("Se abre la ventana del carro(ConfirmarCompra)");
         ConfirmarCompraController controller= ((ConfirmarCompraController) loader.getController());
         controller.setUsuController(usu);
         controller.setStage(reg,btnComprar,compras);
@@ -285,47 +302,7 @@ public class BusquedaLibroController implements Initializable {
      }
     }
     
-    /**
-     * 
-     * @param stage 
-     * Coge la stage utilizada por la ventana anterior
-     */
-    public void setStage(Stage stage){
-      
-        this.stage=stage;
-    }
-    
-    /**
-     * 
-     * @param root
-     * Se ejecuta cuando esta es iniciada como una ventana nueva
-     */
-    public void initStage(Parent root) {
-        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOnShowing(this::handleWindowShowing);
-        stage.showAndWait();
-        
-    }
-    
- 
-    /**
-     * 
-     * @param event 
-     * metodo que se llama al iniciar la ventana(InitStage)
-     */
-    public void handleWindowShowing(WindowEvent event){
-           //se ejecuta antes de iniciar la ventana
-           btnCargar.setVisible(true);
-           btnAdd.setVisible(false);
-           btnComprar.setVisible(false);
-           textFieldUnidades.setVisible(false);
-           stage.setTitle("Busqueda Libro");
-        
-          
-    } 
+   
     
     /**
      * 

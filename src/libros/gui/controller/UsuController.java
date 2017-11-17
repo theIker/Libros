@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,6 +48,7 @@ public class UsuController implements Initializable {
     private LibrosManager librosManager;
     private GenerosManager generosManager;
     private Collection<ComprasBean> historial;
+    private final static Logger logger= Logger.getLogger("libros.gui.controller");
     
     private Stage stage;
 
@@ -154,13 +156,10 @@ public class UsuController implements Initializable {
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/CambiarPass.fxml"));
         
         Parent root =(Parent)loader.load();
-        
+        logger.info("Abriendo ventana para cambiar contraseña(CambiarPass)");
         CambiarPassController controller= ((CambiarPassController) loader.getController());
         controller.setStage(reg);
         controller.initStage(root);
-       
-        
-        
     }
     
     @FXML
@@ -176,6 +175,7 @@ public class UsuController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Hecho");
                 alert.setContentText("Usuario modificado");
+                logger.info("Usuario modificado");
                 alert.showAndWait();
                 
             }
@@ -209,6 +209,7 @@ public class UsuController implements Initializable {
                 Alert alert2 = new Alert(Alert.AlertType.WARNING);
                 alert2.setTitle("Borrado");
                 alert2.setContentText("Usuario borrado");
+                logger.info("Usuario Borrado");
                 alert2.showAndWait();
                // stage=(Stage) btnBorrarUsu.getScene().getWindow();
                // stage.close();
@@ -235,7 +236,7 @@ public class UsuController implements Initializable {
           FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/LoginFinal.fxml"));
         
         Parent root =(Parent)loader.load();
-        
+        logger.info("Saliendo y abriendo la ventana Login");
         LoginFinalController controller= ((LoginFinalController) loader.getController());
         controller.setComprasManager(comprasManager);
         controller.setLibroManager(librosManager);

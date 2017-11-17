@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" stylesheets="@Custom.css" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.LoginFinalController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" stylesheets="@Custom.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.LoginFinalController">
    <children>
       <GridPane layoutX="111.0" layoutY="56.0" prefHeight="124.0" prefWidth="278.0">
         <columnConstraints>
@@ -31,7 +31,7 @@
                </GridPane.margin>
             </TextField>
             <Label id="lblContra" text="Contraseña:" GridPane.rowIndex="1" />
-            <PasswordField fx:id="textFieldContra" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="textFieldContra" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <HBox layoutY="-2.0" prefHeight="58.0" prefWidth="480.0">

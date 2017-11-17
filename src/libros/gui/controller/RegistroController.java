@@ -7,6 +7,7 @@ package libros.gui.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,6 +32,7 @@ import javafx.scene.control.CheckBox;
  */
 public class RegistroController implements Initializable {
     private Stage stage;
+    private final static Logger logger= Logger.getLogger("libros.gui.controller");
     @FXML
     private TextField textUser;
     @FXML
@@ -87,6 +89,7 @@ public class RegistroController implements Initializable {
                       textUser.setDisable(true);
                       textPass.setDisable(true);
                       TextPass2.setDisable(true);
+                      logger.info("Primera parte del registro completada");
                 }else{
                       Alert alert = new Alert(AlertType.ERROR, "Las contraseñas deben coincidir");
                       alert.showAndWait(); 
@@ -110,6 +113,7 @@ public class RegistroController implements Initializable {
             if (textEmail.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
                 if(aceptarTerminos.isSelected()){
                     Alert alert = new Alert(AlertType.INFORMATION, "Registro completado podra acceder con el usuario u:u");
+                    logger.info("Registro completado");
                     alert.showAndWait();
                     stage.close();
                 }else{
