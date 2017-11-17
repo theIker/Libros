@@ -293,7 +293,7 @@ public class AdminController implements Initializable {
       comboGeneros1.setItems(list);
       tablaGeneros.setItems(lista);
       
-      tablaGeneros.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+      tablaGeneros.setColumnResizePolicy((param) -> true );
       
       
       

@@ -145,9 +145,9 @@ public class BusquedaLibroController implements Initializable {
     @FXML
    private void anadirCompra(){
        
-     
-       if(!(textFieldUnidades.getText().equals(""))&&tablaBusqueda.getSelectionModel().getSelectedItem()!=null){
-       btnComprar.setVisible(true);
+     try{
+          if(!(textFieldUnidades.getText().equals(""))&&tablaBusqueda.getSelectionModel().getSelectedItem()!=null){
+       
        
         
         LibroBean libro=tablaBusqueda.getSelectionModel().getSelectedItem();
@@ -155,6 +155,7 @@ public class BusquedaLibroController implements Initializable {
        
         compras.add(libro);
         textFieldUnidades.setText("");
+        btnComprar.setVisible(true);
         
        }
        else{
@@ -162,7 +163,14 @@ public class BusquedaLibroController implements Initializable {
                 alert.setTitle("Error");
                 alert.setContentText("Inserta unidades");
                 alert.showAndWait();
-       }    
+       } 
+     }catch(NumberFormatException e){
+          Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Campo numerico");
+                alert.showAndWait();
+     }
+         
    }
    
     @FXML
@@ -302,6 +310,7 @@ public class BusquedaLibroController implements Initializable {
            btnAdd.setVisible(false);
            btnComprar.setVisible(false);
            textFieldUnidades.setVisible(false);
+           stage.setTitle("Busqueda Libro");
         
           
     } 
@@ -322,8 +331,8 @@ public class BusquedaLibroController implements Initializable {
            fechaP.setCellValueFactory(new PropertyValueFactory<> ("fechaPub"));
      			 descripcion.setCellValueFactory(new PropertyValueFactory<> ("descripcion"));
       
-      		tablaBusqueda.setItems(list); 
-          tablaBusqueda.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+      	tablaBusqueda.setItems(list); 
+               tablaBusqueda.setColumnResizePolicy((param) -> true );
        }
     }
 

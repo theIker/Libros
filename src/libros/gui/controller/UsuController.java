@@ -105,7 +105,7 @@ public class UsuController implements Initializable {
    public void initStage(Parent root) throws IOException {
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        
+        stage.setTitle("Usuario");
          FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
           Parent pane = null; 
           pane = loader.load();
@@ -260,6 +260,7 @@ public class UsuController implements Initializable {
         
         tableHisto.setItems(comprasData);
         tableHisto.refresh();
+        tableHisto.setColumnResizePolicy((param) -> true );
         
     
     }

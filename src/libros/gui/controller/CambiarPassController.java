@@ -59,7 +59,7 @@ public class CambiarPassController implements Initializable {
     
     public void handleWindowShowing(WindowEvent event){
            //se ejecuta antes de iniciar la ventana
-
+            stage.setTitle("Cambiar contraseña");
     } 
     
     @FXML

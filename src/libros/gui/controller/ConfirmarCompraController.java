@@ -86,8 +86,8 @@ public class ConfirmarCompraController implements Initializable {
     
     public void handleWindowShowing(WindowEvent event){
            
-       
-      cargarTablaCompras();
+       stage.setTitle("Carrito compra");
+       cargarTablaCompras();
 
     } 
 
@@ -113,6 +113,14 @@ public class ConfirmarCompraController implements Initializable {
         if(tablaCompra.getSelectionModel().getSelectedItem()!=null){
             
             compras.remove(tablaCompra.getSelectionModel().getSelectedItem());
+            if(compras.size()==0){
+                stage.close();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error");
+                alert.setContentText("Carrito vacio, se ha cerrado la ventana");
+                alert.showAndWait();
+                compra.setVisible(false);
+            }
             cargarTablaCompras();
             
         }
@@ -164,9 +172,7 @@ public class ConfirmarCompraController implements Initializable {
                     alert.setTitle("Hecho");
                     alert.setContentText("Compra realizada");
                     alert.showAndWait();
-                    
-                     Stage y=(Stage) btnConfirmarCompra.getScene().getWindow();
-                     y.close();
+                    stage.close();
                      compra.setVisible(false);
     }
     
@@ -192,7 +198,8 @@ public class ConfirmarCompraController implements Initializable {
          ObservableList<LibroBean> list=FXCollections.observableArrayList(compras);
             
             tablaCompra.setItems(list); 
-            tablaCompra.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+            tablaCompra.setColumnResizePolicy((param) -> true );
+            
     }
 
    
