@@ -1,0 +1,147 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 10, 2017, 8:21:13 AM
+    Author     : iker
+*/
+
+.table-view{
+   -fx-background-color: transparent;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#101010 0%, #424141 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #616161;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; 
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, #424242;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #005797;
+    -fx-background-insets: 0;
+    -fx-background-radius: 1;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: linear-gradient(#101010 0%, #424141 100%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+ .button {
+    -fx-font: monospace;
+    -fx-font-weight: bold;
+    -fx-background-color: darkseagreen;
+    -fx-text-fill: derive(darkseagreen,80%);
+     -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    
+}
+
+.button:armed{
+    -fx-background-color: #3CB371;
+    
+}
+
+
+.label {
+  
+    -fx-font-family: "Segoe UI Semibold";
+    
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#borrarUsu{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+#borrarGen{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+
+#borrarLibro{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+#borrarUsu:armed{
+    -fx-background-color: orangered;
+    
+}
+
+
+#borrarLibro:armed{
+    -fx-background-color: orangered;
+    
+}
+
+
+#borrarGen:armed{
+    -fx-background-color: orangered;
+    
+}
+
+
+
+
+
+
+
+
+

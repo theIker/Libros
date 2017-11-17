@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.AdminController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@Custom.css" fx:controller="libros.gui.controller.AdminController">
    <children>
       <HBox layoutX="-5.0" layoutY="-8.0" prefHeight="79.0" prefWidth="609.0" style="-fx-background-color: #505050;">
          <children>
@@ -203,7 +203,7 @@
                         </GridPane>
                         <HBox layoutX="8.0" layoutY="255.0" prefHeight="90.0" prefWidth="592.0">
                            <children>
-                              <Button fx:id="btnBorrar" mnemonicParsing="false" onAction="#borrar" onKeyPressed="#borrar2" prefHeight="40.0" prefWidth="120.0" text="Borrar libro">
+                              <Button fx:id="btnBorrar" id="borrarLibro" mnemonicParsing="false" onAction="#borrar" onKeyPressed="#borrar2" prefHeight="40.0" prefWidth="120.0" text="Borrar libro">
                                  <HBox.margin>
                                     <Insets left="60.0" top="30.0" />
                                  </HBox.margin>
@@ -232,7 +232,7 @@
                             <TableColumn fx:id="tableGenero" prefWidth="141.0" text="Genero" />
                           </columns>
                         </TableView>
-                        <Button fx:id="btnBorrar2" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" onAction="#borrarGenero" text="Borrar" />
+                        <Button fx:id="btnBorrar2" id="borrarGen" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" onAction="#borrarGenero" text="Borrar" />
                      </children>
                   </AnchorPane>
                </content>

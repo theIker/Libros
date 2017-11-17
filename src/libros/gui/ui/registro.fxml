@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="567.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.RegistroController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" stylesheets="@Custom.css" prefWidth="567.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.RegistroController">
    <children>
       <GridPane layoutX="43.0" layoutY="123.0" prefHeight="116.0" prefWidth="472.0" style="-fx-background-color: #A9F5F2; -fx-border-color: black;">
         <columnConstraints>

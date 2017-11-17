@@ -32,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import libros.datos.beans.ComprasBean;
 import libros.datos.mana.ComprasManager;
+import libros.datos.mana.GenerosManager;
 import libros.datos.mana.LibrosManager;
 
 
@@ -44,6 +45,7 @@ import libros.datos.mana.LibrosManager;
 public class UsuController implements Initializable {
     private ComprasManager comprasManager;
     private LibrosManager librosManager;
+    private GenerosManager generosManager;
     private Collection<ComprasBean> historial;
     
     private Stage stage;
@@ -133,6 +135,11 @@ public class UsuController implements Initializable {
         this.librosManager=lib;
     }
     
+      void setGenerosManager(GenerosManager gen) {
+        
+        this.generosManager=gen;
+    }
+    
     public void setHistorial(Collection<ComprasBean> historial){
         this.historial=historial;
         
@@ -212,6 +219,7 @@ public class UsuController implements Initializable {
             LoginFinalController controller= ((LoginFinalController) loader.getController());
             controller.setComprasManager(comprasManager);
             controller.setLibroManager(librosManager);
+            controller.setGenManager(generosManager);
             controller.setStage(stage);
             controller.initStage(root);
 
@@ -231,6 +239,7 @@ public class UsuController implements Initializable {
         LoginFinalController controller= ((LoginFinalController) loader.getController());
         controller.setComprasManager(comprasManager);
         controller.setLibroManager(librosManager);
+        controller.setGenManager(generosManager);
         controller.setStage(stage);
         controller.initStage(root);
         
@@ -255,13 +264,6 @@ public class UsuController implements Initializable {
     
     }
 
+  
  
-    
-    
-
-  
-    
-    
-  
-    
 }

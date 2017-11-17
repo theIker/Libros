@@ -80,6 +80,7 @@ public class LoginFinalController implements Initializable {
         UsuController controller= ((UsuController) loader.getController());
         controller.setComprasManager(comprasManager);
         controller.setLibrosManager(lib);
+        controller.setGenerosManager(gen);
         controller.setStage(stage,textFieldNombreU.getText());
         controller.initStage(root);
        
