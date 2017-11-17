@@ -67,17 +67,16 @@ and open the template in the editor.
 
 
  .button {
-    -fx-font: monospace;
+     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-background-color: darkseagreen;
-    -fx-text-fill: derive(darkseagreen,80%);
+    -fx-background-color: mediumseagreen;
      -fx-background-radius: 30;
     -fx-background-insets: 0;
     
 }
 
 .button:armed{
-    -fx-background-color: #3CB371;
+    -fx-background-color: darkseagreen;
     
 }
 

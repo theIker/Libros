@@ -144,7 +144,7 @@ public class BusquedaLibroController implements Initializable {
     
     @FXML
    private void anadirCompra(){
-       
+     boolean esta=false;
      try{
           if(!(textFieldUnidades.getText().equals(""))&&tablaBusqueda.getSelectionModel().getSelectedItem()!=null){
        
@@ -152,8 +152,20 @@ public class BusquedaLibroController implements Initializable {
         
         LibroBean libro=tablaBusqueda.getSelectionModel().getSelectedItem();
         libro.setStock(Integer.valueOf(textFieldUnidades.getText()));
-       
-        compras.add(libro);
+       for(int i=0;i<compras.size();i++){
+           if(compras.get(i).getIsbn().equals(libro.getIsbn())){
+        LibroBean x=compras.get(i);
+        compras.remove(compras.get(i));
+        x.setStock(x.getStock()+Integer.parseInt(textFieldUnidades.getText()));
+        compras.add(x);
+        esta=true;
+        break;
+           }
+       }
+       if(!esta){
+          compras.add(libro);
+       }
+        
         textFieldUnidades.setText("");
         btnComprar.setVisible(true);
         
