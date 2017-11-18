@@ -7,6 +7,7 @@ package libros.datos.mana;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 import libros.datos.beans.ComprasBean;
 
 /**
@@ -15,17 +16,20 @@ import libros.datos.beans.ComprasBean;
  */
 public class ComprasManagerDataGenerator implements ComprasManager{
     private ArrayList<ComprasBean> compras;
+    private final static Logger logger= Logger.getLogger("libros.datos.mana");
 
     public ComprasManagerDataGenerator(){
         compras= new ArrayList();
         for(int i=0;i<25;i++){
             compras.add(new ComprasBean("codCompra"+i,"isbn"+i,"fechaComp"+i,"titulo"+i,(float)i,i+2));
+           
         }
+         logger.info("Generadas compras de prueba");
     }
 
     @Override
     public Collection getAllCompras() {
-        
+        logger.info("Devolviendo todas las compras");
         return compras;
     }
     

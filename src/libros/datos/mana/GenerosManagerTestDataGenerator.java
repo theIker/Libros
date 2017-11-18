@@ -7,6 +7,7 @@ package libros.datos.mana;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import libros.datos.beans.GeneroBean;
 
@@ -17,20 +18,24 @@ import libros.datos.beans.GeneroBean;
 public class GenerosManagerTestDataGenerator implements GenerosManager{
 
     private ArrayList <GeneroBean> x;
+    private final static Logger logger= Logger.getLogger("libros.datos.mana");
     
     public GenerosManagerTestDataGenerator(){
         x= new ArrayList <GeneroBean>();
         for (int i = 0; i < 15; i++) {
             x.add(new GeneroBean(i,"Genero"+i ));
         }
+        logger.info("Generos de prueba generados");
     }
     @Override
     public Collection getAllGeneros() {
+        logger.info("Devolviendo todos los generos");
         return x;
     }
 
     @Override
     public Collection getNombresGenero() {
+        logger.info("Mapeando para sacar solo los nombres");
         Collection generosC= x.stream().map(gen -> gen.getGenero()).collect(Collectors.toList());
         return generosC;
   }
