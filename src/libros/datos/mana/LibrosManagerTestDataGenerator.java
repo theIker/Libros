@@ -13,12 +13,15 @@ import libros.datos.beans.LibroBean;
 
 /**
  *
- * @author ubuntu
+ * @author Jon Xabier Gimenez
  */
 public class LibrosManagerTestDataGenerator implements LibrosManager {
     private ArrayList <LibroBean> x;
         private final static Logger logger= Logger.getLogger("libros.datos.mana");
     
+        /**
+         * Genera libros
+         */
     public LibrosManagerTestDataGenerator(){
         x= new ArrayList<LibroBean>();
         for (int i = 1; i < 16; i++) {
@@ -33,6 +36,10 @@ public class LibrosManagerTestDataGenerator implements LibrosManager {
         logger.info("Libros de prueba generados");
     }
     
+    /**
+     * Metodo que devulve todos los libros
+     * @return 
+     */
     @Override
     public Collection getAllLibros() {
         logger.info("Devolviendo todos los libros");

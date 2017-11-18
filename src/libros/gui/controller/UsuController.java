@@ -41,7 +41,7 @@ import libros.datos.mana.LibrosManager;
 /**
  * FXML Controller class
  *
- * @author iker
+ * @author Iker Iglesias
  */
 public class UsuController implements Initializable {
     private ComprasManager comprasManager;
@@ -103,7 +103,11 @@ public class UsuController implements Initializable {
         // TODO
     }    
    
-    
+    /**
+     * Se inica el stage y carga la ventana de Busqueda libro en una pestaña de usuario
+     * @param root
+     * @throws IOException 
+     */
    public void initStage(Parent root) throws IOException {
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -129,19 +133,35 @@ public class UsuController implements Initializable {
         lblUsu.setText(e);
     }
    
+   /**
+    * Se envian las compras a esta clase
+    * @param comprasManager 
+    */
      public void setComprasManager(ComprasManager comprasManager) {
         this.comprasManager=comprasManager;
     }
-    
+    /**
+     * Se envian los libros a esta clase
+     * @param lib 
+     */
     public void setLibrosManager(LibrosManager lib){
         this.librosManager=lib;
     }
+    
+    /**
+     * Se envian los generos a esta clase
+     * @param gen 
+     */
     
       void setGenerosManager(GenerosManager gen) {
         
         this.generosManager=gen;
     }
     
+      /**
+       * se cargan datos en el historial de compras
+       * @param historial 
+       */
     public void setHistorial(Collection<ComprasBean> historial){
         this.historial=historial;
         
@@ -150,7 +170,11 @@ public class UsuController implements Initializable {
         tableHisto.setItems(comprasData);
     }
     
-    
+    /**
+     * Se inicia la ventana para cambiar contraseñs
+     * @param event
+     * @throws IOException 
+     */
     public void cambiarPass(ActionEvent event) throws IOException{
          Stage reg = new Stage();
         FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/CambiarPass.fxml"));
@@ -162,6 +186,10 @@ public class UsuController implements Initializable {
         controller.initStage(root);
     }
     
+    /**
+     * Metodo para actualizar los datos del usuario
+     * @param event 
+     */
     @FXML
     public void actualizarUsu(ActionEvent event){
         
@@ -196,6 +224,13 @@ public class UsuController implements Initializable {
         }
         
     }
+    
+    
+    /**
+     * Se borra el usuario con el que estemos conectados
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     public void deleteUsuario(ActionEvent event) throws IOException{
          Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -231,6 +266,11 @@ public class UsuController implements Initializable {
                 
         
     }
+    /**
+     * Desconectarse de la ventana usuario
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     public void salirLogOut(ActionEvent event) throws IOException{
           FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/LoginFinal.fxml"));
@@ -249,7 +289,9 @@ public class UsuController implements Initializable {
     
     
  
-
+/**
+ * Metodo para cargar la tabla historial compras
+ */
     private void cargarTabla() {
         tbTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         tbISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));

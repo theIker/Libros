@@ -9,7 +9,7 @@ import java.util.Collection;
 
 /**
  *
- * @author ubuntu
+ * @author Jon Xabier Gimenezs
  */
 public interface LibrosManager {
     

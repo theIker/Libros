@@ -28,7 +28,7 @@ import javafx.scene.control.CheckBox;
 /**
  * FXML Controller class
  *
- * @author iker
+ * @author Jon Xabier Gimenez
  */
 public class RegistroController implements Initializable {
     private Stage stage;
@@ -67,7 +67,11 @@ public class RegistroController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
+    /**
+     * Metodo que valida que los campos de registro sean correctos
+     * @param event 
+     */
     @FXML
     private void validarDatos(ActionEvent event) {
         if(textUser.getText().trim().equals("")||textPass.getText().trim().equals("")||TextPass2.getText().trim().equals("")){
@@ -101,7 +105,11 @@ public class RegistroController implements Initializable {
         }      
     }
   
-
+  
+    /**
+     * Metodo para registrarse en la aplicacion
+     * @param event 
+     */
     @FXML
     public void registrarse(ActionEvent event) {   
         if(textNombre.getText().trim().equals("")||textApellido1.getText().trim().equals("")||textApellido2.getText().trim().equals("")||
@@ -133,7 +141,11 @@ public class RegistroController implements Initializable {
      public void setStage(Stage stage) {
         this.stage=stage;
     }
-
+   
+     /**
+      * Inicia el stage
+      * @param root 
+      */
    public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -141,7 +153,10 @@ public class RegistroController implements Initializable {
         stage.setOnShowing(this::handleWindowShowing);
         stage.show();
     }
-    
+    /**
+     * Al ejecutarse el stage los campos se desabilitan
+     * @param event 
+     */
     public void handleWindowShowing(WindowEvent event){
            //se ejecuta antes de iniciar la ventana
            textNombre.setDisable(true);

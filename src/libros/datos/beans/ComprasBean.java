@@ -12,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
- * @author iker
+ * @author Iker Iglesias
  */
 public class ComprasBean implements Serializable {
 

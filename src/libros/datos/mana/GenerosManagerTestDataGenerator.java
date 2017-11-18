@@ -13,13 +13,16 @@ import libros.datos.beans.GeneroBean;
 
 /**
  *
- * @author ubuntu
+ * @author Jon Xabier Gimenez
  */
 public class GenerosManagerTestDataGenerator implements GenerosManager{
 
     private ArrayList <GeneroBean> x;
     private final static Logger logger= Logger.getLogger("libros.datos.mana");
     
+    /**
+     * Metodo para generar generos
+     */
     public GenerosManagerTestDataGenerator(){
         x= new ArrayList <GeneroBean>();
         for (int i = 0; i < 15; i++) {
@@ -32,7 +35,10 @@ public class GenerosManagerTestDataGenerator implements GenerosManager{
         logger.info("Devolviendo todos los generos");
         return x;
     }
-
+   /**
+    * Metodo que devuelve los losgeneros
+    * @return 
+    */
     @Override
     public Collection getNombresGenero() {
         logger.info("Mapeando para sacar solo los nombres");

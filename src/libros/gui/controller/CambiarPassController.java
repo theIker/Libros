@@ -25,7 +25,7 @@ import javafx.stage.WindowEvent;
 /**
  * FXML Controller class
  *
- * @author iker
+ * @author Iker Iglesias
  */
 public class CambiarPassController implements Initializable {
     private Stage stage;
@@ -52,6 +52,10 @@ public class CambiarPassController implements Initializable {
         this.stage=stage;
     }
 
+         /**
+          * Metodo que inicia el stage
+          * @param root 
+          */
    public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -60,11 +64,17 @@ public class CambiarPassController implements Initializable {
         stage.show();
     }
     
+   
     public void handleWindowShowing(WindowEvent event){
            //se ejecuta antes de iniciar la ventana
             stage.setTitle("Cambiar contraseña");
     } 
     
+    /**
+     * Metodo que valida que el cambio de contraseña sea correcta
+     * @param even
+     * @throws IOException 
+     */
     @FXML
     public void cambiarPass(ActionEvent even) throws IOException{
          if(!(contraAnt.getText().equals("")||nuevaContra.getText().equals("")||nuevaContra2.getText().equals(""))){

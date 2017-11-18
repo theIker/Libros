@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package libros.gui.controller;
 
 
@@ -46,13 +47,15 @@ import libros.datos.mana.LibrosManager;
  *
  * @author Jon Xabier Gimenez
  */
+
+
 public class AdminController implements Initializable {
    private Stage stage;
    private GenerosManager generosManager;
    private LibrosManager lib;
    private LibroBean libro;
    private final static Logger logger= Logger.getLogger("libros.gui.controller");
-   
+  
    //InsertarLibro
     @FXML
     private TextField TextIsbn;
@@ -115,7 +118,10 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn tableGenero;
     
-    
+    /**
+     * Se envia libroBean  esta clase
+     * @param libro 
+     */
     public void setLibro(LibroBean libro){
         this.libro=libro;
     }
@@ -146,17 +152,27 @@ public class AdminController implements Initializable {
         public void setStage(Stage stage) {
         this.stage=stage;
     }
-
+   
+        /**
+         * Se envian los generos a esta clase
+         * @param gen 
+         */
     void setGenManager(GenerosManager gen) {
         this.generosManager=gen;
     }
-
+     
+    /**
+     * se envian los Libros a esta clase
+     * @param lib 
+     */
     void setLibroManager(LibrosManager lib) {
         this.lib=lib;
     }
     
   
-    
+    /**
+     * Metodo en el cual se inserta un libro
+     */
     @FXML
     public void insertarLibro(){
         if(TextIsbn.getText().equals("")||TextAutor.getText().equals("")||TextDescripcion.getText().equals("")
@@ -186,6 +202,8 @@ public class AdminController implements Initializable {
              }  
         }
 }
+    
+    
     @FXML
     public void insertarLibro2(KeyEvent event){
     if(event.getCode() == KeyCode.SPACE) {
@@ -193,7 +211,10 @@ public class AdminController implements Initializable {
      }
 }
     
-    
+    /**
+     * Metodo en el cual se abre la busqueda de libro y se carga en la ventana de admin
+     * @throws IOException 
+     */
     @FXML
     public void buscar() throws IOException{
         Stage reg = new Stage();
@@ -256,8 +277,11 @@ public class AdminController implements Initializable {
      }    
     }
     
+    /**
+     * Metodo en el cual se borra un libro
+     */
     @FXML
-    public void borrar(){ //Mirar el alert para que no se seleccione el YES si le doy enter
+    public void borrar(){
         Alert alert = new Alert(AlertType.WARNING, 
                         "Seguro que quiere borrar el libro?", 
                         ButtonType.YES, ButtonType.NO);
@@ -278,6 +302,10 @@ public class AdminController implements Initializable {
           borrar();
      }
  }
+    
+    /**
+     * Metodo para insertar generos
+     */
     @FXML
     public void insertarGenero(){
         if(!generosManager.getNombresGenero().contains((String) textGenero.getText())){
@@ -299,6 +327,9 @@ public class AdminController implements Initializable {
      }
  }
     
+    /**
+     * Metodo para borrar generos
+     */
     @FXML
     public void borrarGenero(){
        if(tablaGeneros.getSelectionModel().getSelectedIndex()!= -1){
@@ -358,6 +389,10 @@ public class AdminController implements Initializable {
         TextEditorial.setText("");    
         comboGeneros.getSelectionModel().clearSelection();
     }
+    
+    /**
+     * Limpia en la pestaña de modificar una vez se haya modificado
+     */
     
     private void limpiarModificar(){
         TextIsbn1.setText("");

@@ -39,7 +39,7 @@ import libros.datos.mana.LibrosManager;
 /**
  * FXML Controller class
  *
- * @author ubuntu
+ * @author Iker Iglesias, Jon Xabier Gimenez
  */
 public class BusquedaLibroController implements Initializable {
 
@@ -100,6 +100,11 @@ public class BusquedaLibroController implements Initializable {
        
         
     }
+    
+    /**
+     * Inicia el stage
+     * @param root 
+     */
 
    public void initStage(Parent root) {
         
@@ -135,32 +140,52 @@ public class BusquedaLibroController implements Initializable {
       
         this.stage=stage;
     }
-
+   
+    /**
+     * Pasa los liros generados a esta clase y los carga en una tabla
+     * @param lib 
+     */
     void setLibroManager(LibrosManager lib) {
          this.librosManager=lib;
          ObservableList<LibroBean> list=FXCollections.observableArrayList(librosManager.getAllLibros());
          this.cargarTabla(list);
     }
     
+    /**
+     * Se envia el controllador del administrador
+    */
     void setAdminController(AdminController x){
         this.x=x;
     }
     
+    /**
+     * Limpia el carrito de compras
+     */
     void resetCompras(){
         compras.clear();
     }
-
+    
+    /**
+     * se envia el controlador del usuario
+     * @param aThis 
+     */
     void setUsuController(UsuController aThis) {
         this.usu=aThis;
     }
 
+     /**
+      * Se envian las compras a esta clase
+      * @param comprasManager 
+      */
     void setComprasManager(ComprasManager comprasManager) {
         
        this.comprasManager=comprasManager;
     }
     
     
-    
+    /**
+     * Metodo en el que se añade al carrito un libro que hayamos seleccionado
+     */
     
     @FXML
    private void anadirCompra(){
@@ -255,6 +280,9 @@ public class BusquedaLibroController implements Initializable {
      }
     }
     
+    /**
+     * Metodo para cargar el libro en la ventana de modificado del administrador
+     */
     @FXML
     private void cargarLibro() {
        
@@ -270,7 +298,11 @@ public class BusquedaLibroController implements Initializable {
          buscar();
      }
     }
-
+    
+    /**
+     * Metodo que nos abre otra pestaña para ver el carrito de compra y confirmar la compra
+     * @throws IOException 
+     */
     @FXML
     private void comprarLibro() throws IOException {
      if(compras.size()>0){

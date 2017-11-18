@@ -87,39 +87,39 @@ and open the template in the editor.
 
 
 #borrarUsu{
-    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-color: orangered;
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
 }
 
 #borrarGen{
-    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-color: orangered;
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
 }
 
 #borrarLibro{
-    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-color: orangered;
     -fx-background-radius: 30;
     -fx-background-insets: 0;
     -fx-text-fill: white;
 }
 #borrarUsu:armed{
-    -fx-background-color: orangered;
+    -fx-background-color: lightcoral;
     
 }
 
 
 #borrarLibro:armed{
-    -fx-background-color: orangered;
+    -fx-background-color: lightcoral;
     
 }
 
 
 #borrarGen:armed{
-    -fx-background-color: orangered;  
+    -fx-background-color: lightcoral;  
 }
 
 #borrarUsu:focused{

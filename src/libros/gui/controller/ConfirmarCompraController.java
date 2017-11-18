@@ -37,7 +37,7 @@ import libros.datos.mana.ComprasManager;
 /**
  * FXML Controller class
  *
- * @author iker
+ * @author Iker Iglesias
  */
 public class ConfirmarCompraController implements Initializable {
     private UsuController usu= new UsuController();
@@ -78,7 +78,11 @@ public class ConfirmarCompraController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
           
     }    
-
+  
+    /**
+     * Metodo que inicia el stage
+     * @param root 
+     */
      public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -95,22 +99,32 @@ public class ConfirmarCompraController implements Initializable {
     } 
 
    
-
+    
     void setStage(Stage reg, Button btnComprar, ArrayList<LibroBean> compras) {
          this.stage=reg;
         this.compra=btnComprar;
         this.compras=compras;
     }
-    
+      
+    /**
+     * Se envia el controlador de usuario
+     * @param usu 
+     */
      void setUsuController(UsuController usu) {
       this.usu=usu;
     }
-
+    
+     /**
+      * Se envian las compras a esta clase
+      * @param comprasManager 
+      */
     void setComprasManager(ComprasManager comprasManager) {
         this.compMana=comprasManager;
     }
     
-    
+    /**
+     * Metodo para borrar compras del carrito
+     */
     @FXML
    private void quitarCompra(){
         if(tablaCompra.getSelectionModel().getSelectedItem()!=null){
@@ -146,7 +160,9 @@ public class ConfirmarCompraController implements Initializable {
      }
     }
    
-   
+   /**
+    * Metodo que confirma la compra
+    */
     @FXML
     private void confirmarCompra() {
         BusquedaLibroController controller= new BusquedaLibroController();
@@ -190,7 +206,9 @@ public class ConfirmarCompraController implements Initializable {
  
 
   
-
+/**
+ * Carga el carrito de compras en una tabla
+ */
     private void cargarTablaCompras() {
           colTitulo.setCellValueFactory(new PropertyValueFactory<> ("titulo"));
         colAutor.setCellValueFactory(new PropertyValueFactory<> ("autor"));

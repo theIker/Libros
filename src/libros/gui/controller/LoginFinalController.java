@@ -31,7 +31,7 @@ import libros.datos.mana.LibrosManager;
 /**
  * FXML Controller class
  *
- * @author iker
+ * @author Iker Iglesias
  */
 public class LoginFinalController implements Initializable {
     private Stage stage;
@@ -56,6 +56,11 @@ public class LoginFinalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    /**
+     * Se inica el stage
+     * @param root 
+     */
      public void initStage(Parent root){
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -69,7 +74,11 @@ public class LoginFinalController implements Initializable {
          
         
     }
-
+     
+    /**
+     * Se envian las compras a esta clase
+     * @param comprasManager 
+     */
      public void setComprasManager(ComprasManager comprasManager) {
         this.comprasManager=comprasManager;
     }
@@ -78,15 +87,25 @@ public class LoginFinalController implements Initializable {
           this.stage=stage;
     }
     
+    /**
+     * Se envian los generos a esta clase
+     * @param generoManager 
+     */
      public void setGenManager(GenerosManager generoManager) {
         this.gen=generoManager;
     }
-
+    /**
+     * Se envian los libros a esta clase
+     */
     public void setLibroManager(LibrosManager libroManager) {
         this.lib=libroManager;
     }
     
-
+   
+    /**
+     * Metodo para hacer login a la aplicacion como usuario o administrador
+     * @throws IOException 
+     */
     @FXML
     private void entrar() throws IOException {
         
@@ -134,6 +153,11 @@ public class LoginFinalController implements Initializable {
          entrar();
      }
     }
+    
+    /**
+     * En caso de no tener una cuenta de usuario se entrara a la ventana registro pero solo para usuarios
+     * @throws IOException 
+     */
     @FXML
     private void registrar() throws IOException {
         Stage reg = new Stage();

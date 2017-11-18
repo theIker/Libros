@@ -10,7 +10,7 @@ import libros.datos.beans.GeneroBean;
 
 /**
  *
- * @author ubuntu
+ * @author Jon Xabier Gimenez
  */
 public interface GenerosManager {
     

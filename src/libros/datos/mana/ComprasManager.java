@@ -9,7 +9,7 @@ import java.util.Collection;
 
 /**
  *
- * @author iker
+ * @author Iker Iglesias
  */
 public interface ComprasManager {
     

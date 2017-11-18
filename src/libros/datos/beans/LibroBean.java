@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  *
- * @author ubuntu
+ * @author Jon Xabier Gimenez
  */
 public class LibroBean implements Serializable {
     
