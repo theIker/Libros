@@ -112,6 +112,7 @@ public class UsuController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Usuario");
+         stage.setResizable(false);
          FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
           Parent pane = null; 
           pane = loader.load();

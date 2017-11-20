@@ -162,6 +162,7 @@ public class RegistroController implements Initializable {
      */
     public void handleWindowShowing(WindowEvent event){
            //se ejecuta antes de iniciar la ventana
+            stage.setResizable(false);
            textNombre.setDisable(true);
            textApellido1.setDisable(true);
            textApellido2.setDisable(true);

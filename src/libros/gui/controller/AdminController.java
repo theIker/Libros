@@ -141,6 +141,7 @@ public class AdminController implements Initializable {
      public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);  
+         stage.setResizable(false);
         //Codificar comportamiento
         btnBorrar.setDisable(true);
         btnModi.setDisable(true);

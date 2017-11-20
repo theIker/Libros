@@ -74,7 +74,7 @@ public class LoginFinalController implements Initializable {
      */
     public void handleWindowShowing(WindowEvent event){
         //se ejecuta antes de iniciar la ventana
-         
+        stage.setResizable(false);
     }
      
     /**

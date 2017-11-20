@@ -96,7 +96,7 @@ public class ConfirmarCompraController implements Initializable {
       * @param event 
       */
     public void handleWindowShowing(WindowEvent event){
-           
+            stage.setResizable(false);
        stage.setTitle("Carrito compra");
        cargarTablaCompras();
 
