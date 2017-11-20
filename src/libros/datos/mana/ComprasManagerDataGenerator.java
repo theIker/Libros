@@ -14,24 +14,26 @@ import libros.datos.beans.ComprasBean;
  *
  * @author Iker Iglesias
  */
-public class ComprasManagerDataGenerator implements ComprasManager{
+public class ComprasManagerDataGenerator implements ComprasManager {
+
     private ArrayList<ComprasBean> compras;
-    private final static Logger logger= Logger.getLogger("libros.datos.mana");
-   
+    private final static Logger logger = Logger.getLogger("libros.datos.mana");
+
     /**
      * Metodo para generar compras
      */
-    public ComprasManagerDataGenerator(){
-        compras= new ArrayList();
-        for(int i=0;i<25;i++){
-            compras.add(new ComprasBean("codCompra"+i,"isbn"+i,"fechaComp"+i,"titulo"+i,(float)i,i+2));
-           
+    public ComprasManagerDataGenerator() {
+        compras = new ArrayList();
+        for (int i = 0; i < 25; i++) {
+            compras.add(new ComprasBean("codCompra" + i, "isbn" + i, "fechaComp" + i, "titulo" + i, (float) i, i + 2));
+
         }
-         logger.info("Generadas compras de prueba");
+        logger.info("Generadas compras de prueba");
     }
 
     /**
      * Metodo para devolver las compras
+     *
      * @return las compras
      */
     @Override
@@ -39,5 +41,5 @@ public class ComprasManagerDataGenerator implements ComprasManager{
         logger.info("Devolviendo todas las compras");
         return compras;
     }
-    
+
 }

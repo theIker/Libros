@@ -13,65 +13,67 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="480.0" stylesheets="@Custom.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.LoginFinalController">
-   <children>
-      <GridPane layoutX="111.0" layoutY="56.0" prefHeight="124.0" prefWidth="278.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="94.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="179.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label id="lblNombreU" prefHeight="16.0" prefWidth="64.0" text="Usuario:" />
-            <TextField fx:id="textFieldNombreU" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="168.0" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </TextField>
-            <Label id="lblContra" text="Contraseña:" GridPane.rowIndex="1" />
-            <PasswordField fx:id="textFieldContra" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <HBox layoutY="-2.0" prefHeight="58.0" prefWidth="480.0">
-         <children>
-            <HBox prefHeight="58.0" prefWidth="480.0" style="-fx-background-color: #505050;">
-               <children>
-                  <Label text="Identifícate en tu cuenta de Libros S.A" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets left="25.0" top="13.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </HBox>
-         </children></HBox>
-      <HBox layoutX="2.0" layoutY="185.0" prefHeight="58.0" prefWidth="480.0">
-         <children>
-            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#entrar" onKeyPressed="#entrar2" prefHeight="39.0" prefWidth="110.0" text="Login" />
-         </children>
-         <padding>
-            <Insets left="210.0" />
-         </padding>
-      </HBox>
-      <HBox layoutX="-6.0" layoutY="256.0" prefHeight="107.0" prefWidth="488.0" style="-fx-background-color: DarkGray;">
-         <children>
-            <Label id="lblregistro" text="No tienes cuenta?">
-               <HBox.margin>
-                  <Insets top="25.0" />
-               </HBox.margin>
-            </Label>
-            <Hyperlink fx:id="HyperLinkRegistro" onAction="#registrar" onKeyPressed="#registrar2" text="Crear cuenta ahora &gt;&gt;">
-               <HBox.margin>
-                  <Insets top="20.0" />
-               </HBox.margin></Hyperlink>
-         </children>
-         <padding>
-            <Insets left="70.0" top="10.0" />
-         </padding>
-      </HBox>
-   </children>
+    <children>
+        <GridPane layoutX="111.0" layoutY="56.0" prefHeight="124.0" prefWidth="278.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="94.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="343.0" minWidth="10.0" prefWidth="179.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label id="lblNombreU" prefHeight="16.0" prefWidth="64.0" text="Usuario:" />
+                <TextField fx:id="textFieldNombreU" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="168.0" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </TextField>
+                <Label id="lblContra" text="Contraseña:" GridPane.rowIndex="1" />
+                <PasswordField fx:id="textFieldContra" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+        </GridPane>
+        <HBox layoutY="-2.0" prefHeight="58.0" prefWidth="480.0">
+            <children>
+                <HBox prefHeight="58.0" prefWidth="480.0" style="-fx-background-color: #505050;">
+                    <children>
+                        <Label text="Identifícate en tu cuenta de Libros S.A" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets left="25.0" top="13.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </HBox>
+            </children>
+        </HBox>
+        <HBox layoutX="2.0" layoutY="185.0" prefHeight="58.0" prefWidth="480.0">
+            <children>
+                <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#entrar" onKeyPressed="#entrar2" prefHeight="39.0" prefWidth="110.0" text="Login" />
+            </children>
+            <padding>
+                <Insets left="210.0" />
+            </padding>
+        </HBox>
+        <HBox layoutX="-6.0" layoutY="256.0" prefHeight="107.0" prefWidth="488.0" style="-fx-background-color: DarkGray;">
+            <children>
+                <Label id="lblregistro" text="No tienes cuenta?">
+                    <HBox.margin>
+                        <Insets top="25.0" />
+                    </HBox.margin>
+                </Label>
+                <Hyperlink fx:id="HyperLinkRegistro" onAction="#registrar" onKeyPressed="#registrar2" text="Crear cuenta ahora &gt;&gt;">
+                    <HBox.margin>
+                        <Insets top="20.0" />
+                    </HBox.margin>
+                </Hyperlink>
+            </children>
+            <padding>
+                <Insets left="70.0" top="10.0" />
+            </padding>
+        </HBox>
+    </children>
 </Pane>

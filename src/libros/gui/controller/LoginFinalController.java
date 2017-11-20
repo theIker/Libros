@@ -34,12 +34,13 @@ import libros.datos.mana.LibrosManager;
  * @author Iker Iglesias
  */
 public class LoginFinalController implements Initializable {
+
     private Stage stage;
     private GenerosManager gen;
     private LibrosManager lib;
     private ComprasManager comprasManager;
-    private final static Logger logger= Logger.getLogger("libros.gui.controller");
-    
+    private final static Logger logger = Logger.getLogger("libros.gui.controller");
+
     @FXML
     private TextField textFieldNombreU;
     @FXML
@@ -55,138 +56,148 @@ public class LoginFinalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
     /**
      * Se inica el stage
-     * @param root 
+     *
+     * @param root
      */
-     public void initStage(Parent root){
+    public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setOnShowing(this::handleWindowShowing);
         stage.show();
-        
+
     }
+
     /**
      * Se ejecuta al iniciar la ventana
-     * @param event 
+     *
+     * @param event
      */
-    public void handleWindowShowing(WindowEvent event){
+    public void handleWindowShowing(WindowEvent event) {
         //se ejecuta antes de iniciar la ventana
         stage.setResizable(false);
     }
-     
+
     /**
      * Se envian las compras a esta clase
-     * @param comprasManager 
+     *
+     * @param comprasManager
      */
-     public void setComprasManager(ComprasManager comprasManager) {
-        this.comprasManager=comprasManager;
+    public void setComprasManager(ComprasManager comprasManager) {
+        this.comprasManager = comprasManager;
     }
-     /**
-      * Recoge el stage
-      * @param stage 
-      */
+
+    /**
+     * Recoge el stage
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
-          this.stage=stage;
+        this.stage = stage;
     }
-    
+
     /**
      * Se envian los generos a esta clase
-     * @param generoManager 
+     *
+     * @param generoManager
      */
-     public void setGenManager(GenerosManager generoManager) {
-        this.gen=generoManager;
+    public void setGenManager(GenerosManager generoManager) {
+        this.gen = generoManager;
     }
+
     /**
      * Se envian los libros a esta clase
      */
     public void setLibroManager(LibrosManager libroManager) {
-        this.lib=libroManager;
+        this.lib = libroManager;
     }
-    
-   
+
     /**
      * Metodo para hacer login a la aplicacion como usuario o administrador
-     * @throws IOException 
+     *
+     * @throws IOException
      */
     @FXML
     private void entrar() throws IOException {
-        
-        if(textFieldNombreU.getText().equals("u") && textFieldContra.getText().equals("u")){
-              
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/Usu.fxml"));
-        
-        Parent root =(Parent)loader.load();
-        logger.info("Entrando a Usuario(Ventana)");
-        UsuController controller= ((UsuController) loader.getController());
-        controller.setComprasManager(comprasManager);
-        controller.setLibrosManager(lib);
-        controller.setGenerosManager(gen);
-        controller.setStage(stage,textFieldNombreU.getText());
-        controller.initStage(root);
-       
-        }
-        
-        else if(textFieldNombreU.getText().equals("a")& textFieldContra.getText().equals("a")){
-              
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/admin.fxml"));
-        
-        Parent root =(Parent)loader.load();
-        logger.info("Entrando a Administrador(Ventana)");
-        AdminController controller= ((AdminController) loader.getController());
-        controller.setStage(stage);
-        controller.setGenManager(gen);
-        controller.setLibroManager(lib);
-        
-        controller.initStage(root);
-        }
-        
-        else {
+
+        if (textFieldNombreU.getText().equals("u") && textFieldContra.getText().equals("u")) {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/Usu.fxml"));
+
+            Parent root = (Parent) loader.load();
+            logger.info("Entrando a Usuario(Ventana)");
+            UsuController controller = ((UsuController) loader.getController());
+            controller.setComprasManager(comprasManager);
+            controller.setLibrosManager(lib);
+            controller.setGenerosManager(gen);
+            controller.setStage(stage, textFieldNombreU.getText());
+            controller.initStage(root);
+
+        } else if (textFieldNombreU.getText().equals("a") & textFieldContra.getText().equals("a")) {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/admin.fxml"));
+
+            Parent root = (Parent) loader.load();
+            logger.info("Entrando a Administrador(Ventana)");
+            AdminController controller = ((AdminController) loader.getController());
+            controller.setStage(stage);
+            controller.setGenManager(gen);
+            controller.setLibroManager(lib);
+
+            controller.initStage(root);
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("Usuario/contraseña incorrecta");
-                alert.showAndWait();
-                logger.info("Credenciales Incorrectas");
+            alert.setTitle("Error");
+            alert.setContentText("Usuario/contraseña incorrecta");
+            alert.showAndWait();
+            logger.info("Credenciales Incorrectas");
         }
     }
-   /**
-    * Metodo entrar() por teclado
-    * @param event
-    * @throws IOException 
-    */
-    @FXML
-    public void entrar2(KeyEvent event) throws IOException{
-        if(event.getCode() == KeyCode.SPACE) {
-         entrar();
-     }
-    }
-    
+
     /**
-     * En caso de no tener una cuenta de usuario se entrara a la ventana registro pero solo para usuarios
-     * @throws IOException 
+     * Metodo entrar() por teclado
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    public void entrar2(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.SPACE) {
+            entrar();
+        }
+    }
+
+    /**
+     * En caso de no tener una cuenta de usuario se entrara a la ventana
+     * registro pero solo para usuarios
+     *
+     * @throws IOException
      */
     @FXML
     private void registrar() throws IOException {
         Stage reg = new Stage();
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/registro.fxml"));
-        
-        Parent root =(Parent)loader.load();
-         logger.info("Entrando a Registro(Ventana)");
-       RegistroController controller= ((RegistroController) loader.getController());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/registro.fxml"));
+
+        Parent root = (Parent) loader.load();
+        logger.info("Entrando a Registro(Ventana)");
+        RegistroController controller = ((RegistroController) loader.getController());
         controller.setStage(reg);
         controller.initStage(root);
     }
+
     /**
-     * metodo registrar() por teclado 
+     * metodo registrar() por teclado
+     *
      * @param event
-     * @throws IOException 
+     * @throws IOException
      */
-     @FXML
+    @FXML
     public void registrar2(KeyEvent event) throws IOException {
-        if(event.getCode() == KeyCode.SPACE) {
-         registrar();
-     }
-    }  
+        if (event.getCode() == KeyCode.SPACE) {
+            registrar();
+        }
+    }
 }

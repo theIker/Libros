@@ -13,9 +13,9 @@ import libros.datos.beans.GeneroBean;
  * @author Jon Xabier Gimenez
  */
 public interface GenerosManager {
-    
+
     public Collection getAllGeneros();
-    
+
     public Collection getNombresGenero();
-    
+
 }

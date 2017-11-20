@@ -22,34 +22,32 @@ import libros.gui.controller.LoginFinalController;
  * @author Iker Iglesias, Jon Xabier Gimenez
  */
 public class LibrosSL extends Application {
-    
+
     /**
      * Inicia la aplicación
+     *
      * @param stage
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void start(Stage stage) throws Exception {
-        GenerosManager generoManager= 
-                new GenerosManagerTestDataGenerator();
-       LibrosManager libroManager= 
-                new LibrosManagerTestDataGenerator();
-       ComprasManager comprasManager=
-               new ComprasManagerDataGenerator();
-        
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/libros/gui/ui/LoginFinal.fxml"));
-        
-        Parent root =(Parent)loader.load();
-        
-        LoginFinalController controller= ((LoginFinalController) loader.getController());
+        GenerosManager generoManager
+                = new GenerosManagerTestDataGenerator();
+        LibrosManager libroManager
+                = new LibrosManagerTestDataGenerator();
+        ComprasManager comprasManager
+                = new ComprasManagerDataGenerator();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/LoginFinal.fxml"));
+
+        Parent root = (Parent) loader.load();
+
+        LoginFinalController controller = ((LoginFinalController) loader.getController());
         controller.setStage(stage);
         controller.setGenManager(generoManager);
         controller.setLibroManager(libroManager);
         controller.setComprasManager(comprasManager);
         controller.initStage(root);
-        
-        
-       
 
     }
 
@@ -59,5 +57,5 @@ public class LibrosSL extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

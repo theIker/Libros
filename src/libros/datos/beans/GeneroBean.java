@@ -15,31 +15,31 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Jon Xabier Gimenez
  */
 public class GeneroBean {
-    
+
     private final SimpleIntegerProperty codGenero;
     private final SimpleStringProperty genero;
-    
-    public GeneroBean(Integer codGenero,String genero){
-        this.codGenero= new SimpleIntegerProperty (codGenero);
-        this.genero= new SimpleStringProperty(genero);
-}
+
+    public GeneroBean(Integer codGenero, String genero) {
+        this.codGenero = new SimpleIntegerProperty(codGenero);
+        this.genero = new SimpleStringProperty(genero);
+    }
 
     public Integer getCodGenero() {
         return this.codGenero.get();
     }
-    public void setCodGenero(Integer codGenero){
-        
+
+    public void setCodGenero(Integer codGenero) {
+
         this.codGenero.set(codGenero);
     }
-    
-    
+
     public String getGenero() {
         return this.genero.get();
     }
-     public void setGenero(String Genero){
-        
+
+    public void setGenero(String Genero) {
+
         this.genero.set(Genero);
     }
-    
 
 }

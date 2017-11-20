@@ -23,16 +23,15 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.scene.control.CheckBox;
 
-
-
 /**
  * FXML Controller class
  *
  * @author Jon Xabier Gimenez
  */
 public class RegistroController implements Initializable {
+
     private Stage stage;
-    private final static Logger logger= Logger.getLogger("libros.gui.controller");
+    private final static Logger logger = Logger.getLogger("libros.gui.controller");
     @FXML
     private TextField textUser;
     @FXML
@@ -66,112 +65,116 @@ public class RegistroController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
     /**
      * Metodo que valida que los campos de registro sean correctos
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void validarDatos(ActionEvent event) {
-        if(textUser.getText().trim().equals("")||textPass.getText().trim().equals("")||TextPass2.getText().trim().equals("")){
+        if (textUser.getText().trim().equals("") || textPass.getText().trim().equals("") || TextPass2.getText().trim().equals("")) {
             Alert alert = new Alert(AlertType.ERROR, "Rellene todos los campos");
             alert.showAndWait();
-        }else{
-            if(!textUser.getText().equals("u")){
-                if(textPass.getText().trim().equals(TextPass2.getText().trim())){
-                      textNombre.setDisable(false);
-                      textApellido1.setDisable(false);
-                      textApellido2.setDisable(false);
-                      textDireccion.setDisable(false);
-                      textTelefono.setDisable(false);
-                      textEmail.setDisable(false);
-                      textCuenta.setDisable(false);
-                      btnRegistrar.setDisable(false);
-                      aceptarTerminos.setDisable(false);
-                      
-                      textUser.setDisable(true);
-                      textPass.setDisable(true);
-                      TextPass2.setDisable(true);
-                      logger.info("Primera parte del registro completada");
-                }else{
-                      Alert alert = new Alert(AlertType.ERROR, "Las contraseñas deben coincidir");
-                      alert.showAndWait(); 
-                } 
-            }else{
-               Alert alert = new Alert(AlertType.ERROR, "Nombre de usuario en uso");
-               alert.showAndWait(); 
+        } else {
+            if (!textUser.getText().equals("u")) {
+                if (textPass.getText().trim().equals(TextPass2.getText().trim())) {
+                    textNombre.setDisable(false);
+                    textApellido1.setDisable(false);
+                    textApellido2.setDisable(false);
+                    textDireccion.setDisable(false);
+                    textTelefono.setDisable(false);
+                    textEmail.setDisable(false);
+                    textCuenta.setDisable(false);
+                    btnRegistrar.setDisable(false);
+                    aceptarTerminos.setDisable(false);
+
+                    textUser.setDisable(true);
+                    textPass.setDisable(true);
+                    TextPass2.setDisable(true);
+                    logger.info("Primera parte del registro completada");
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR, "Las contraseñas deben coincidir");
+                    alert.showAndWait();
+                }
+            } else {
+                Alert alert = new Alert(AlertType.ERROR, "Nombre de usuario en uso");
+                alert.showAndWait();
             }
-        }      
+        }
     }
-  
-  
+
     /**
      * Metodo para registrarse en la aplicacion
-     * @param event 
+     *
+     * @param event
      */
     @FXML
-    public void registrarse(ActionEvent event) {   
-        if(textNombre.getText().trim().equals("")||textApellido1.getText().trim().equals("")||textApellido2.getText().trim().equals("")||
-                textEmail.getText().trim().equals("")|| textDireccion.getText().trim().equals("")||textTelefono.getText().trim().equals("")
-                ||textCuenta.getText().trim().equals("")){
-             Alert alert = new Alert(AlertType.ERROR, "Rellene todos los campos");
-             alert.showAndWait();
-        }else{
-            if (textEmail.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")){
-                if(aceptarTerminos.isSelected()){
+    public void registrarse(ActionEvent event) {
+        if (textNombre.getText().trim().equals("") || textApellido1.getText().trim().equals("") || textApellido2.getText().trim().equals("")
+                || textEmail.getText().trim().equals("") || textDireccion.getText().trim().equals("") || textTelefono.getText().trim().equals("")
+                || textCuenta.getText().trim().equals("")) {
+            Alert alert = new Alert(AlertType.ERROR, "Rellene todos los campos");
+            alert.showAndWait();
+        } else {
+            if (textEmail.getText().matches("^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\\.[a-zA-Z]{2,4}$")) {
+                if (aceptarTerminos.isSelected()) {
                     Alert alert = new Alert(AlertType.INFORMATION, "Registro completado podra acceder con el usuario u:u");
                     logger.info("Registro completado");
                     alert.showAndWait();
                     stage.close();
-                }else{
-                     Alert alert = new Alert(AlertType.ERROR, "Acepte los terminos primero");
-                     alert.showAndWait();
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR, "Acepte los terminos primero");
+                    alert.showAndWait();
                 }
-            }else{
-                 Alert alert = new Alert(AlertType.ERROR, "Email Incorrecto");
-                 alert.showAndWait();
+            } else {
+                Alert alert = new Alert(AlertType.ERROR, "Email Incorrecto");
+                alert.showAndWait();
             }
         }
-        
-        
+
     }
-    
+
     /**
      * Recoge el stage
-     * @param stage 
+     *
+     * @param stage
      */
-     public void setStage(Stage stage) {
-        this.stage=stage;
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
-   
-     /**
-      * Inicia el stage
-      * @param root 
-      */
-   public void initStage(Parent root) {
+
+    /**
+     * Inicia el stage
+     *
+     * @param root
+     */
+    public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOnShowing(this::handleWindowShowing);
         stage.show();
     }
+
     /**
      * Al ejecutarse el stage los campos se desabilitan
-     * @param event 
+     *
+     * @param event
      */
-    public void handleWindowShowing(WindowEvent event){
-           //se ejecuta antes de iniciar la ventana
-            stage.setResizable(false);
-           textNombre.setDisable(true);
-           textApellido1.setDisable(true);
-           textApellido2.setDisable(true);
-           textDireccion.setDisable(true);
-           textTelefono.setDisable(true);
-           textEmail.setDisable(true);
-           textCuenta.setDisable(true);
-           btnRegistrar.setDisable(true);
-           aceptarTerminos.setDisable(true);
-    } 
-    
+    public void handleWindowShowing(WindowEvent event) {
+        //se ejecuta antes de iniciar la ventana
+        stage.setResizable(false);
+        textNombre.setDisable(true);
+        textApellido1.setDisable(true);
+        textApellido2.setDisable(true);
+        textDireccion.setDisable(true);
+        textTelefono.setDisable(true);
+        textEmail.setDisable(true);
+        textCuenta.setDisable(true);
+        btnRegistrar.setDisable(true);
+        aceptarTerminos.setDisable(true);
+    }
+
 }

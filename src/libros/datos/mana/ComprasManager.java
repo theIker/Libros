@@ -12,8 +12,7 @@ import java.util.Collection;
  * @author Iker Iglesias
  */
 public interface ComprasManager {
-    
+
     public Collection getAllCompras();
-    
-    
+
 }

@@ -28,9 +28,10 @@ import javafx.stage.WindowEvent;
  * @author Iker Iglesias
  */
 public class CambiarPassController implements Initializable {
+
     private Stage stage;
-    private final static Logger logger= Logger.getLogger("libros.gui.controller");
-    
+    private final static Logger logger = Logger.getLogger("libros.gui.controller");
+
     @FXML
     private PasswordField contraAnt;
     @FXML
@@ -46,87 +47,84 @@ public class CambiarPassController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
-     /**
-      * Recoge el stage
-      * @param stage 
-      */
-         public void setStage(Stage stage) {
-        this.stage=stage;
     }
 
-         /**
-          * Metodo que inicia el stage
-          * @param root 
-          */
-   public void initStage(Parent root) {
+    /**
+     * Recoge el stage
+     *
+     * @param stage
+     */
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    /**
+     * Metodo que inicia el stage
+     *
+     * @param root
+     */
+    public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOnShowing(this::handleWindowShowing);
         stage.show();
     }
-    
-   /**
-    * Se ejecuta al iniciar la ventana
-    * @param event 
-    */
-    public void handleWindowShowing(WindowEvent event){
-           //se ejecuta antes de iniciar la ventana
-            stage.setResizable(false);
-            stage.setTitle("Cambiar contraseña");
-    } 
-    
+
+    /**
+     * Se ejecuta al iniciar la ventana
+     *
+     * @param event
+     */
+    public void handleWindowShowing(WindowEvent event) {
+        //se ejecuta antes de iniciar la ventana
+        stage.setResizable(false);
+        stage.setTitle("Cambiar contraseña");
+    }
+
     /**
      * Metodo que valida que el cambio de contraseña sea correcta
+     *
      * @param even
-     * @throws IOException 
+     * @throws IOException
      */
     @FXML
-    public void cambiarPass(ActionEvent even) throws IOException{
-         if(!(contraAnt.getText().equals("")||nuevaContra.getText().equals("")||nuevaContra2.getText().equals(""))){
-             if(contraAnt.getText().equals("u")){
-                 
-                 if(nuevaContra.getText().equals(nuevaContra2.getText())){
+    public void cambiarPass(ActionEvent even) throws IOException {
+        if (!(contraAnt.getText().equals("") || nuevaContra.getText().equals("") || nuevaContra2.getText().equals(""))) {
+            if (contraAnt.getText().equals("u")) {
+
+                if (nuevaContra.getText().equals(nuevaContra2.getText())) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Hecho");
                     alert.setContentText("Contraseña cambiada");
                     logger.info("Contraseña cambiada");
                     alert.showAndWait();
-                    
-                     Stage y=(Stage) btnCambiarPass.getScene().getWindow();
-                     y.close();
 
-                 }
-                 else {
-                      Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("La nueva contraseña no coincide");
-                alert.showAndWait();
-                     
-                 }
-                 
-             }
-             else{
+                    Stage y = (Stage) btnCambiarPass.getScene().getWindow();
+                    y.close();
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("La nueva contraseña no coincide");
+                    alert.showAndWait();
+
+                }
+
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setContentText("La contraseña antigua no coincide");
                 alert.showAndWait();
-             }
-             
-         }
-         
-         else{
-               Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("Rellena los campos");
-                alert.showAndWait();
-         }
-        
-        
+            }
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Rellena los campos");
+            alert.showAndWait();
+        }
+
     }
 
-   
-    
 }

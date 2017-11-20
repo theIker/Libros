@@ -15,40 +15,43 @@ import libros.datos.beans.GeneroBean;
  *
  * @author Jon Xabier Gimenez
  */
-public class GenerosManagerTestDataGenerator implements GenerosManager{
+public class GenerosManagerTestDataGenerator implements GenerosManager {
 
-    private ArrayList <GeneroBean> x;
-    private final static Logger logger= Logger.getLogger("libros.datos.mana");
-    
+    private ArrayList<GeneroBean> x;
+    private final static Logger logger = Logger.getLogger("libros.datos.mana");
+
     /**
      * Metodo para generar generos
      */
-    public GenerosManagerTestDataGenerator(){
-        x= new ArrayList <GeneroBean>();
+    public GenerosManagerTestDataGenerator() {
+        x = new ArrayList<GeneroBean>();
         for (int i = 0; i < 15; i++) {
-            x.add(new GeneroBean(i,"Genero"+i ));
+            x.add(new GeneroBean(i, "Genero" + i));
         }
         logger.info("Generos de prueba generados");
     }
+
     /**
      * Devuelve todos los generos
-     * @return  Collection
+     *
+     * @return Collection
      */
     @Override
     public Collection getAllGeneros() {
         logger.info("Devolviendo todos los generos");
         return x;
     }
-   /**
-    * Metodo que devuelve los los generos
-    * @return 
-    */
+
+    /**
+     * Metodo que devuelve los los generos
+     *
+     * @return
+     */
     @Override
     public Collection getNombresGenero() {
         logger.info("Mapeando para sacar solo los nombres");
-        Collection generosC= x.stream().map(gen -> gen.getGenero()).collect(Collectors.toList());
+        Collection generosC = x.stream().map(gen -> gen.getGenero()).collect(Collectors.toList());
         return generosC;
-  }
+    }
 
-    
 }

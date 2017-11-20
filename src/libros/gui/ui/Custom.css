@@ -9,10 +9,10 @@ and open the template in the editor.
 */
 
 .table-view{
-   -fx-background-color: transparent;
+    -fx-background-color: transparent;
 }
 .table-view:focused{
-  
+
     -fx-background-color: linear-gradient(#328BDB 0%, #207BCF 25%, #1973C9 75%, #0A65BF 100%);
     -fx-text-fill: white;
 }
@@ -56,20 +56,20 @@ and open the template in the editor.
     -fx-background-color: linear-gradient(#101010 0%, #424141 100%);
 }
 
- .button {
-     -fx-text-fill: white;
+.button {
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-background-color: mediumseagreen;
-     -fx-background-radius: 30;
+    -fx-background-radius: 30;
     -fx-background-insets: 0;
-    
+
 }
 
 .label {
-  
+
     -fx-font-family: "Segoe UI Semibold";
-    
-   
+
+
 }
 
 .button:armed{
@@ -77,10 +77,10 @@ and open the template in the editor.
 }
 
 .button:focused{
-     -fx-border: 12px solid; 
-     -fx-border-color: blue; 
+    -fx-border: 12px solid; 
+    -fx-border-color: blue; 
     -fx-background-radius: 15.0;
-     -fx-border-radius: 15.0;
+    -fx-border-radius: 15.0;
     -fx-background-radius: 30;
     -fx-background-insets: 0;
 }
@@ -108,13 +108,13 @@ and open the template in the editor.
 }
 #borrarUsu:armed{
     -fx-background-color: lightcoral;
-    
+
 }
 
 
 #borrarLibro:armed{
     -fx-background-color: lightcoral;
-    
+
 }
 
 
@@ -123,32 +123,32 @@ and open the template in the editor.
 }
 
 #borrarUsu:focused{
-     -fx-border: 12px solid; 
-     -fx-border-color: blue; 
+    -fx-border: 12px solid; 
+    -fx-border-color: blue; 
     -fx-background-radius: 15.0;
-     -fx-border-radius: 15.0;
+    -fx-border-radius: 15.0;
     -fx-background-radius: 30;
     -fx-background-insets: 0;
-    
+
 }
 
 
 #borrarLibro:focused{
-     -fx-border: 12px solid; 
-     -fx-border-color: blue; 
+    -fx-border: 12px solid; 
+    -fx-border-color: blue; 
     -fx-background-radius: 15.0;
-     -fx-border-radius: 15.0;
+    -fx-border-radius: 15.0;
     -fx-background-radius: 30;
     -fx-background-insets: 0;
-    
+
 }
 
 
 #borrarGen:focused{
-     -fx-border: 12px solid; 
-     -fx-border-color: blue; 
+    -fx-border: 12px solid; 
+    -fx-border-color: blue; 
     -fx-background-radius: 15.0;
-     -fx-border-radius: 15.0;
+    -fx-border-radius: 15.0;
     -fx-background-radius: 30;
     -fx-background-insets: 0;
 }

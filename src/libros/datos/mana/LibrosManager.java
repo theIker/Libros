@@ -12,13 +12,13 @@ import java.util.Collection;
  * @author Jon Xabier Gimenezs
  */
 public interface LibrosManager {
-    
-     public Collection getAllLibros();
-     
-     public Collection getLibrosIsbn(String isbn);
-     
-      public Collection getLibrosTitulo(String titulo);
-      
-       public Collection getLibrosAutor(String autor);
-    
+
+    public Collection getAllLibros();
+
+    public Collection getLibrosIsbn(String isbn);
+
+    public Collection getLibrosTitulo(String titulo);
+
+    public Collection getLibrosAutor(String autor);
+
 }
