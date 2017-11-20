@@ -38,26 +38,39 @@ public class LibrosManagerTestDataGenerator implements LibrosManager {
     
     /**
      * Metodo que devulve todos los libros
-     * @return 
+     * @return Collection
      */
     @Override
     public Collection getAllLibros() {
         logger.info("Devolviendo todos los libros");
         return x;
     }
+    /**
+     * Filtra libros por isbn
+     * @param isbn
+     * @return Collection
+     */
     public Collection getLibrosIsbn(String isbn){
         logger.info("Devolviendo libros filtrados por isbn");
        Collection Bisbn= x.stream().filter(libro->libro.getIsbn().toLowerCase().contains(isbn)).collect(Collectors.toList());    
        return Bisbn;
         }
-
+    /**
+     * Filra los libros por titulo
+     * @param titulo
+     * @return Collection
+     */
     @Override
     public Collection getLibrosTitulo(String titulo) {
         logger.info("Devolviendo libros filtrados por titulo");
         Collection Btitulo=x.stream().filter(libro->libro.getTitulo().toLowerCase().contains(titulo)).collect(Collectors.toList());    
         return Btitulo;
     }
-
+    /**
+     * Filtra los libros por autor
+     * @param autor
+     * @return Collection 
+     */
     @Override
     public Collection getLibrosAutor(String autor) { 
         logger.info("Devolviendo libros filtrados por autor");

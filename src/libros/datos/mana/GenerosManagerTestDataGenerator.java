@@ -30,13 +30,17 @@ public class GenerosManagerTestDataGenerator implements GenerosManager{
         }
         logger.info("Generos de prueba generados");
     }
+    /**
+     * Devuelve todos los generos
+     * @return  Collection
+     */
     @Override
     public Collection getAllGeneros() {
         logger.info("Devolviendo todos los generos");
         return x;
     }
    /**
-    * Metodo que devuelve los losgeneros
+    * Metodo que devuelve los los generos
     * @return 
     */
     @Override
