@@ -137,7 +137,10 @@ public class RegistroController implements Initializable {
         
     }
     
-    
+    /**
+     * Recoge el stage
+     * @param stage 
+     */
      public void setStage(Stage stage) {
         this.stage=stage;
     }

@@ -86,14 +86,14 @@ public class UsuController implements Initializable {
     private TableView<ComprasBean> tableHisto;
     @FXML
     private TableColumn tbISBN;
-     @FXML
+    @FXML
     private TableColumn tbTitulo;
-      @FXML
-     private TableColumn tbFecha;
-      @FXML
-     private TableColumn tbUnidades;
-       @FXML
-      private TableColumn tbTotal;
+    @FXML
+    private TableColumn tbFecha;
+    @FXML
+    private TableColumn tbUnidades;
+    @FXML
+     private TableColumn tbTotal;
 
     /**
      * Initializes the controller class.
@@ -127,7 +127,11 @@ public class UsuController implements Initializable {
 
        
     }
-   
+   /**
+    * Recoge el stage
+    * @param stage
+    * @param e 
+    */
    public void setStage(Stage stage, String e) {
         this.stage=stage;
         lblUsu.setText(e);

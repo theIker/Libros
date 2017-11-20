@@ -19,10 +19,15 @@ import libros.gui.controller.LoginFinalController;
 
 /**
  *
- * @author iker
+ * @author Iker Iglesias, Jon Xabier Gimenez
  */
 public class LibrosSL extends Application {
     
+    /**
+     * Inicia la aplicación
+     * @param stage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception {
         GenerosManager generoManager= 

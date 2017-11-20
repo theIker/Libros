@@ -42,7 +42,7 @@
       </HBox>
       <TabPane layoutX="6.0" layoutY="73.0" prefHeight="507.0" prefWidth="767.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab fx:id="tabLibro" text="Busqueda Libro" />
+          <Tab fx:id="tabLibro" text="Búsqueda Libro" />
           <Tab fx:id="tabUsuario" text="Editar Usuario">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

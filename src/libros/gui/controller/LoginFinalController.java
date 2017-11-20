@@ -68,11 +68,13 @@ public class LoginFinalController implements Initializable {
         stage.show();
         
     }
-    
+    /**
+     * Se ejecuta al iniciar la ventana
+     * @param event 
+     */
     public void handleWindowShowing(WindowEvent event){
         //se ejecuta antes de iniciar la ventana
          
-        
     }
      
     /**
@@ -82,7 +84,10 @@ public class LoginFinalController implements Initializable {
      public void setComprasManager(ComprasManager comprasManager) {
         this.comprasManager=comprasManager;
     }
-     
+     /**
+      * Recoge el stage
+      * @param stage 
+      */
     public void setStage(Stage stage) {
           this.stage=stage;
     }
@@ -146,7 +151,11 @@ public class LoginFinalController implements Initializable {
                 logger.info("Credenciales Incorrectas");
         }
     }
-
+   /**
+    * Metodo entrar() por teclado
+    * @param event
+    * @throws IOException 
+    */
     @FXML
     public void entrar2(KeyEvent event) throws IOException{
         if(event.getCode() == KeyCode.SPACE) {
@@ -169,6 +178,11 @@ public class LoginFinalController implements Initializable {
         controller.setStage(reg);
         controller.initStage(root);
     }
+    /**
+     * metodo registrar() por teclado 
+     * @param event
+     * @throws IOException 
+     */
      @FXML
     public void registrar2(KeyEvent event) throws IOException {
         if(event.getCode() == KeyCode.SPACE) {

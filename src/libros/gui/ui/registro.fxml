@@ -76,8 +76,8 @@
             <Label text="Nombre:" />
             <Label text="Apellido 1:" GridPane.rowIndex="1" />
             <Label text="Apellido 2:" GridPane.rowIndex="2" />
-            <Label text="Direccion:" GridPane.columnIndex="2" />
-            <Label text="Telefono:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Dirección:" GridPane.columnIndex="2" />
+            <Label text="Teléfono:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label text="Email:" GridPane.rowIndex="3" />
             <Label text="Nº cuenta:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <TextField fx:id="textNombre" GridPane.columnIndex="1">
@@ -119,7 +119,7 @@
       </GridPane>
       <HBox layoutX="43.0" layoutY="431.0" prefHeight="100.0" prefWidth="441.0">
          <children>
-            <CheckBox fx:id="aceptarTerminos" mnemonicParsing="false" text="Aceptar terminos y condiciones" />
+            <CheckBox fx:id="aceptarTerminos" mnemonicParsing="false" text="Aceptar términos y condiciones" />
             <Button fx:id="btnRegistrar" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#registrarse" prefHeight="40.0" prefWidth="120.0" text="Registrar">
                <HBox.margin>
                   <Insets left="-60.0" top="40.0" />
@@ -132,7 +132,7 @@
             <Insets />
          </opaqueInsets>
          <children>
-            <Label text="Crea tu cuenta para Libros S.A. es facil, rapido y gratis" textFill="WHITE">
+            <Label text="Crea tu cuenta para Libros S.A. es fácil, rápido y gratis" textFill="WHITE">
                <HBox.margin>
                   <Insets left="25.0" top="13.0" />
                </HBox.margin>

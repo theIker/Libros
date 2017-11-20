@@ -96,7 +96,7 @@ public class BusquedaLibroController implements Initializable {
             "Titulo",
             "Autor"
             );
-      textFieldBusqueda.setPromptText("Parametro de Busqueda");
+      textFieldBusqueda.setPromptText("Parámetro de Búsqueda");
        
         
     }
@@ -230,6 +230,11 @@ public class BusquedaLibroController implements Initializable {
          
    }
    
+   /**
+    * Metodo anadirCompra() por teclado
+    * @param event
+    * @throws IOException 
+    */
     @FXML
     public void anadirCompra2(KeyEvent event) throws IOException{
         if(event.getCode() == KeyCode.SPACE) {
@@ -285,13 +290,26 @@ public class BusquedaLibroController implements Initializable {
      */
     @FXML
     private void cargarLibro() {
-       
+        
+       if(tablaBusqueda.getSelectionModel().getSelectedItem()!=null){
         LibroBean aux= tablaBusqueda.getSelectionModel().getSelectedItem();
-        x.cargarLibro(aux);
-        logger.info("Libro cargado en administrador(Ventana)");
-        stage.close();
+            x.cargarLibro(aux);
+            logger.info("Libro cargado en administrador(Ventana)");
+            stage.close();
+       }
+       else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Selecciona libro");
+                alert.showAndWait();
+       }
     }
     
+    /**
+     * Metodo cargarLibro() por teclado
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     public void cargarLibro2(KeyEvent event) throws IOException{
         if(event.getCode() == KeyCode.SPACE) {
@@ -327,6 +345,11 @@ public class BusquedaLibroController implements Initializable {
      }
     }
     
+    /**
+     * Metodo comprarLibro() por teclado
+     * @param event
+     * @throws IOException 
+     */
      @FXML
     public void comprarLibro2(KeyEvent event) throws IOException{
         if(event.getCode() == KeyCode.SPACE) {

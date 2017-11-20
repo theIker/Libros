@@ -134,6 +134,10 @@ public class AdminController implements Initializable {
         // TODO
     }
     
+    /**
+     * Se inicia el stage
+     * @param root 
+     */
      public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);  
@@ -148,7 +152,10 @@ public class AdminController implements Initializable {
         stage.show();
         logger.info("Despues de mostrar ventana Administrador");
     }
-    
+    /**
+     * Recoge el stage
+     * @param stage 
+     */
         public void setStage(Stage stage) {
         this.stage=stage;
     }
@@ -189,12 +196,12 @@ public class AdminController implements Initializable {
                 TextEditorial.getText(),TextDescripcion.getText(),dateFechaPUb.getValue().toString(),Float.parseFloat(TextPrecio.getText()),
                 Integer.parseInt(TextStock.getText()),((String)comboGeneros.getSelectionModel().getSelectedItem()));      
                 lib.getAllLibros().add(aux);
-                logger.info("Libro "+aux.getIsbn()+" insertado");
+                logger.info("Libro  insertado");
                 limpiarInsertar();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Insertado");
                 alert.showAndWait(); 
             }catch(NumberFormatException e){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Precio y stock deben ser numericos");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Precio y stock deben ser numéricos");
                alert.showAndWait(); 
             }catch(NullPointerException ex){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
@@ -203,7 +210,10 @@ public class AdminController implements Initializable {
         }
 }
     
-    
+    /**
+     * Metodo insertar() pero por teclado
+     * @param event 
+     */
     @FXML
     public void insertarLibro2(KeyEvent event){
     if(event.getCode() == KeyCode.SPACE) {
@@ -230,7 +240,11 @@ public class AdminController implements Initializable {
         logger.info("Despues de Buscar(Ventana)");
      
     }
-    
+    /**
+     * Metodo buscar() pero por teclado
+     * @param event
+     * @throws IOException 
+     */
       @FXML
     public void buscar2(KeyEvent event) throws IOException{
     if(event.getCode() == KeyCode.SPACE) {
@@ -239,7 +253,6 @@ public class AdminController implements Initializable {
 }
     /**
      * 
-     * @param event 
      * modifica el libro cargado
      */
     @FXML
@@ -256,12 +269,12 @@ public class AdminController implements Initializable {
                 Integer.parseInt(TextStock1.getText()),((String)comboGeneros1.getSelectionModel().getSelectedItem()));
                 lib.getAllLibros().remove(libro);
                 lib.getAllLibros().add(modificado);
-                logger.info("Disco "+libro.getIsbn()+" modificado");
+                logger.info("Disco  modificado");
                 limpiarModificar();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Modificado");
                 alert.showAndWait(); 
             }catch(NumberFormatException e){
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Precio y stock deben ser numericos");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Precio y stock deben ser numéricos");
                alert.showAndWait(); 
             }catch(NullPointerException ex){
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
@@ -269,7 +282,10 @@ public class AdminController implements Initializable {
              }
         }     
     }
-    
+    /**
+     * Metodo modificar() pero por teclado
+     * @param event 
+     */
     @FXML
     public void modificar2(KeyEvent event){
     if(event.getCode() == KeyCode.SPACE) {
@@ -289,13 +305,17 @@ public class AdminController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES){
               lib.getAllLibros().remove(libro);
-              logger.info("Disco "+libro.getIsbn()+" borrado");
+              logger.info("Disco borrado");
               limpiarModificar();
         } else{
             
         }
     }
     
+    /**
+     * Metodo borrar() pero por teclado
+     * @param event 
+     */
     @FXML
     public void borrar2(KeyEvent event){
     if(event.getCode() == KeyCode.SPACE){
@@ -320,6 +340,10 @@ public class AdminController implements Initializable {
         }   
     }
     
+    /**
+     * Metodo insertarGenero() pero por teclado
+     * @param event 
+     */
      @FXML
     public void insertarGenero2(KeyEvent event){
     if(event.getCode() == KeyCode.SPACE){
@@ -344,7 +368,10 @@ public class AdminController implements Initializable {
            alert.showAndWait();
        }  
     } 
-    
+    /**
+     * Metodo borrarGenero() pero por teclado
+     * @param event 
+     */
      @FXML
     public void borrarGenero2(KeyEvent event){
     if(event.getCode() == KeyCode.SPACE){

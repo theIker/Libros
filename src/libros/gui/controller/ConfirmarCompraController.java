@@ -91,6 +91,10 @@ public class ConfirmarCompraController implements Initializable {
         stage.show();
     }
     
+     /**
+      * Se ejecuta al iniciar la ventana
+      * @param event 
+      */
     public void handleWindowShowing(WindowEvent event){
            
        stage.setTitle("Carrito compra");
@@ -99,7 +103,12 @@ public class ConfirmarCompraController implements Initializable {
     } 
 
    
-    
+    /**
+     * Recoge el stage 
+     * @param reg
+     * @param btnComprar
+     * @param compras 
+     */
     void setStage(Stage reg, Button btnComprar, ArrayList<LibroBean> compras) {
          this.stage=reg;
         this.compra=btnComprar;
@@ -152,7 +161,11 @@ public class ConfirmarCompraController implements Initializable {
             
         }
    }
-   
+   /**
+    * Meotodo quitarCompra() por teclado
+    * @param event
+    * @throws IOException 
+    */
     @FXML
     public void quitarCompra2(KeyEvent event) throws IOException{
         if(event.getCode() == KeyCode.SPACE) {
@@ -195,6 +208,11 @@ public class ConfirmarCompraController implements Initializable {
                      compra.setVisible(false);
     }
     
+    /**
+     * Metodo confirmarCompra() por teclado
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     public void confirmarCompra2(KeyEvent event) throws IOException{
         if(event.getCode() == KeyCode.SPACE) {

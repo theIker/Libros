@@ -48,6 +48,10 @@ public class CambiarPassController implements Initializable {
         // TODO
     }    
     
+     /**
+      * Recoge el stage
+      * @param stage 
+      */
          public void setStage(Stage stage) {
         this.stage=stage;
     }
@@ -64,7 +68,10 @@ public class CambiarPassController implements Initializable {
         stage.show();
     }
     
-   
+   /**
+    * Se ejecuta al iniciar la ventana
+    * @param event 
+    */
     public void handleWindowShowing(WindowEvent event){
            //se ejecuta antes de iniciar la ventana
             stage.setTitle("Cambiar contraseña");

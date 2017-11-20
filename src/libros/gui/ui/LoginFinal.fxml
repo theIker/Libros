@@ -38,7 +38,7 @@
          <children>
             <HBox prefHeight="58.0" prefWidth="480.0" style="-fx-background-color: #505050;">
                <children>
-                  <Label text="Identificate en tu cuenta de Libros S.A" textFill="WHITE">
+                  <Label text="Identifícate en tu cuenta de Libros S.A" textFill="WHITE">
                      <HBox.margin>
                         <Insets left="25.0" top="13.0" />
                      </HBox.margin>
