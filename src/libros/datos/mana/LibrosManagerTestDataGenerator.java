@@ -27,9 +27,9 @@ public class LibrosManagerTestDataGenerator implements LibrosManager {
         x = new ArrayList<LibroBean>();
         for (int i = 1; i < 16; i++) {
             if (i < 10) {
-                x.add(new LibroBean("isbn" + i, "titulo" + i, "autor" + i, "editorial" + i, "Descripcion" + i, "2017-11-0" + i, (float) i, i, "Genero" + i));
+                x.add(new LibroBean("isbn" + i, "titulo" + i, "autor" + i, "editorial" + i, "Descripcion" + i, "2017/11/0" + i, (float) i, i, "Genero" + i));
             } else {
-                x.add(new LibroBean("isbn" + i, "titulo" + i, "autor" + i, "editorial" + i, "Descripcion" + i, "2017-11-" + i, (float) i, i, "Genero" + i));
+                x.add(new LibroBean("isbn" + i, "titulo" + i, "autor" + i, "editorial" + i, "Descripcion" + i, "2017/11/" + i, (float) i, i, "Genero" + i));
             }
         }
         logger.info("Libros de prueba generados");

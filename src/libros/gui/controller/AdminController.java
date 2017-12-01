@@ -184,7 +184,7 @@ public class AdminController implements Initializable {
      */
     @FXML
     public void insertarLibro() {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            
         if (TextIsbn.getText().equals("") || TextAutor.getText().equals("") || TextDescripcion.getText().equals("")
                 || TextEditorial.getText().equals("") || TextPrecio.getText().equals("") || TextStock.getText().equals("")
                 || TextTitulo.getText().equals("") || comboGeneros.getSelectionModel().getSelectedIndex() == -1) {
@@ -193,10 +193,10 @@ public class AdminController implements Initializable {
             alert.showAndWait();
 
         } else {
-
+          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             try {
                 LibroBean aux = new LibroBean(TextIsbn.getText(), TextTitulo.getText(), TextAutor.getText(),
-                        TextEditorial.getText(), TextDescripcion.getText(),dateFechaPUb.getValue().toString(), Float.parseFloat(TextPrecio.getText()),
+                        TextEditorial.getText(), TextDescripcion.getText(),formatter.format(dateFechaPUb.getValue()), Float.parseFloat(TextPrecio.getText()),
                         Integer.parseInt(TextStock.getText()), ((String) comboGeneros.getSelectionModel().getSelectedItem()));
                 lib.getAllLibros().add(aux);
                 logger.info("Libro  insertado");

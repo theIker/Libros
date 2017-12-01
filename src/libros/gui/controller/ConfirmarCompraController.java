@@ -85,6 +85,10 @@ public class ConfirmarCompraController implements Initializable {
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOnShowing(this::handleWindowShowing);
+        
+        stage.setResizable(false);
+        stage.setTitle("Carrito compra");
+        
         stage.show();
     }
 
@@ -94,9 +98,7 @@ public class ConfirmarCompraController implements Initializable {
      * @param event
      */
     public void handleWindowShowing(WindowEvent event) {
-        stage.setResizable(false);
-        stage.setTitle("Carrito compra");
-        cargarTablaCompras();
+        
 
     }
 
@@ -129,6 +131,7 @@ public class ConfirmarCompraController implements Initializable {
      */
     void setComprasManager(ComprasManager comprasManager) {
         this.compMana = comprasManager;
+       
     }
 
     /**
@@ -233,6 +236,11 @@ public class ConfirmarCompraController implements Initializable {
         tablaCompra.setItems(list);
         tablaCompra.setColumnResizePolicy((param) -> true);
 
+    }
+
+    void setCompras(ArrayList<LibroBean> compras) {
+        this.compras=compras;
+        this.cargarTablaCompras();
     }
 
 }

@@ -58,6 +58,8 @@ public class UsuController implements Initializable {
     @FXML
     private Tab tabUsuario;
     @FXML
+    private Tab tabCarrito;
+    @FXML
     private TextField textFieldNombre;
     @FXML
     private TextField textFieldApel1;
@@ -117,12 +119,23 @@ public class UsuController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
         Parent pane = null;
         pane = loader.load();
+   
         BusquedaLibroController controller = ((BusquedaLibroController) loader.getController());
         controller.setUsuController(this);
         controller.setLibroManager(librosManager);
         controller.setComprasManager(comprasManager);
 
         tabLibro.setContent(pane);
+        
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/libros/gui/ui/confirmarCompra.fxml"));
+        Parent pane2 = null;
+        pane2 = loader2.load();
+        
+        ConfirmarCompraController controller2 = ((ConfirmarCompraController) loader2.getController());
+        controller2.setComprasManager(comprasManager);
+        controller2.setUsuController(this);
+        tabCarrito.setContent(pane2);
+        
         stage.show();
 
         cargarTabla();

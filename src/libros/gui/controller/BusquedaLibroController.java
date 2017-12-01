@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -204,6 +205,18 @@ public class BusquedaLibroController implements Initializable {
                 if (!esta) {
                     compras.add(libro);
                 }
+                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/confirmarCompra.fxml"));
+
+                try {
+                    Parent root = (Parent) loader.load();
+                    ConfirmarCompraController controller = ((ConfirmarCompraController) loader.getController());
+                    controller.setUsuController(usu);
+                    controller.setCompras(compras);
+                } catch (IOException ex) {
+                    Logger.getLogger(BusquedaLibroController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+                
                 logger.info("Añadido al carro");
                 textFieldUnidades.setText("");
                 btnComprar.setVisible(true);
