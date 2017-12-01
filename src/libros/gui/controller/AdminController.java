@@ -7,6 +7,8 @@ package libros.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -182,6 +184,7 @@ public class AdminController implements Initializable {
      */
     @FXML
     public void insertarLibro() {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         if (TextIsbn.getText().equals("") || TextAutor.getText().equals("") || TextDescripcion.getText().equals("")
                 || TextEditorial.getText().equals("") || TextPrecio.getText().equals("") || TextStock.getText().equals("")
                 || TextTitulo.getText().equals("") || comboGeneros.getSelectionModel().getSelectedIndex() == -1) {
@@ -193,7 +196,7 @@ public class AdminController implements Initializable {
 
             try {
                 LibroBean aux = new LibroBean(TextIsbn.getText(), TextTitulo.getText(), TextAutor.getText(),
-                        TextEditorial.getText(), TextDescripcion.getText(), dateFechaPUb.getValue().toString(), Float.parseFloat(TextPrecio.getText()),
+                        TextEditorial.getText(), TextDescripcion.getText(),dateFechaPUb.getValue().toString(), Float.parseFloat(TextPrecio.getText()),
                         Integer.parseInt(TextStock.getText()), ((String) comboGeneros.getSelectionModel().getSelectedItem()));
                 lib.getAllLibros().add(aux);
                 logger.info("Libro  insertado");

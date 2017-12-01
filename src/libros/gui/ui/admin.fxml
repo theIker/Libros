@@ -173,7 +173,7 @@
                                                 <Insets right="20.0" />
                                             </GridPane.margin>
                                         </TextField>
-                                        <TextField fx:id="TextEditorial1" disable="true" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                        <TextField fx:id="TextEditorial1" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                             <GridPane.margin>
                                                 <Insets right="20.0" />
                                             </GridPane.margin>

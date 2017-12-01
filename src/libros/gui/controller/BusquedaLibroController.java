@@ -94,7 +94,7 @@ public class BusquedaLibroController implements Initializable {
                 "Autor"
         );
         textFieldBusqueda.setPromptText("Parámetro de Búsqueda");
-
+        comboBusqueda.setPromptText("Criterio");
     }
 
     /**
@@ -304,7 +304,7 @@ public class BusquedaLibroController implements Initializable {
     @FXML
     public void cargarLibro2(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.SPACE) {
-            buscar();
+            cargarLibro();
         }
     }
 
