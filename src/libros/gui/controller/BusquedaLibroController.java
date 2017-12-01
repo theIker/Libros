@@ -245,12 +245,12 @@ public class BusquedaLibroController implements Initializable {
         ObservableList<LibroBean> lista = null;
         if (comboBusqueda.getSelectionModel().getSelectedIndex() != -1) {
             if (comboBusqueda.getSelectionModel().getSelectedIndex() == 0) {
-                lista = FXCollections.observableArrayList(librosManager.getLibrosIsbn((String) textFieldBusqueda.getText()));
+                lista = FXCollections.observableArrayList(librosManager.getLibrosIsbn((String) textFieldBusqueda.getText().toLowerCase()));
 
             } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 1) {
-                lista = FXCollections.observableArrayList(librosManager.getLibrosTitulo((String) textFieldBusqueda.getText()));
+                lista = FXCollections.observableArrayList(librosManager.getLibrosTitulo((String) textFieldBusqueda.getText().toLowerCase()));
             } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 2) {
-                lista = FXCollections.observableArrayList(librosManager.getLibrosAutor((String) textFieldBusqueda.getText()));
+                lista = FXCollections.observableArrayList(librosManager.getLibrosAutor((String) textFieldBusqueda.getText().toLowerCase()));
             }
             cargarTabla(lista);
             logger.info("Busqueda realizada");
