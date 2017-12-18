@@ -205,16 +205,13 @@ public class BusquedaLibroController implements Initializable {
                 if (!esta) {
                     compras.add(libro);
                 }
-                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/confirmarCompra.fxml"));
-
-                try {
-                    Parent root = (Parent) loader.load();
-                    ConfirmarCompraController controller = ((ConfirmarCompraController) loader.getController());
-                    controller.setUsuController(usu);
-                    controller.setCompras(compras);
-                } catch (IOException ex) {
-                    Logger.getLogger(BusquedaLibroController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                  
+            usu.setUsuController(usu);
+            usu.setCompras(compras);
+            usu.setComprasManager(comprasManager);
+            
+                    
+                
             
                 
                 logger.info("Añadido al carro");
@@ -330,16 +327,9 @@ public class BusquedaLibroController implements Initializable {
     @FXML
     private void comprarLibro() throws IOException {
         if (compras.size() > 0) {
-            Stage reg = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/confirmarCompra.fxml"));
-
-            Parent root = (Parent) loader.load();
-            logger.info("Se abre la ventana del carro(ConfirmarCompra)");
-            ConfirmarCompraController controller = ((ConfirmarCompraController) loader.getController());
-            controller.setUsuController(usu);
-            controller.setStage(reg, btnComprar, compras);
-            controller.setComprasManager(comprasManager);
-            controller.initStage(root);
+            usu.setUsuController(usu);
+            usu.setCompras(compras);
+            usu.setComprasManager(comprasManager);
         } else {
             btnComprar.setVisible(false);
             Alert alert = new Alert(Alert.AlertType.ERROR);
