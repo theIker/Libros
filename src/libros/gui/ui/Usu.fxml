@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="760.0" stylesheets="@Custom.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.UsuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" stylesheets="@Custom.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.UsuController">
     <children>
-        <HBox prefHeight="73.0" prefWidth="767.0" style="-fx-background-color: #505050;">
+        <HBox prefHeight="73.0" prefWidth="1000.0" style="-fx-background-color: #505050;">
             <children>
                 <Label text="LIBROS S.A" textFill="WHITE">
                     <font>
@@ -35,7 +35,7 @@
                 </Label>
             </children>
         </HBox>
-        <TabPane layoutX="6.0" layoutY="73.0" prefHeight="507.0" prefWidth="767.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutX="6.0" layoutY="73.0" prefHeight="680.0" prefWidth="994.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="tabLibro" text="Búsqueda Libros" />
             <Tab fx:id="tabCarrito" text="Carrito Compra">
@@ -68,7 +68,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="tableHisto" layoutX="14.0" layoutY="20.0" prefHeight="415.0" prefWidth="662.0">
+                                <TableView fx:id="tableHisto" layoutX="81.0" layoutY="73.0" prefHeight="415.0" prefWidth="662.0">
                                     <columns>
                                         <TableColumn fx:id="tbISBN" prefWidth="184.0" text="ISBN" />
                                         <TableColumn fx:id="tbTitulo" minWidth="0.0" prefWidth="150.0" text="Titulo" />
