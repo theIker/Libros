@@ -18,9 +18,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@Custom.css" fx:controller="libros.gui.controller.AdminController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" stylesheets="@Custom.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="libros.gui.controller.AdminController">
     <children>
-        <HBox layoutX="-5.0" layoutY="-8.0" prefHeight="79.0" prefWidth="609.0" style="-fx-background-color: #505050;">
+        <HBox layoutX="-5.0" layoutY="-8.0" prefHeight="79.0" prefWidth="1007.0" style="-fx-background-color: #505050;">
             <children>
                 <Label text="Libros S.A." textFill="#fffefe">
                     <font>
@@ -32,13 +32,13 @@
                 </Label>
             </children>
         </HBox>
-        <TabPane layoutY="71.0" prefHeight="453.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutY="71.0" prefHeight="683.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Insertar libro">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="352.0" prefWidth="604.0">
                             <children>
-                                <GridPane layoutX="25.0" layoutY="27.0" prefHeight="171.0" prefWidth="551.0">
+                                <GridPane layoutX="25.0" layoutY="27.0" prefHeight="453.0" prefWidth="954.0">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="66.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="163.0" />
@@ -52,14 +52,62 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Label text="Isbn:" />
-                                        <Label text="Titulo:" GridPane.rowIndex="1" />
-                                        <Label text="Autor:" GridPane.rowIndex="2" />
-                                        <Label text="Editorial:" GridPane.rowIndex="3" />
-                                        <Label text="Descripción:" GridPane.columnIndex="2" />
-                                        <Label text="Fecha publicación:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                        <Label text="Precio:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                        <Label text="Stock:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                        <Label text="Isbn:">
+                                 <GridPane.margin>
+                                    <Insets left="75.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
+                                        <Label text="Titulo:" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="75.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
+                                        <Label text="Autor:" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="75.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
+                                        <Label text="Editorial:" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="75.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
+                                        <Label text="Descripción:" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="75.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
+                                        <Label text="Fecha publicación:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="75.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
+                                        <Label text="Precio:" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="75.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
+                                        <Label text="Stock:" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="75.0" />
+                                 </GridPane.margin>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets></Label>
                                         <TextField fx:id="TextIsbn" GridPane.columnIndex="1">
                                             <GridPane.margin>
                                                 <Insets right="20.0" />
@@ -103,23 +151,23 @@
                               
                                     </children>
                                 </GridPane>
-                                <HBox layoutX="249.0" layoutY="202.0" prefHeight="79.0" prefWidth="291.0" spacing="10.0">
+                                <HBox layoutX="522.0" layoutY="480.0" prefHeight="79.0" prefWidth="479.0" spacing="10.0">
                                     <children>
                                         <Label text="Genero:">
                                             <HBox.margin>
                                                 <Insets top="25.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <ComboBox fx:id="comboGeneros" prefWidth="150.0">
+                                        <ComboBox fx:id="comboGeneros" prefHeight="25.0" prefWidth="269.0">
                                             <HBox.margin>
-                                                <Insets left="72.0" top="20.0" />
+                                                <Insets left="110.0" top="20.0" />
                                             </HBox.margin>
                                         </ComboBox>
                                     </children>
                                 </HBox>
-                                <HBox layoutY="255.0" prefHeight="90.0" prefWidth="600.0">
+                                <HBox layoutX="3.0" layoutY="557.0" prefHeight="97.0" prefWidth="994.0">
                                     <children>
-                                        <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#insertarLibro" onKeyPressed="#insertarLibro2" prefHeight="40.0" prefWidth="120.0" text="Insertar">
+                                        <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#insertarLibro" onKeyPressed="#insertarLibro2" prefHeight="48.0" prefWidth="182.0" text="Insertar">
                                             <HBox.margin>
                                                 <Insets left="400.0" top="20.0" />
                                             </HBox.margin>
@@ -134,9 +182,9 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="600.0">
                             <children>
-                                <Button fx:id="btnBuscar" layoutX="86.0" layoutY="24.0" mnemonicParsing="false" onAction="#buscar" onKeyPressed="#buscar2" text="Buscar" />
-                                <ComboBox fx:id="comboGeneros1" disable="true" layoutX="374.0" layoutY="30.0" prefWidth="150.0" />
-                                <GridPane layoutX="21.0" layoutY="89.0" prefHeight="171.0" prefWidth="551.0">
+                                <Button fx:id="btnBuscar" layoutX="58.0" layoutY="49.0" mnemonicParsing="false" onAction="#buscar" onKeyPressed="#buscar2" prefHeight="48.0" prefWidth="182.0" text="Buscar" />
+                                <ComboBox fx:id="comboGeneros1" disable="true" layoutX="695.0" layoutY="51.0" prefHeight="25.0" prefWidth="275.0" />
+                                <GridPane layoutX="21.0" layoutY="89.0" prefHeight="478.0" prefWidth="977.0">
                                     <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="66.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="163.0" />
@@ -150,14 +198,38 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Label text="Isbn:" />
-                                        <Label text="Titulo:" GridPane.rowIndex="1" />
-                                        <Label text="Autor:" GridPane.rowIndex="2" />
-                                        <Label text="Editorial:" GridPane.rowIndex="3" />
-                                        <Label text="Descripción:" GridPane.columnIndex="2" />
-                                        <Label text="Fecha publicación:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                        <Label text="Precio:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                        <Label text="Stock:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                        <Label text="Isbn:">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding></Label>
+                                        <Label text="Titulo:" GridPane.rowIndex="1">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding></Label>
+                                        <Label text="Autor:" GridPane.rowIndex="2">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding></Label>
+                                        <Label text="Editorial:" GridPane.rowIndex="3">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding></Label>
+                                        <Label text="Descripción:" GridPane.columnIndex="2">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding></Label>
+                                        <Label text="Fecha publicación:" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding></Label>
+                                        <Label text="Precio:" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding></Label>
+                                        <Label text="Stock:" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding></Label>
                                         <TextField fx:id="TextIsbn1" disable="true" GridPane.columnIndex="1">
                                             <GridPane.margin>
                                                 <Insets right="20.0" />
@@ -201,38 +273,41 @@
                              
                                     </children>
                                 </GridPane>
-                                <HBox layoutX="8.0" layoutY="255.0" prefHeight="90.0" prefWidth="592.0">
+                                <HBox layoutX="1.0" layoutY="554.0" prefHeight="100.0" prefWidth="1000.0">
                                     <children>
-                                        <Button fx:id="btnBorrar" id="borrarLibro" mnemonicParsing="false" onAction="#borrar" onKeyPressed="#borrar2" prefHeight="40.0" prefWidth="120.0" text="Borrar libro">
+                                        <Button id="borrarLibro" fx:id="btnBorrar" mnemonicParsing="false" onAction="#borrar" onKeyPressed="#borrar2" prefHeight="48.0" prefWidth="182.0" text="Borrar libro">
                                             <HBox.margin>
                                                 <Insets left="60.0" top="30.0" />
                                             </HBox.margin>
                                         </Button>
-                                        <Button fx:id="btnModi" mnemonicParsing="false" onAction="#modificar" onKeyPressed="#modificar2" prefHeight="40.0" prefWidth="120.0" text="Modificar">
+                                        <Button fx:id="btnModi" mnemonicParsing="false" onAction="#modificar" onKeyPressed="#modificar2" prefHeight="48.0" prefWidth="182.0" text="Modificar">
                                             <HBox.margin>
                                                 <Insets left="150.0" top="30.0" />
                                             </HBox.margin>
                                         </Button>
                                     </children>
+                           <padding>
+                              <Insets left="150.0" />
+                           </padding>
                                 </HBox>
-                                <Label layoutX="253.0" layoutY="32.0" text="Genero:" />
+                                <Label layoutX="561.0" layoutY="55.0" text="Genero:" />
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Insertar/borrar genero">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="832.0">
                             <children>
-                                <Label layoutX="67.0" layoutY="59.0" text="Genero:" />
-                                <TextField fx:id="textGenero" layoutX="129.0" layoutY="54.0" />
-                                <Button fx:id="btnInsertgen" layoutX="316.0" layoutY="54.0" mnemonicParsing="false" onAction="#insertarGenero" onKeyPressed="#insertarGenero2" text="Insertar" />
-                                <TableView fx:id="tablaGeneros" layoutX="115.0" layoutY="110.0" prefHeight="206.0" prefWidth="142.0">
+                                <Label layoutX="57.0" layoutY="37.0" text="Genero:" />
+                                <TextField fx:id="textGenero" layoutX="148.0" layoutY="33.0" prefHeight="25.0" prefWidth="402.0" />
+                                <Button fx:id="btnInsertgen" layoutX="556.0" layoutY="22.0" mnemonicParsing="false" onAction="#insertarGenero" onKeyPressed="#insertarGenero2" prefHeight="48.0" prefWidth="182.0" text="Insertar" />
+                                <TableView fx:id="tablaGeneros" layoutX="115.0" layoutY="110.0" prefHeight="423.0" prefWidth="642.0">
                                     <columns>
-                                        <TableColumn fx:id="tableGenero" prefWidth="141.0" text="Genero" />
+                                        <TableColumn fx:id="tableGenero" prefWidth="641.0000076293945" text="Genero" />
                                     </columns>
                                 </TableView>
-                                <Button fx:id="btnBorrar2" id="borrarGen" layoutX="271.0" layoutY="210.0" mnemonicParsing="false" onAction="#borrarGenero" onKeyPressed="#borrarGenero2" text="Borrar" />
+                                <Button id="borrarGen" fx:id="btnBorrar2" layoutX="383.0" layoutY="571.0" mnemonicParsing="false" onAction="#borrarGenero" onKeyPressed="#borrarGenero2" prefHeight="48.0" prefWidth="182.0" text="Borrar" />
                             </children>
                         </AnchorPane>
                     </content>
