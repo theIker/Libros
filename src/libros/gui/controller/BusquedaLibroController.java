@@ -216,7 +216,7 @@ public class BusquedaLibroController implements Initializable {
                 
                 logger.info("Añadido al carro");
                 textFieldUnidades.setText("");
-                btnComprar.setVisible(true);
+             
 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
