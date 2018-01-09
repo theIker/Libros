@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package libros.datos.mana;
+package libros.datos.manager;
 
 import java.util.Collection;
-import libros.datos.beans.GeneroBean;
 
 /**
  *
- * @author Jon Xabier Gimenez
+ * @author Iker Iglesias
  */
-public interface GenerosManager {
+public interface ComprasManager {
 
-    public Collection getAllGeneros();
-
-    public Collection getNombresGenero();
+    public Collection getAllCompras();
 
 }

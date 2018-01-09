@@ -34,8 +34,8 @@ import javafx.stage.WindowEvent;
 import libros.datos.beans.ComprasBean;
 import libros.datos.beans.GeneroBean;
 import libros.datos.beans.LibroBean;
-import libros.datos.mana.ComprasManager;
-import libros.datos.mana.LibrosManager;
+import libros.datos.manager.ComprasManager;
+import libros.datos.manager.LibrosManager;
 
 /**
  * FXML Controller class

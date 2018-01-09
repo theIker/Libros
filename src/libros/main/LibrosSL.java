@@ -9,12 +9,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import libros.datos.mana.ComprasManager;
-import libros.datos.mana.ComprasManagerDataGenerator;
-import libros.datos.mana.GenerosManager;
-import libros.datos.mana.GenerosManagerTestDataGenerator;
-import libros.datos.mana.LibrosManager;
-import libros.datos.mana.LibrosManagerTestDataGenerator;
+import libros.datos.manager.ComprasManager;
+import libros.datos.manager.ComprasManagerDataGenerator;
+import libros.datos.manager.GenerosManager;
+import libros.datos.manager.GenerosManagerTestDataGenerator;
+import libros.datos.manager.LibrosManager;
+import libros.datos.manager.LibrosManagerImplementation;
 import libros.gui.controller.LoginFinalController;
 
 /**
@@ -34,7 +34,7 @@ public class LibrosSL extends Application {
         GenerosManager generoManager
                 = new GenerosManagerTestDataGenerator();
         LibrosManager libroManager
-                = new LibrosManagerTestDataGenerator();
+                = new LibrosManagerImplementation();
         ComprasManager comprasManager
                 = new ComprasManagerDataGenerator();
 

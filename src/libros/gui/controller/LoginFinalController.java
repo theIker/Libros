@@ -24,9 +24,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import libros.datos.mana.ComprasManager;
-import libros.datos.mana.GenerosManager;
-import libros.datos.mana.LibrosManager;
+import libros.datos.manager.ComprasManager;
+import libros.datos.manager.GenerosManager;
+import libros.datos.manager.LibrosManager;
 
 /**
  * FXML Controller class

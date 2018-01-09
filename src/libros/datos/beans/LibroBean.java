@@ -10,11 +10,15 @@ import java.io.Serializable;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Jon Xabier Gimenez
  */
+
+
+@XmlRootElement(name="book")
 public class LibroBean implements Serializable {
 
     private final SimpleStringProperty isbn;
