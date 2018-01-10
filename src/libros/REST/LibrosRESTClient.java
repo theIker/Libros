@@ -22,7 +22,7 @@ import libros.datos.beans.LibroBean;
  *        client.close();
  * </pre>
  *
- * @author 2dam
+ * @author Jon Xabier Gimenez
  */
 public class LibrosRESTClient {
 

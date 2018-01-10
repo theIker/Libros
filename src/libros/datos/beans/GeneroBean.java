@@ -9,11 +9,14 @@ import java.beans.*;
 import java.io.Serializable;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Jon Xabier Gimenez
  */
+
+@XmlRootElement(name="genero")
 public class GeneroBean {
 
     private final SimpleIntegerProperty codGenero;
