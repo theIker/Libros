@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import libros.datos.manager.ComprasManager;
 import libros.datos.manager.ComprasManagerDataGenerator;
 import libros.datos.manager.GenerosManager;
-import libros.datos.manager.GenerosManagerTestDataGenerator;
+import libros.datos.manager.GenerosManagerImplementation;
 import libros.datos.manager.LibrosManager;
 import libros.datos.manager.LibrosManagerImplementation;
 import libros.gui.controller.LoginFinalController;
@@ -32,7 +32,7 @@ public class LibrosSL extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         GenerosManager generoManager
-                = new GenerosManagerTestDataGenerator();
+                = new GenerosManagerImplementation();
         LibrosManager libroManager
                 = new LibrosManagerImplementation();
         ComprasManager comprasManager

@@ -7,8 +7,11 @@ package libros.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +30,8 @@ import javafx.stage.WindowEvent;
 import libros.datos.manager.ComprasManager;
 import libros.datos.manager.GenerosManager;
 import libros.datos.manager.LibrosManager;
+import libros.datos.beans.LibroBean;
+import libros.datos.exceptions.BusquedaLibroException;
 
 /**
  * FXML Controller class
@@ -121,10 +126,16 @@ public class LoginFinalController implements Initializable {
      * @throws IOException
      */
     @FXML
-    private void entrar() throws IOException {
+    private void entrar() throws IOException, BusquedaLibroException {
 
         if (textFieldNombreU.getText().equals("u") && textFieldContra.getText().equals("u")) {
-
+            //System.out.println(lib.getLibrosTitulo("titulo"));
+            //Collection allLibros = lib.getAllLibros();
+           
+        ObservableList<LibroBean> comprasData;
+        comprasData = FXCollections.observableArrayList(lib.getLibrosAutor("Jon"));
+        System.out.println("Holaaaa: "+comprasData.get(0).getAutor());  
+             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/Usu.fxml"));
 
             Parent root = (Parent) loader.load();
@@ -164,7 +175,7 @@ public class LoginFinalController implements Initializable {
      * @throws IOException
      */
     @FXML
-    public void entrar2(KeyEvent event) throws IOException {
+    public void entrar2(KeyEvent event) throws IOException, BusquedaLibroException {
         if (event.getCode() == KeyCode.SPACE) {
             entrar();
         }

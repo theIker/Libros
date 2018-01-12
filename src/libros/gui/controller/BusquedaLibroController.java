@@ -34,6 +34,7 @@ import javafx.stage.WindowEvent;
 import libros.datos.beans.ComprasBean;
 import libros.datos.beans.GeneroBean;
 import libros.datos.beans.LibroBean;
+import libros.datos.exceptions.BusquedaLibroException;
 import libros.datos.manager.ComprasManager;
 import libros.datos.manager.LibrosManager;
 
@@ -144,8 +145,13 @@ public class BusquedaLibroController implements Initializable {
      */
     void setLibroManager(LibrosManager lib) {
         this.librosManager = lib;
-        ObservableList<LibroBean> list = FXCollections.observableArrayList(librosManager.getAllLibros());
-        this.cargarTabla(list);
+        try {
+             ObservableList<LibroBean> list= FXCollections.observableArrayList(librosManager.getAllLibros());
+              this.cargarTabla(list);
+        } catch (BusquedaLibroException ex) {
+            Logger.getLogger(BusquedaLibroController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
     }
 
     /**
@@ -251,7 +257,7 @@ public class BusquedaLibroController implements Initializable {
      * el usuario. Se ejecuta cuando se clica sobre el boton btnBuscar.
      */
     @FXML
-    private void buscar() {
+    private void buscar() throws BusquedaLibroException {
         ObservableList<LibroBean> lista = null;
         if (comboBusqueda.getSelectionModel().getSelectedIndex() != -1) {
             if (comboBusqueda.getSelectionModel().getSelectedIndex() == 0) {
@@ -280,7 +286,7 @@ public class BusquedaLibroController implements Initializable {
      * espacio y el elemento btnBuscar tiene el foco
      */
     @FXML
-    public void buscar2(KeyEvent event) throws IOException {
+    public void buscar2(KeyEvent event) throws IOException, BusquedaLibroException {
         if (event.getCode() == KeyCode.SPACE) {
             buscar();
         }

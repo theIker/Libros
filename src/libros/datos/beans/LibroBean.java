@@ -45,6 +45,18 @@ public class LibroBean implements Serializable {
         this.genero = new SimpleStringProperty(genero);
 
     }
+    
+     public LibroBean(){
+        this.isbn = new SimpleStringProperty();
+        this.titulo = new SimpleStringProperty();
+        this.autor = new SimpleStringProperty();
+        this.editorial = new SimpleStringProperty();
+        this.descripcion = new SimpleStringProperty();
+        this.fechaPub = new SimpleStringProperty();
+        this.precio = new SimpleFloatProperty();
+        this.stock = new SimpleIntegerProperty();
+        this.genero = new SimpleStringProperty();
+    }
 
     public String getIsbn() {
         return this.isbn.get();

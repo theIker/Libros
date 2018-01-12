@@ -37,6 +37,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import libros.datos.beans.GeneroBean;
 import libros.datos.beans.LibroBean;
+import libros.datos.exceptions.BusquedaLibroException;
 import libros.datos.manager.GenerosManager;
 import libros.datos.manager.LibrosManager;
 
@@ -209,6 +210,9 @@ public class AdminController implements Initializable {
             } catch (NullPointerException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
                 alert.showAndWait();
+            }catch (BusquedaLibroException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No se encontro");
+                alert.showAndWait();
             }
         }
     }
@@ -288,6 +292,9 @@ public class AdminController implements Initializable {
             } catch (NullPointerException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
                 alert.showAndWait();
+            }catch(BusquedaLibroException e){
+                 Alert alert = new Alert(Alert.AlertType.ERROR, "No se encontro el libro");
+                alert.showAndWait();
             }
         }
     }
@@ -315,9 +322,15 @@ public class AdminController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES) {
-            lib.getAllLibros().remove(libro);
-            logger.info("Disco borrado");
-            limpiarModificar();
+            try{
+                lib.getAllLibros().remove(libro);
+                logger.info("Disco borrado");
+                limpiarModificar();
+            }catch(BusquedaLibroException e){
+                logger.severe("No se encontro el libro");
+                logger.severe(e.getMessage());
+            }
+            
         } else {
 
         }
@@ -335,70 +348,13 @@ public class AdminController implements Initializable {
         }
     }
 
-    /**
-     * Metodo para insertar generos
-     */
-    @FXML
-    public void insertarGenero() {
-        if (!generosManager.getNombresGenero().contains((String) textGenero.getText())) {
-            generosManager.getAllGeneros().add(new GeneroBean(generosManager.getAllGeneros().size() + 1, (String) textGenero.getText()));
-            cargarTabla();
-            logger.info("Genero insertado");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Genero Introducido");
-            alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Genero existente");
-            alert.showAndWait();
-        }
-    }
 
-    /**
-     * Metodo insertarGenero() pero por teclado
-     *
-     * @param event
-     */
-    @FXML
-    public void insertarGenero2(KeyEvent event) {
-        if (event.getCode() == KeyCode.SPACE) {
-            insertarGenero();
-        }
-    }
-
-    /**
-     * Metodo para borrar generos
-     */
-    @FXML
-    public void borrarGenero() {
-        if (tablaGeneros.getSelectionModel().getSelectedIndex() != -1) {
-            generosManager.getAllGeneros().remove(tablaGeneros.getSelectionModel().getSelectedItem());
-            cargarTabla();
-            logger.info("Genero borrado");
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Genero borrado");
-            alert.showAndWait();
-
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Selecciona un genero");
-            alert.showAndWait();
-        }
-    }
-
-    /**
-     * Metodo borrarGenero() pero por teclado
-     *
-     * @param event
-     */
-    @FXML
-    public void borrarGenero2(KeyEvent event) {
-        if (event.getCode() == KeyCode.SPACE) {
-            borrarGenero();
-        }
-    }
 
     /**
      * Carga la tabla generos y los combos que contienen generos
      */
     private void cargarTabla() {
-        ObservableList<String> list = FXCollections.observableArrayList(generosManager.getNombresGenero());
+        ObservableList<String> list = FXCollections.observableArrayList(generosManager.getAllGeneros().toString());
         ObservableList<GeneroBean> lista = FXCollections.observableArrayList(generosManager.getAllGeneros());
 
         tableGenero.setCellValueFactory(new PropertyValueFactory<>("Genero"));
