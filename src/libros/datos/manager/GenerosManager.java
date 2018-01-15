@@ -5,8 +5,8 @@
  */
 package libros.datos.manager;
 
+import libros.datos.exceptions.GeneroException;
 import java.util.Collection;
-import libros.datos.beans.GeneroBean;
 
 /**
  *
@@ -14,6 +14,6 @@ import libros.datos.beans.GeneroBean;
  */
 public interface GenerosManager {
 
-    public Collection getAllGeneros();
+    public Collection getAllGeneros()throws GeneroException;
 
 }

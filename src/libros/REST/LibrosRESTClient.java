@@ -5,12 +5,11 @@
  */
 package libros.REST;
 
-import java.util.List;
+
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
-import libros.datos.beans.LibroBean;
 
 /**
  * Jersey REST client generated for REST resource:BookFacadeREST [book]<br>

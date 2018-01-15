@@ -21,12 +21,18 @@ public class GeneroBean {
 
     private final SimpleIntegerProperty codGenero;
     private final SimpleStringProperty genero;
-
+    
+   
     public GeneroBean(Integer codGenero, String genero) {
         this.codGenero = new SimpleIntegerProperty(codGenero);
         this.genero = new SimpleStringProperty(genero);
     }
-
+    
+     public GeneroBean() {
+        this.codGenero = new SimpleIntegerProperty();
+        this.genero = new SimpleStringProperty();
+    }
+     
     public Integer getCodGenero() {
         return this.codGenero.get();
     }

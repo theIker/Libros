@@ -7,13 +7,12 @@ package libros.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,6 +37,7 @@ import javafx.stage.Stage;
 import libros.datos.beans.GeneroBean;
 import libros.datos.beans.LibroBean;
 import libros.datos.exceptions.BusquedaLibroException;
+import libros.datos.exceptions.LibroException;
 import libros.datos.manager.GenerosManager;
 import libros.datos.manager.LibrosManager;
 
@@ -185,7 +185,6 @@ public class AdminController implements Initializable {
      */
     @FXML
     public void insertarLibro() {
-            
         if (TextIsbn.getText().equals("") || TextAutor.getText().equals("") || TextDescripcion.getText().equals("")
                 || TextEditorial.getText().equals("") || TextPrecio.getText().equals("") || TextStock.getText().equals("")
                 || TextTitulo.getText().equals("") || comboGeneros.getSelectionModel().getSelectedIndex() == -1) {
@@ -194,12 +193,12 @@ public class AdminController implements Initializable {
             alert.showAndWait();
 
         } else {
-          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
             try {
                 LibroBean aux = new LibroBean(TextIsbn.getText(), TextTitulo.getText(), TextAutor.getText(),
-                        TextEditorial.getText(), TextDescripcion.getText(),formatter.format(dateFechaPUb.getValue()), Float.parseFloat(TextPrecio.getText()),
+                        TextEditorial.getText(), TextDescripcion.getText(), dateFechaPUb.getValue().toString(), Float.parseFloat(TextPrecio.getText()),
                         Integer.parseInt(TextStock.getText()), ((String) comboGeneros.getSelectionModel().getSelectedItem()));
-                lib.getAllLibros().add(aux);
+                lib.createLibro(aux);
                 logger.info("Libro  insertado");
                 limpiarInsertar();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Insertado");
@@ -210,8 +209,8 @@ public class AdminController implements Initializable {
             } catch (NullPointerException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
                 alert.showAndWait();
-            }catch (BusquedaLibroException ex) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "No se encontro");
+            }catch (LibroException ex){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Fallo al crear el libro");
                 alert.showAndWait();
             }
         }
@@ -246,7 +245,7 @@ public class AdminController implements Initializable {
         controller.setLibroManager(lib);
         controller.setStage(reg);
         controller.setAdminController(this);
-        controller.initStage(root);
+        controller.initStage(root);              //FALLA AQUI
         logger.info("Despues de Buscar(Ventana)");
 
     }
@@ -280,7 +279,7 @@ public class AdminController implements Initializable {
                 LibroBean modificado = new LibroBean(TextIsbn1.getText(), TextTitulo1.getText(), TextAutor1.getText(),
                         TextEditorial1.getText(), TextDescripcion1.getText(), dateFechaPub1.getValue().toString(), Float.parseFloat(TextPrecio1.getText()),
                         Integer.parseInt(TextStock1.getText()), ((String) comboGeneros1.getSelectionModel().getSelectedItem()));
-                lib.getAllLibros().remove(libro);
+                lib.deleteLibro(libro);
                 lib.getAllLibros().add(modificado);
                 logger.info("Disco  modificado");
                 limpiarModificar();
@@ -293,8 +292,11 @@ public class AdminController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
                 alert.showAndWait();
             }catch(BusquedaLibroException e){
-                 Alert alert = new Alert(Alert.AlertType.ERROR, "No se encontro el libro");
-                alert.showAndWait();
+                 Alert alert = new Alert(Alert.AlertType.ERROR, "Fallo al buscar el libro");
+                 alert.showAndWait();
+            }catch(LibroException e){
+                 Alert alert = new Alert(Alert.AlertType.ERROR, "Fallo de servidor");
+                 alert.showAndWait();
             }
         }
     }
@@ -322,15 +324,14 @@ public class AdminController implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES) {
-            try{
-                lib.getAllLibros().remove(libro);
+            try {
+                lib.deleteLibro(libro);
                 logger.info("Disco borrado");
                 limpiarModificar();
-            }catch(BusquedaLibroException e){
-                logger.severe("No se encontro el libro");
-                logger.severe(e.getMessage());
+            } catch (LibroException ex) {
+                logger.severe(ex.getMessage());
+                logger.severe("Fallo con el servidor");
             }
-            
         } else {
 
         }
@@ -348,20 +349,18 @@ public class AdminController implements Initializable {
         }
     }
 
-
-
     /**
      * Carga la tabla generos y los combos que contienen generos
      */
     private void cargarTabla() {
-        ObservableList<String> list = FXCollections.observableArrayList(generosManager.getAllGeneros().toString());
-        ObservableList<GeneroBean> lista = FXCollections.observableArrayList(generosManager.getAllGeneros());
+        //ObservableList<String> list = FXCollections.observableArrayList(generosManager.getNombresGenero());
+        //ObservableList<GeneroBean> lista = FXCollections.observableArrayList(generosManager.getAllGeneros());
 
         tableGenero.setCellValueFactory(new PropertyValueFactory<>("Genero"));
 
-        comboGeneros.setItems(list);
-        comboGeneros1.setItems(list);
-        tablaGeneros.setItems(lista);
+        //comboGeneros.setItems(list);
+        //comboGeneros1.setItems(list);
+        //tablaGeneros.setItems(lista);
 
         tablaGeneros.setColumnResizePolicy((param) -> true);
 
@@ -448,6 +447,66 @@ public class AdminController implements Initializable {
         comboGeneros1.requestFocus();
 
         logger.info("Despues de cargar el libro");
+    }
+    
+    
+    /**
+     * Metodo para insertar generos
+     */
+    @FXML
+    public void insertarGenero() {
+        /*if (!generosManager.getNombresGenero().contains((String) textGenero.getText())) {
+            generosManager.getAllGeneros().add(new GeneroBean(generosManager.getAllGeneros().size() + 1, (String) textGenero.getText()));
+            cargarTabla();
+            logger.info("Genero insertado");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Genero Introducido");
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Genero existente");
+            alert.showAndWait();
+        }*/
+    }
+
+    /**
+     * Metodo insertarGenero() pero por teclado
+     *
+     * @param event
+     */
+    @FXML
+    public void insertarGenero2(KeyEvent event) {
+        if (event.getCode() == KeyCode.SPACE) {
+            insertarGenero();
+        }
+    }
+
+    /**
+     * Metodo para borrar generos
+     */
+    @FXML
+    public void borrarGenero() {
+       /* if (tablaGeneros.getSelectionModel().getSelectedIndex() != -1) {
+            generosManager.getAllGeneros().remove(tablaGeneros.getSelectionModel().getSelectedItem());
+            cargarTabla();
+            logger.info("Genero borrado");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Genero borrado");
+            alert.showAndWait();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Selecciona un genero");
+            alert.showAndWait();
+        }*/
+    }
+
+    /**
+     * Metodo borrarGenero() pero por teclado
+     *
+     * @param event
+     */
+    @FXML
+    public void borrarGenero2(KeyEvent event) {
+        if (event.getCode() == KeyCode.SPACE) {
+            borrarGenero();
+        }
     }
 
 }

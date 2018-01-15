@@ -31,8 +31,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import libros.datos.beans.ComprasBean;
-import libros.datos.beans.GeneroBean;
 import libros.datos.beans.LibroBean;
 import libros.datos.exceptions.BusquedaLibroException;
 import libros.datos.manager.ComprasManager;
@@ -49,7 +47,7 @@ public class BusquedaLibroController implements Initializable {
     private LibrosManager librosManager;
     private ComprasManager comprasManager;
     private UsuController usu = new UsuController();
-    private AdminController x = new AdminController();
+    private AdminController adminControl = new AdminController();
     private ArrayList<LibroBean> compras = new ArrayList<LibroBean>();
     private final static Logger logger = Logger.getLogger("libros.gui.controller");
 
@@ -93,7 +91,8 @@ public class BusquedaLibroController implements Initializable {
         comboBusqueda.getItems().addAll(
                 "ISBN",
                 "Titulo",
-                "Autor"
+                "Autor",
+                "Todos"
         );
         textFieldBusqueda.setPromptText("Parámetro de Búsqueda");
         comboBusqueda.setPromptText("Criterio");
@@ -123,7 +122,6 @@ public class BusquedaLibroController implements Initializable {
         stage.setResizable(false);
         btnCargar.setVisible(true);
         btnAdd.setVisible(false);
-        btnComprar.setVisible(false);
         textFieldUnidades.setVisible(false);
         stage.setTitle("Busqueda Libro");
 
@@ -157,8 +155,8 @@ public class BusquedaLibroController implements Initializable {
     /**
      * Se envia el controllador del administrador
      */
-    void setAdminController(AdminController x) {
-        this.x = x;
+    void setAdminController(AdminController admin) {
+        this.adminControl = admin;
     }
 
     /**
@@ -261,17 +259,23 @@ public class BusquedaLibroController implements Initializable {
         ObservableList<LibroBean> lista = null;
         if (comboBusqueda.getSelectionModel().getSelectedIndex() != -1) {
             if (comboBusqueda.getSelectionModel().getSelectedIndex() == 0) {
-                lista = FXCollections.observableArrayList(librosManager.getLibrosIsbn((String) textFieldBusqueda.getText().toLowerCase()));
-
+                if( textFieldBusqueda.getText().equals(null)){
+                     lista = FXCollections.observableArrayList(librosManager.getLibrosIsbn((String) textFieldBusqueda.getText().toLowerCase()));
+                } 
             } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 1) {
-                lista = FXCollections.observableArrayList(librosManager.getLibrosTitulo((String) textFieldBusqueda.getText().toLowerCase()));
+                if( textFieldBusqueda.getText().equals(null)){
+                    lista = FXCollections.observableArrayList(librosManager.getLibrosTitulo((String) textFieldBusqueda.getText().toLowerCase()));
+                } 
             } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 2) {
-                lista = FXCollections.observableArrayList(librosManager.getLibrosAutor((String) textFieldBusqueda.getText().toLowerCase()));
+                if( textFieldBusqueda.getText().equals(null)){
+                    lista = FXCollections.observableArrayList(librosManager.getLibrosAutor((String) textFieldBusqueda.getText().toLowerCase()));
+                } 
+            }else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 3) {
+                lista = FXCollections.observableArrayList(librosManager.getAllLibros());
             }
             cargarTabla(lista);
             logger.info("Busqueda realizada");
         } else {
-
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("Selecciona criterio de busqueda");
@@ -300,7 +304,7 @@ public class BusquedaLibroController implements Initializable {
 
         if (tablaBusqueda.getSelectionModel().getSelectedItem() != null) {
             LibroBean aux = tablaBusqueda.getSelectionModel().getSelectedItem();
-            x.cargarLibro(aux);
+            adminControl.cargarLibro(aux);
             logger.info("Libro cargado en administrador(Ventana)");
             stage.close();
         } else {
