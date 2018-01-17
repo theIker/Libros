@@ -37,6 +37,7 @@ import javafx.stage.Stage;
 import libros.datos.beans.GeneroBean;
 import libros.datos.beans.LibroBean;
 import libros.datos.exceptions.BusquedaLibroException;
+import libros.datos.exceptions.GeneroException;
 import libros.datos.exceptions.LibroException;
 import libros.datos.manager.GenerosManager;
 import libros.datos.manager.LibrosManager;
@@ -141,6 +142,7 @@ public class AdminController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.centerOnScreen();
         //Codificar comportamiento
         btnBorrar.setDisable(true);
         btnModi.setDisable(true);
@@ -185,7 +187,7 @@ public class AdminController implements Initializable {
      */
     @FXML
     public void insertarLibro() {
-        if (TextIsbn.getText().equals("") || TextAutor.getText().equals("") || TextDescripcion.getText().equals("")
+       if (TextIsbn.getText().equals("") || TextAutor.getText().equals("") || TextDescripcion.getText().equals("")
                 || TextEditorial.getText().equals("") || TextPrecio.getText().equals("") || TextStock.getText().equals("")
                 || TextTitulo.getText().equals("") || comboGeneros.getSelectionModel().getSelectedIndex() == -1) {
 
@@ -196,11 +198,19 @@ public class AdminController implements Initializable {
 
             try {
                 LibroBean aux = new LibroBean(TextIsbn.getText(), TextTitulo.getText(), TextAutor.getText(),
-                        TextEditorial.getText(), TextDescripcion.getText(), dateFechaPUb.getValue().toString(), Float.parseFloat(TextPrecio.getText()),
-                        Integer.parseInt(TextStock.getText()), ((String) comboGeneros.getSelectionModel().getSelectedItem()));
+                        TextEditorial.getText(), TextDescripcion.getText(), dateFechaPUb.getValue().toString(), Float.parseFloat(TextPrecio.getText().replace(',', '.')),
+                        Integer.parseInt(TextStock.getText()), new GeneroBean(comboGeneros.getSelectionModel().getSelectedIndex()+1, ((String) comboGeneros.getSelectionModel().getSelectedItem())));  
                 lib.createLibro(aux);
                 logger.info("Libro  insertado");
-                limpiarInsertar();
+                TextIsbn.setText("");
+                TextAutor.setText("");
+                TextDescripcion.setText("");
+                TextStock.setText("");
+                TextPrecio.setText("");
+                TextTitulo.setText("");
+                dateFechaPUb.setValue(null);
+                TextEditorial.setText("");
+                comboGeneros.getSelectionModel().clearSelection();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Insertado");
                 alert.showAndWait();
             } catch (NumberFormatException e) {
@@ -277,10 +287,10 @@ public class AdminController implements Initializable {
         } else {
             try {
                 LibroBean modificado = new LibroBean(TextIsbn1.getText(), TextTitulo1.getText(), TextAutor1.getText(),
-                        TextEditorial1.getText(), TextDescripcion1.getText(), dateFechaPub1.getValue().toString(), Float.parseFloat(TextPrecio1.getText()),
-                        Integer.parseInt(TextStock1.getText()), ((String) comboGeneros1.getSelectionModel().getSelectedItem()));
-                lib.deleteLibro(libro);
-                lib.getAllLibros().add(modificado);
+                        TextEditorial1.getText(), TextDescripcion1.getText(), dateFechaPub1.getValue().toString(), Float.parseFloat(TextPrecio1.getText().replace(',', '.')),
+                        Integer.parseInt(TextStock1.getText()),new GeneroBean(comboGeneros1.getSelectionModel().getSelectedIndex()+1, ((String) comboGeneros.getSelectionModel().getSelectedItem())));
+                        //((String) comboGeneros1.getSelectionModel().getSelectedItem()));
+                lib.updateLibro(modificado);
                 logger.info("Disco  modificado");
                 limpiarModificar();
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Modificado");
@@ -291,9 +301,6 @@ public class AdminController implements Initializable {
             } catch (NullPointerException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
                 alert.showAndWait();
-            }catch(BusquedaLibroException e){
-                 Alert alert = new Alert(Alert.AlertType.ERROR, "Fallo al buscar el libro");
-                 alert.showAndWait();
             }catch(LibroException e){
                  Alert alert = new Alert(Alert.AlertType.ERROR, "Fallo de servidor");
                  alert.showAndWait();
@@ -353,33 +360,25 @@ public class AdminController implements Initializable {
      * Carga la tabla generos y los combos que contienen generos
      */
     private void cargarTabla() {
-        //ObservableList<String> list = FXCollections.observableArrayList(generosManager.getNombresGenero());
-        //ObservableList<GeneroBean> lista = FXCollections.observableArrayList(generosManager.getAllGeneros());
+        try{
+            ObservableList<String> list = FXCollections.observableArrayList(generosManager.getNombresGenero(generosManager.getAllGeneros()));
+            ObservableList<GeneroBean> lista = FXCollections.observableArrayList(generosManager.getAllGeneros());
 
-        tableGenero.setCellValueFactory(new PropertyValueFactory<>("Genero"));
+            tableGenero.setCellValueFactory(new PropertyValueFactory<>("Genero"));
 
-        //comboGeneros.setItems(list);
-        //comboGeneros1.setItems(list);
-        //tablaGeneros.setItems(lista);
+            comboGeneros.setItems(list);
+            comboGeneros1.setItems(list);
+            tablaGeneros.setItems(lista);
 
-        tablaGeneros.setColumnResizePolicy((param) -> true);
+            tablaGeneros.setColumnResizePolicy((param) -> true);
+            }catch(GeneroException e){
+            
+            }
+        
 
     }
 
-    /**
-     * Limpia la pestaña insertar una vez se ha insertado un libro
-     */
-    private void limpiarInsertar() {
-        TextIsbn.setText("");
-        TextAutor.setText("");
-        TextDescripcion.setText("");
-        TextStock.setText("");
-        TextPrecio.setText("");
-        TextTitulo.setText("");
-        dateFechaPUb.setValue(null);
-        TextEditorial.setText("");
-        comboGeneros.getSelectionModel().clearSelection();
-    }
+  
 
     /**
      * Limpia en la pestaña de modificar una vez se haya modificado
@@ -430,19 +429,17 @@ public class AdminController implements Initializable {
         TextIsbn1.setText(libro.getIsbn());
         TextAutor1.setText(libro.getAutor());
         TextEditorial1.setText(libro.getEditorial());
-        TextPrecio1.setText(libro.getPrecio().toString());
+        TextPrecio1.setText(libro.getPrecio().toString().replace('.', ','));
         TextStock1.setText(libro.getStock().toString());
         TextDescripcion1.setText(libro.getDescripcion());
         TextTitulo1.setText(libro.getTitulo());
-        String s = libro.getFechaPub();
-        String fecha;
-        fecha = s.substring(8, 10) + "/" + s.substring(5, 7) + "/" + s.substring(0, 4);
-
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        LocalDate localDate = LocalDate.parse(fecha, formatter);
+        System.out.println(libro.getFechaPub());
+        LocalDate localDate = LocalDate.parse(libro.getFechaPub(), formatter);
         dateFechaPub1.setValue(localDate);
 
-        comboGeneros1.getSelectionModel().select(libro.getGenero());
+        comboGeneros1.getSelectionModel().select(libro.getGenero().getGenero());
 
         comboGeneros1.requestFocus();
 

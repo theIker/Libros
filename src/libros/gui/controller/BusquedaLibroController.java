@@ -13,9 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,6 +33,10 @@ import libros.datos.beans.LibroBean;
 import libros.datos.exceptions.BusquedaLibroException;
 import libros.datos.manager.ComprasManager;
 import libros.datos.manager.LibrosManager;
+import java.text.NumberFormat;
+import java.util.Locale;
+
+
 
 /**
  * FXML Controller class
@@ -255,27 +257,28 @@ public class BusquedaLibroController implements Initializable {
      * el usuario. Se ejecuta cuando se clica sobre el boton btnBuscar.
      */
     @FXML
-    private void buscar() throws BusquedaLibroException {
+    private void buscar(){
         ObservableList<LibroBean> lista = null;
         if (comboBusqueda.getSelectionModel().getSelectedIndex() != -1) {
-            if (comboBusqueda.getSelectionModel().getSelectedIndex() == 0) {
-                if( textFieldBusqueda.getText().equals(null)){
-                     lista = FXCollections.observableArrayList(librosManager.getLibrosIsbn((String) textFieldBusqueda.getText().toLowerCase()));
-                } 
-            } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 1) {
-                if( textFieldBusqueda.getText().equals(null)){
+            try{
+                if (comboBusqueda.getSelectionModel().getSelectedIndex() == 0 && !textFieldBusqueda.getText().equals("")) {
+                    lista = FXCollections.observableArrayList(librosManager.getLibrosIsbn((String) textFieldBusqueda.getText().toLowerCase()));
+                } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 1 && !textFieldBusqueda.getText().equals("")) {
                     lista = FXCollections.observableArrayList(librosManager.getLibrosTitulo((String) textFieldBusqueda.getText().toLowerCase()));
-                } 
-            } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 2) {
-                if( textFieldBusqueda.getText().equals(null)){
+                } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 2 && !textFieldBusqueda.getText().equals("")) {
                     lista = FXCollections.observableArrayList(librosManager.getLibrosAutor((String) textFieldBusqueda.getText().toLowerCase()));
-                } 
-            }else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 3) {
-                lista = FXCollections.observableArrayList(librosManager.getAllLibros());
+                } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 3 || textFieldBusqueda.getText().equals("")) {
+                    lista = FXCollections.observableArrayList(librosManager.getAllLibros());
+                }
+                cargarTabla(lista);
+                logger.info("Busqueda realizada");
+            }catch(BusquedaLibroException e){
+                 Alert alert = new Alert(Alert.AlertType.ERROR);
+                 alert.setTitle("Error");
+                 alert.setContentText("Fallo en la busqueda del libro");
+                 alert.showAndWait();
             }
-            cargarTabla(lista);
-            logger.info("Busqueda realizada");
-        } else {
+           } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("Selecciona criterio de busqueda");
@@ -290,7 +293,7 @@ public class BusquedaLibroController implements Initializable {
      * espacio y el elemento btnBuscar tiene el foco
      */
     @FXML
-    public void buscar2(KeyEvent event) throws IOException, BusquedaLibroException {
+    public void buscar2(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.SPACE) {
             buscar();
         }
@@ -370,6 +373,20 @@ public class BusquedaLibroController implements Initializable {
      */
     private void cargarTabla(ObservableList<LibroBean> list) {
         if (list != null) {
+            for(LibroBean e: list){
+                String fecha = e.getFechaPub().substring(8, 10) + "/" + e.getFechaPub().substring(5, 7) + "/" + e.getFechaPub().substring(0, 4);
+                e.setFechaPub(fecha);
+
+                String w = e.getPrecio().toString();
+                w.replace('.', ',');
+                e.setPrecio(Float.valueOf(w));
+                System.out.println(e.getPrecio());
+                
+                /*NumberFormat defaultFormat = NumberFormat.getCurrencyInstance();
+		System.out.println("US: " + defaultFormat.format(e.getPrecio()));
+                e.setPrecio(Float.valueOf(defaultFormat.format(e.getPrecio())));*/
+             
+            } 
             isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
             titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
             autor.setCellValueFactory(new PropertyValueFactory<>("autor"));

@@ -9,6 +9,7 @@ import java.beans.*;
 import java.io.Serializable;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -16,8 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Jon Xabier Gimenez
  */
 
-@XmlRootElement(name="genero")
-public class GeneroBean {
+@XmlRootElement(name="gender")
+public class GeneroBean implements Serializable{
 
     private final SimpleIntegerProperty codGenero;
     private final SimpleStringProperty genero;
@@ -33,6 +34,7 @@ public class GeneroBean {
         this.genero = new SimpleStringProperty();
     }
      
+    @XmlElement(name="codigo")
     public Integer getCodGenero() {
         return this.codGenero.get();
     }

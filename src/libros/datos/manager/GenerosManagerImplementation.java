@@ -5,12 +5,15 @@
  */
 package libros.datos.manager;
 
+
 import java.util.Collection;
 import java.util.List;
 import libros.REST.GenerosRESTClient;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.ws.rs.core.GenericType;
 import libros.datos.beans.GeneroBean;
+import libros.datos.exceptions.GeneroException;
 
 /**
  *
@@ -36,5 +39,10 @@ public class GenerosManagerImplementation implements GenerosManager {
         logger.info("GenerosManager: Buscando todos los generos desde el servicio REST(XML).");
         List<GeneroBean> generos = webClient.findAll_XML(new GenericType<List<GeneroBean>>() {});
         return generos;    
+    }
+
+    @Override
+    public Collection getNombresGenero(Collection <GeneroBean> generos) throws GeneroException {
+        return generos.stream().map(gen -> gen.getGenero()).collect(Collectors.toList());
     }
 }

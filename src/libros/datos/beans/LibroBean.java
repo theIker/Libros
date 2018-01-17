@@ -7,10 +7,18 @@ package libros.datos.beans;
 
 import java.beans.*;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
@@ -29,10 +37,10 @@ public class LibroBean implements Serializable {
     private final SimpleStringProperty fechaPub;
     private final SimpleFloatProperty precio;
     private final SimpleIntegerProperty stock;
-    private final SimpleStringProperty genero;
+    private final SimpleObjectProperty<GeneroBean> genero;
 
-    public LibroBean(String isbn, String titulo, String autor,
-            String editorial, String descripcion, String fechaPub, Float precio, Integer stock, String genero) {
+   public LibroBean(String isbn, String titulo, String autor,
+            String editorial, String descripcion, String fechaPub, Float precio, Integer stock, GeneroBean genero) {
 
         this.isbn = new SimpleStringProperty(isbn);
         this.titulo = new SimpleStringProperty(titulo);
@@ -42,10 +50,13 @@ public class LibroBean implements Serializable {
         this.fechaPub = new SimpleStringProperty(fechaPub);
         this.precio = new SimpleFloatProperty(precio);
         this.stock = new SimpleIntegerProperty(stock);
-        this.genero = new SimpleStringProperty(genero);
+        this.genero = new SimpleObjectProperty(genero);
 
     }
+  
     
+    
+   
      public LibroBean(){
         this.isbn = new SimpleStringProperty();
         this.titulo = new SimpleStringProperty();
@@ -55,7 +66,7 @@ public class LibroBean implements Serializable {
         this.fechaPub = new SimpleStringProperty();
         this.precio = new SimpleFloatProperty();
         this.stock = new SimpleIntegerProperty();
-        this.genero = new SimpleStringProperty();
+        this.genero = new SimpleObjectProperty();
     }
 
     public String getIsbn() {
@@ -97,7 +108,7 @@ public class LibroBean implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion.set(descripcion);
     }
-
+    @XmlElement(name="fechaPublicacion")
     public String getFechaPub() {
         return this.fechaPub.get();
     }
@@ -121,12 +132,12 @@ public class LibroBean implements Serializable {
     public void setStock(Integer stock) {
         this.stock.set(stock);
     }
-
-    public void setGenero(String Genero) {
-        this.genero.set(Genero);
-    }
-
-    public String getGenero() {
+    @XmlElement(name="genero")
+    public GeneroBean getGenero(){
         return this.genero.get();
     }
+    public void setGenero(GeneroBean genero){
+        this.genero.set(genero);
+    }
+   
 }

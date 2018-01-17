@@ -133,15 +133,16 @@ public class LoginFinalController implements Initializable {
         if (textFieldNombreU.getText().equals("u") && textFieldContra.getText().equals("u")) {
           
            try{
-               /* ObservableList<LibroBean> comprasData;
-            comprasData = FXCollections.observableArrayList(lib.getLibrosAutor("Jon"));
-            System.out.println("FECHA PUBLICACION: "+comprasData.get(0).getFechaPub());    */          
+               ObservableList<LibroBean> comprasData;
+            comprasData = FXCollections.observableArrayList(lib.getAllLibros());
+            System.out.println("FECHA PUBLICACION: "+comprasData.get(0).getFechaPub());
+            System.out.println("Titulo: "+comprasData.get(0).getTitulo());             
                      
-            ObservableList<GeneroBean> comprasData;
+            /*ObservableList<GeneroBean> comprasData;
                System.out.println("e");
             comprasData = FXCollections.observableArrayList(gen.getAllGeneros());
                System.out.println("e");
-            System.out.println("FECHA PUBLICACION: "+comprasData.get(0).getGenero()); 
+            System.out.println("FECHA PUBLICACION: "+comprasData.get(0).getGenero()); */
             
            }catch (Exception e){
                

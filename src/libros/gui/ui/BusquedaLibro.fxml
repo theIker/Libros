@@ -24,8 +24,8 @@
                         <TableColumn fx:id="autor" prefWidth="75.0" text="Autor" />
                         <TableColumn fx:id="editorial" prefWidth="75.0" text="Editorial" />
                         <TableColumn fx:id="precio" prefWidth="76.0" text="Precio" />
-                        <TableColumn fx:id="fechaP" prefWidth="73.0" text="FechaP" />
-                        <TableColumn fx:id="descripcion" prefWidth="349.0" text="Descripcion" />
+                        <TableColumn fx:id="fechaP" prefWidth="223.0" text="FechaP" />
+                        <TableColumn fx:id="descripcion" prefWidth="199.0" text="Descripcion" />
                     </columns>
                 </TableView>
                 <Button fx:id="btnCargar" layoutX="286.0" layoutY="409.0" mnemonicParsing="false" onAction="#cargarLibro" onKeyPressed="#cargarLibro2" prefHeight="43.0" prefWidth="158.0" text="Cargar" visible="false" />
