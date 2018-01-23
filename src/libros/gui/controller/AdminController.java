@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -41,6 +44,13 @@ import libros.datos.exceptions.GeneroException;
 import libros.datos.exceptions.LibroException;
 import libros.datos.manager.GenerosManager;
 import libros.datos.manager.LibrosManager;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -55,6 +65,7 @@ public class AdminController implements Initializable {
     private LibroBean libro;
     private final static Logger logger = Logger.getLogger("libros.gui.controller");
 
+    
     //InsertarLibro
     @FXML
     private TextField TextIsbn;
@@ -446,7 +457,7 @@ public class AdminController implements Initializable {
         logger.info("Despues de cargar el libro");
     }
     
-    
+ 
     /**
      * Metodo para insertar generos
      */
