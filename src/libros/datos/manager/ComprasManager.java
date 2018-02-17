@@ -6,6 +6,7 @@
 package libros.datos.manager;
 
 import java.util.Collection;
+import libros.datos.beans.ComprasBean;
 
 /**
  *
@@ -13,6 +14,12 @@ import java.util.Collection;
  */
 public interface ComprasManager {
 
-    public Collection getAllCompras();
+    public Collection<ComprasBean> getAllCompras(String usuario);
+    public void createCompras(ComprasBean compra);
+    public void updateCompra(ComprasBean compra);
+    public void deleteCompra(ComprasBean compra);
+    
+    
+    
 
 }

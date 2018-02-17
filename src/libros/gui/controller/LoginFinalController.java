@@ -7,12 +7,8 @@ package libros.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,12 +24,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import libros.datos.beans.GeneroBean;
 import libros.datos.manager.ComprasManager;
 import libros.datos.manager.GenerosManager;
 import libros.datos.manager.LibrosManager;
-import libros.datos.beans.LibroBean;
-import libros.datos.exceptions.BusquedaLibroException;
 
 /**
  * FXML Controller class
@@ -63,6 +56,7 @@ public class LoginFinalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }
 
     /**
@@ -128,27 +122,13 @@ public class LoginFinalController implements Initializable {
      * @throws IOException
      */
     @FXML
-    private void entrar() throws IOException, BusquedaLibroException {
-
+    private void entrar() throws IOException {
+        
+        
+        
+        
         if (textFieldNombreU.getText().equals("u") && textFieldContra.getText().equals("u")) {
-          
-           try{
-               ObservableList<LibroBean> comprasData;
-            comprasData = FXCollections.observableArrayList(lib.getAllLibros());
-            System.out.println("FECHA PUBLICACION: "+comprasData.get(0).getFechaPub());
-            System.out.println("Titulo: "+comprasData.get(0).getTitulo());             
-                     
-            /*ObservableList<GeneroBean> comprasData;
-               System.out.println("e");
-            comprasData = FXCollections.observableArrayList(gen.getAllGeneros());
-               System.out.println("e");
-            System.out.println("FECHA PUBLICACION: "+comprasData.get(0).getGenero()); */
-            
-           }catch (Exception e){
-               
-           }
-           
-           
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/Usu.fxml"));
 
             Parent root = (Parent) loader.load();
@@ -188,7 +168,7 @@ public class LoginFinalController implements Initializable {
      * @throws IOException
      */
     @FXML
-    public void entrar2(KeyEvent event) throws IOException, BusquedaLibroException {
+    public void entrar2(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.SPACE) {
             entrar();
         }

@@ -7,7 +7,9 @@ package libros.gui.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -15,7 +17,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,6 +43,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import libros.datos.beans.ComprasBean;
 import libros.datos.beans.LibroBean;
+import libros.datos.beans.UserBean;
 import libros.datos.manager.ComprasManager;
 import libros.datos.manager.GenerosManager;
 import libros.datos.manager.LibrosManager;
@@ -55,7 +60,7 @@ public class UsuController implements Initializable {
     private GenerosManager generosManager;
     private Collection<ComprasBean> historial;
     private final static Logger logger = Logger.getLogger("libros.gui.controller");
-    private ArrayList<LibroBean> compras;
+    private ArrayList<LibroBean> compras=new ArrayList<>();
     private UsuController usu;
 
     private Stage stage;
@@ -121,6 +126,10 @@ public class UsuController implements Initializable {
     private TableColumn colUnidades;
     @FXML
     private Button btnQuitarCompra;
+    @FXML
+    private Button btnUpdate;
+    @FXML
+    private TextField tfUnidades;
     
     private Button compra;
     
@@ -147,6 +156,7 @@ public class UsuController implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Usuario");
         stage.setResizable(false);
+        stage.centerOnScreen();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
         Parent pane = null;
         pane = loader.load();
@@ -214,6 +224,7 @@ public class UsuController implements Initializable {
         ObservableList<ComprasBean> comprasData;
         comprasData = FXCollections.observableArrayList(this.historial);
         tableHisto.setItems(comprasData);
+   
     }
 
     /**
@@ -333,21 +344,72 @@ public class UsuController implements Initializable {
      * Metodo para cargar la tabla historial compras
      */
     private void cargarTabla() {
+       SimpleDateFormat dt= new SimpleDateFormat("dd/MM/yyy");
+       
+        Collection<ComprasBean> pur=  comprasManager.getAllCompras("u");
+          
+        
+        pur.forEach((c) -> {
+            String fecha;
+            if(c.getFechaCompra()==null){
+                Date date = new Date();
+                fecha=dt.format(date);
+            }
+                else{
+                fecha = c.getFechaCompra().substring(8, 10) + "/" + c.getFechaCompra().substring(5, 7) + "/" + c.getFechaCompra().substring(0, 4);
+               
+            }
+            c.setFechaCompra(fecha);
+        }); 
+        
+        
         tbTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         tbISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
-        tbFecha.setCellValueFactory(new PropertyValueFactory<>("fechaComp"));
-        tbTotal.setCellValueFactory(new PropertyValueFactory<>("precioTot"));
+        tbFecha.setCellValueFactory(new PropertyValueFactory<>("fechaCompra"));
+        tbTotal.setCellValueFactory(new PropertyValueFactory<>("precioTotal"));
         tbUnidades.setCellValueFactory(new PropertyValueFactory<>("unidades"));
-        ObservableList<ComprasBean> comprasData;
-        comprasData = FXCollections.observableArrayList(comprasManager.getAllCompras());
-
+        
+        ObservableList<ComprasBean> comprasData=null;
+        comprasData=FXCollections.observableArrayList(pur);
+        
         tableHisto.setItems(comprasData);
+        
         tableHisto.refresh();
         tableHisto.setColumnResizePolicy((param) -> true);
 
     }
-    
-    
+    /**
+     * Metodo para cambiar las unidades compras de un libro
+     */
+    @FXML
+    private void cambiarUnidades(){
+        try{
+        if(!(Integer.valueOf(tfUnidades.getText())<=0) && tablaCompra.getSelectionModel().getSelectedItem() != null){
+            LibroBean lb= new LibroBean();
+            lb=tablaCompra.getSelectionModel().getSelectedItem();
+            compras.remove(lb);
+            lb.setStock(Integer.valueOf(tfUnidades.getText()));
+            compras.add(lb);
+            
+            cargarTablaCompras();
+            
+            
+        }
+        else{
+            
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Inserta Unidades");
+            alert.showAndWait();
+        }
+        }catch(NumberFormatException ex){
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Campo numerico");
+            alert.showAndWait();
+        }
+        
+    }
     
     //confirmar compra
      /**
@@ -392,21 +454,35 @@ public class UsuController implements Initializable {
     @FXML
     private void confirmarCompra() {
         BusquedaLibroController controller = new BusquedaLibroController();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-
-        histo = (ArrayList<ComprasBean>) comprasManager.getAllCompras();
+        UserBean user = new UserBean();
+        user.setUsuario("u");
+        user.setNombre("Manu");
+        user.setApellidos("Carrillo");
+        user.setEmail("manu@gmail.com");
+        user.setDireccion("Mexico");
+        user.setTelefono("123456789");
+       
+        histo = (ArrayList<ComprasBean>) comprasManager.getAllCompras(user.getUsuario());
         if(compras.size()>0){
-            for (int i = 0; i < compras.size(); i++) {
-
-                ComprasBean comp = new ComprasBean(String.valueOf(i), compras.get(i).getIsbn(), dateFormat.format(date), compras.get(i).getTitulo(), compras.get(i).getStock() * compras.get(i).getPrecio(), compras.get(i).getStock());
-
+           
+                 
+             for(int i=0;i<compras.size();i++){  
+          //ComprasBean comp = new ComprasBean(String.valueOf(i), compras.get(i).getIsbn, dateFormat.format(date), compras.get(i).getTitulo(), compras.get(i).getStock() * compras.get(i).getPrecio(), compras.get(i).getStock());
+                ComprasBean comp = new ComprasBean();
+                comp.setFechaCompra(date.toString());
+                comp.setPrecioTotal(compras.get(i).getPrecio()*compras.get(i).getStock());
+                comp.setUnidades(compras.get(i).getStock());
+                comp.setBook(compras.get(i));
+                comp.setUsuario(user);
+                 comprasManager.createCompras(comp);
                 logger.info("Compra realizada y guardada");
-                histo.add(comp);
-            }
+                //histo.add(comp);
+             }
+            
 
-            usu.setHistorial(histo);
-
+            //usu.setHistorial(histo);
+          
             controller.resetCompras();
             compras.clear();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -414,6 +490,7 @@ public class UsuController implements Initializable {
             alert.setContentText("Compra realizada");
             alert.show();
             cargarTablaCompras();
+            cargarTabla();
             }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -457,6 +534,7 @@ public class UsuController implements Initializable {
     //confirmar compra
 
     void setCompras(ArrayList<LibroBean> compras) {
+        
         this.compras=compras;
         cargarTablaCompras();
     }
