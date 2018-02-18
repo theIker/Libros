@@ -205,6 +205,7 @@ public class AdminController implements Initializable {
                         Integer.parseInt(TextStock.getText()), new GeneroBean(comboGeneros.getSelectionModel().getSelectedIndex()+1, ((String) comboGeneros.getSelectionModel().getSelectedItem())));  
                 if(lib.getLibrosIsbn(TextIsbn.getText()).size()>0){
                     throw new BusquedaLibroException();
+                    //lanzamos excepcion
                 }
                 //llamada para crear el libro 
                 lib.createLibro(aux);
