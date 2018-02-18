@@ -82,16 +82,22 @@ import net.sf.jasperreports.view.JasperViewer;
 
 
 /**
- * FXML Controller class
- *
+ * Clase que define los manejadores de eventos de la interfaz definida mediante
+ * el archivo BusquedaLibro.fmxl: una UI de busqueda de libros. Tambien utilizada
+ * para introducir compras y carga de datos.
  * @author Iker Iglesias, Jon Xabier Gimenez
  */
 public class BusquedaLibroController implements Initializable {
-
+    
+    //Referencia para el objeto Ventana de la UI que controla esta clase
     private Stage stage;
+     //Referencia para el objeto de la capa de lógica 
     private LibrosManager librosManager;
+     //Referencia para el objeto de la capa de lógica 
     private ComprasManager comprasManager;
+    //Referencia para el controlador de la ventana ejecutandose(USUARIO)
     private UsuController usu = new UsuController();
+     //Referencia para el controlador de la ventana ejecutandose en el fondo(ADMIN)
     private AdminController adminControl = new AdminController();
     private ArrayList<LibroBean> compras = new ArrayList<>();
     private ArrayList<ComprasBean> c = new ArrayList<>();
@@ -152,9 +158,9 @@ public class BusquedaLibroController implements Initializable {
     }
 
     /**
-     * Inicia el stage
+     * *Metodo para cambiar la scene al stage actual. 
      *
-     * @param root
+     * @param root El objeto padre que representa el nodo raíz/root del gráfico de vista.
      */
     public void initStage(Parent root) {
 
@@ -167,11 +173,12 @@ public class BusquedaLibroController implements Initializable {
     }
 
     /**
-     *
-     * @param event metodo que se llama al iniciar la ventana(InitStage)
+     * Metodo que inicializa la ventana. Deshabilita/Habilita los campos
+     * @param event Evento provocado al iniciar la ventana(InitStage)
      */
     public void handleWindowShowing(WindowEvent event) {
         //se ejecuta antes de iniciar la ventana
+        //Ajusta la visibilidad de los componentes
         stage.setResizable(false);
         btnCargar.setVisible(true);
         btnAdd.setVisible(false);
@@ -181,19 +188,14 @@ public class BusquedaLibroController implements Initializable {
 
     }
 
-    /**
-     *
-     * @param stage Coge la stage utilizada por la ventana anterior
-     */
     public void setStage(Stage stage) {
 
         this.stage = stage;
     }
 
     /**
-     * Pasa los liros generados a esta clase y los carga en una tabla
-     *
-     * @param lib
+     * Inicializa el librosManager de esta ventana.
+     * Aprovecha este para obtener todos los libros y cargarlos en la tabla.
      */
     void setLibroManager(LibrosManager lib) {
         this.librosManager = lib;
@@ -206,9 +208,6 @@ public class BusquedaLibroController implements Initializable {
       
     }
 
-    /**
-     * Se envia el controllador del administrador
-     */
     void setAdminController(AdminController admin) {
         this.adminControl = admin;
     }
@@ -220,20 +219,10 @@ public class BusquedaLibroController implements Initializable {
         compras.clear();
     }
 
-    /**
-     * se envia el controlador del usuario
-     *
-     * @param aThis
-     */
     void setUsuController(UsuController aThis) {
         this.usu = aThis;
     }
 
-    /**
-     * Se envian las compras a esta clase
-     *
-     * @param comprasManager
-     */
     void setComprasManager(ComprasManager comprasManager) {
 
         this.comprasManager = comprasManager;
@@ -282,14 +271,6 @@ public class BusquedaLibroController implements Initializable {
                 alert.setContentText("Ese libro ya esta en el carro");
                 alert.showAndWait();
                     }
-                    
-                
-                
-                
-                  
-        
-             
-
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -319,14 +300,16 @@ public class BusquedaLibroController implements Initializable {
     }
 
     /**
-     * Se encarga de buscar el libro dependiendo el filtro que le haya asignado
-     * el usuario. Se ejecuta cuando se clica sobre el boton btnBuscar.
+     * Metodo que soporta el onAction del btnBuscar.
+     * Metodo en el cual se busca un libro en la Base de Datos, teniendo en cuenta los parametros de busqueda.
      */
     @FXML
     private void buscar(){
         ObservableList<LibroBean> lista = null;
+        //Se comprueba que hay algo seleccionado en la comboBox
         if (comboBusqueda.getSelectionModel().getSelectedIndex() != -1) {
             try{
+                //Se aplica el filtro correspondiente
                 if (comboBusqueda.getSelectionModel().getSelectedIndex() == 0 && !textFieldBusqueda.getText().equals("")) {
                     lista = FXCollections.observableArrayList(librosManager.getLibrosIsbn((String) textFieldBusqueda.getText().toLowerCase()));
                 } else if (comboBusqueda.getSelectionModel().getSelectedIndex() == 1 && !textFieldBusqueda.getText().equals("")) {
@@ -339,24 +322,27 @@ public class BusquedaLibroController implements Initializable {
                 cargarTabla(lista);
                 logger.info("Busqueda realizada");
             }catch(BusquedaLibroException e){
+                 //Fallo en la busqueda del libro
                  Alert alert = new Alert(Alert.AlertType.ERROR);
                  alert.setTitle("Error");
                  alert.setContentText("Fallo en la busqueda del libro");
                  alert.showAndWait();
             }
            } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Selecciona criterio de busqueda");
-            alert.showAndWait();
+                //Cuando escribe un texto para filtrar pero no ha elegido un criterio
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Selecciona criterio de busqueda");
+                alert.showAndWait();
         }
     }
 
     /**
      *
-     * @param event
-     * @throws IOException Hace una llamada al metodo buscar cuando se pulsa el
-     * espacio y el elemento btnBuscar tiene el foco
+     * Metodo que escucha por teclado en el btnBuscar
+     * y cuando se pulsa espacio sobre este hace una llamada al metodo buscar()
+     * @param event Evento que sucede cuando se pulsa una tecla cuando el foco esta en el btnBuscar
+     * @throws IOException 
      */
     @FXML
     public void buscar2(KeyEvent event) throws IOException {
@@ -366,13 +352,15 @@ public class BusquedaLibroController implements Initializable {
     }
 
     /**
-     * Metodo para cargar el libro en la ventana de modificado del administrador
+     * Metodo que soporta el onAction del btnCargar.
+     * Sirve para cargar el libro en la ventana controlado por AdminController
+     * Ademas cierra la ventana actual.
      */
     @FXML
     private void cargarLibro() {
-
         if (tablaBusqueda.getSelectionModel().getSelectedItem() != null) {
             LibroBean aux = tablaBusqueda.getSelectionModel().getSelectedItem();
+            //Llamada al controlador de la ventana de fondo para coger el libro,
             adminControl.cargarLibro(aux);
             logger.info("Libro cargado en administrador(Ventana)");
             stage.close();
@@ -385,9 +373,9 @@ public class BusquedaLibroController implements Initializable {
     }
 
     /**
-     * Metodo cargarLibro() por teclado
-     *
-     * @param event
+     * Metodo que escucha por teclado en el btnCargar
+     * y cuando se pulsa espacio sobre este hace una llamada al metodo  cargarLibro()
+     * @param event Evento que sucede cuando se pulsa una tecla cuando el foco esta en el btnBuscar
      * @throws IOException
      */
     @FXML
@@ -433,16 +421,17 @@ public class BusquedaLibroController implements Initializable {
     }
 
     /**
-     *
-     * @param list Recibe un ObservableList y se ocupa de mostrarlo en la
-     * tableView (tablaBusqueda)
+     * Carga el ObservableList recibido en la TableView de la ventana
+     * @param list Lista de LibroBean a mostrar
      */
     private void cargarTabla(ObservableList<LibroBean> list) {
         if (list != null) {
             for(LibroBean e: list){
+                //Se da un formato legible a las fechas 
                 String fecha = e.getFechaPub().substring(8, 10) + "/" + e.getFechaPub().substring(5, 7) + "/" + e.getFechaPub().substring(0, 4);
                 e.setFechaPub(fecha);      
             } 
+            //Se le asigna a cada celda un valor a mostrar
             isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
             titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
             autor.setCellValueFactory(new PropertyValueFactory<>("autor"));
@@ -450,12 +439,17 @@ public class BusquedaLibroController implements Initializable {
             precio.setCellValueFactory(new PropertyValueFactory<>("precio"));
             fechaP.setCellValueFactory(new PropertyValueFactory<>("fechaPub"));
             descripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-
+            //Se le asigna el ObservableList a la tabla
             tablaBusqueda.setItems(list);
+            //Quita posibilidad de cambiar el tamaño a las columnas
             tablaBusqueda.setColumnResizePolicy((param) -> true);
         }
     }
     
+    /**
+     * Metodo que se ocupa de hacer un reporte detallado de los libros
+     * cargados actualmente en la tabla
+     */
     @FXML
     private void handleImprimirLibros(){
         try {
