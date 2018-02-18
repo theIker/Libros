@@ -27,7 +27,7 @@ public class LibrosRESTClient {
 
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8080/LibrosWeb/webresources";
+    private static final String BASE_URI = "http://localhost:8080/Libros_Server_Final/webresources";
 
     public LibrosRESTClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();

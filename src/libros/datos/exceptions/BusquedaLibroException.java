@@ -6,8 +6,8 @@
 package libros.datos.exceptions;
 
 /**
- *
- * @author 2dam
+ * Excepcion que indica fallo al Leer los libros.
+ * @author Jon Xabier Gimenez
  */
 public class BusquedaLibroException extends Exception {
 

@@ -6,7 +6,7 @@
 package libros.datos.exceptions;
 
 /**
- *
+ * Excepcion que indica un fallo al hacer una operacion CUD con Libro
  * @author Jon Xabier Gimenez
  */
 public class LibroException extends Exception {

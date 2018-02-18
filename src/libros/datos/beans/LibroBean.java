@@ -18,7 +18,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 /**
  *
@@ -53,10 +52,7 @@ public class LibroBean implements Serializable {
         this.genero = new SimpleObjectProperty(genero);
 
     }
-  
-    
-    
-   
+
      public LibroBean(){
         this.isbn = new SimpleStringProperty();
         this.titulo = new SimpleStringProperty();
@@ -76,7 +72,7 @@ public class LibroBean implements Serializable {
     public void setIsbn(String isbn) {
         this.isbn.set(isbn);
     }
-    
+
     public String getTitulo() {
         return this.titulo.get();
     }

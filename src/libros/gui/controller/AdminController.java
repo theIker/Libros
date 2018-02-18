@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -41,20 +44,33 @@ import libros.datos.exceptions.GeneroException;
 import libros.datos.exceptions.LibroException;
 import libros.datos.manager.GenerosManager;
 import libros.datos.manager.LibrosManager;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+
 
 /**
- * FXML Controller class
- *
+  * Clase que define los manejadores de eventos de la interfaz definida mediante
+ *  el archivo admin.fmxl: una UI para mantenimiento de datos de libros. 
  * @author Jon Xabier Gimenez
  */
 public class AdminController implements Initializable {
-
+    
+    //Referencia para el objeto Ventana de la UI que controla esta clase
     private Stage stage;
+    //Referencia para el objeto de la capa de lógica 
     private GenerosManager generosManager;
+    //Referencia para el objeto de la capa de lógica 
     private LibrosManager lib;
+    //Referencia para cargar un libro desde otro controlador
     private LibroBean libro;
     private final static Logger logger = Logger.getLogger("libros.gui.controller");
 
+    
     //InsertarLibro
     @FXML
     private TextField TextIsbn;
@@ -116,15 +132,10 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn tableGenero;
 
-    /**
-     * Se envia libroBean esta clase
-     *
-     * @param libro
-     */
+    
     public void setLibro(LibroBean libro) {
         this.libro = libro;
     }
-
     /**
      * Initializes the controller class.
      */
@@ -132,76 +143,73 @@ public class AdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
     /**
-     * Se inicia el stage
      *
-     * @param root
+      *Metodo para cambiar la scene al stage de AdminController. 
+     * @param root El objeto padre que representa el nodo raíz/root del gráfico de vista.
      */
     public void initStage(Parent root) {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.centerOnScreen();
+        stage.setTitle("Administrador");
         //Codificar comportamiento
         btnBorrar.setDisable(true);
         btnModi.setDisable(true);
         TextIsbn.requestFocus();
-
-        stage.setTitle("Administrador");
-
-        cargarTabla();
+        try{
+            //Carga las combos con los generos.
+            ObservableList<String> list = FXCollections.observableArrayList(generosManager.getNombresGenero(generosManager.getAllGeneros()));
+            comboGeneros.setItems(list);
+            comboGeneros1.setItems(list);
+        }catch(GeneroException e){
+            logger.severe(e.getMessage());
+            logger.severe("Fallo al coger los datos de los generos");
+         }
+        
         stage.show();
         logger.info("Despues de mostrar ventana Administrador");
     }
 
-    /**
-     * Recoge el stage
-     *
-     * @param stage
-     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    /**
-     * Se envian los generos a esta clase
-     *
-     * @param gen
-     */
     void setGenManager(GenerosManager gen) {
         this.generosManager = gen;
     }
 
-    /**
-     * se envian los Libros a esta clase
-     *
-     * @param lib
-     */
     void setLibroManager(LibrosManager lib) {
         this.lib = lib;
     }
 
     /**
-     * Metodo en el cual se inserta un libro
+     * Metodo que soporta el onAction del btnInsertar.
+     * Metodo en el cual se inserta un libro en la Base de Datos. Controlando los posibles fallos.
      */
     @FXML
-    public void insertarLibro() {
+    public void handlerInsertarLibro() {
+        //Controla que no quede ningun campo en blanco
        if (TextIsbn.getText().equals("") || TextAutor.getText().equals("") || TextDescripcion.getText().equals("")
                 || TextEditorial.getText().equals("") || TextPrecio.getText().equals("") || TextStock.getText().equals("")
                 || TextTitulo.getText().equals("") || comboGeneros.getSelectionModel().getSelectedIndex() == -1) {
-
+           //En caso de quedar algun campo se muestra una alerta informando
             Alert alert = new Alert(Alert.AlertType.ERROR, "Rellena todos los campos");
             alert.showAndWait();
-
         } else {
-
             try {
+                //Cargo un LibroBean con todos los datos
                 LibroBean aux = new LibroBean(TextIsbn.getText(), TextTitulo.getText(), TextAutor.getText(),
                         TextEditorial.getText(), TextDescripcion.getText(), dateFechaPUb.getValue().toString(), Float.parseFloat(TextPrecio.getText().replace(',', '.')),
                         Integer.parseInt(TextStock.getText()), new GeneroBean(comboGeneros.getSelectionModel().getSelectedIndex()+1, ((String) comboGeneros.getSelectionModel().getSelectedItem())));  
+                if(lib.getLibrosIsbn(TextIsbn.getText()).size()>0){
+                    throw new BusquedaLibroException();
+                }
+                //llamada para crear el libro 
                 lib.createLibro(aux);
                 logger.info("Libro  insertado");
+                //Una vez insertado se procede a limpiar todos los campos
                 TextIsbn.setText("");
                 TextAutor.setText("");
                 TextDescripcion.setText("");
@@ -211,179 +219,174 @@ public class AdminController implements Initializable {
                 dateFechaPUb.setValue(null);
                 TextEditorial.setText("");
                 comboGeneros.getSelectionModel().clearSelection();
+                //Se informa de que todo ha ido bien
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Insertado");
                 alert.showAndWait();
             } catch (NumberFormatException e) {
+                //Si el precio o stock no son numericos vendra a esta excepcion
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Precio y stock deben ser numéricos");
                 alert.showAndWait();
             } catch (NullPointerException ex) {
+                //Al no insertar un formato valido en el datePicker vendra a esta excepcion
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
                 alert.showAndWait();
             }catch (LibroException ex){
+                //Aqui entrara cuando tenga cualquier problema al crear el libro
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Fallo al crear el libro");
+                alert.showAndWait();
+            }catch(BusquedaLibroException ex){
+                 Alert alert = new Alert(Alert.AlertType.ERROR, "ISBN repetido");
                 alert.showAndWait();
             }
         }
     }
-
     /**
-     * Metodo insertar() pero por teclado
-     *
-     * @param event
+     * Metodo que escucha por teclado en el btnInsertar
+     * y cuando se pulsa espacio sobre este hace una llamada al metodo handlerInsertarLibro()
+     * @param event Evento que sucede cuando se pulsa una tecla cuando el foco esta en el btnInsertar
      */
     @FXML
-    public void insertarLibro2(KeyEvent event) {
+    public void handlerInsertarLibro2(KeyEvent event) {
         if (event.getCode() == KeyCode.SPACE) {
-            insertarLibro();
+            handlerInsertarLibro();
         }
     }
-
     /**
-     * Metodo en el cual se abre la busqueda de libro y se carga en la ventana
-     * de admin
-     *
-     * @throws IOException
+     * Metodo que soporta el onAction del btnBUscar.
+     * En el cual se abre el documento BusquedaLibro.fxml en otro stage.
+     * 
      */
     @FXML
-    public void buscar() throws IOException {
-        Stage reg = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
-
-        Parent root = (Parent) loader.load();
-        logger.info("Abriendo Ventana Busqueda Libro");
-        BusquedaLibroController controller = ((BusquedaLibroController) loader.getController());
-        controller.setLibroManager(lib);
-        controller.setStage(reg);
-        controller.setAdminController(this);
-        controller.initStage(root);              //FALLA AQUI
-        logger.info("Despues de Buscar(Ventana)");
-
-    }
-
-    /**
-     * Metodo buscar() pero por teclado
-     *
-     * @param event
-     * @throws IOException
-     */
-    @FXML
-    public void buscar2(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.SPACE) {
-            buscar();
+    public void handlerBuscar() {
+        try{
+            //Se inicia un stage y se carga el fxml
+            Stage reg = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/BusquedaLibro.fxml"));
+            Parent root = (Parent) loader.load();
+            logger.info("Abriendo Ventana Busqueda Libro");
+            //Se le pasa todo lo necesario al Controlador del otro fxml
+            BusquedaLibroController controller = ((BusquedaLibroController) loader.getController());
+            controller.setLibroManager(lib);
+            controller.setStage(reg);
+            controller.setAdminController(this);
+            controller.initStage(root);         
+            logger.info("Despues de Buscar(Ventana)");
+        }catch(IOException ex){
+            //Aqui entrara cuando tenga algun problema al cargar la ventana
+            logger.severe(ex.getMessage());
+             Alert alert = new Alert(Alert.AlertType.ERROR, "Fallo al abrir la ventana BusquedaLibro");
+             alert.showAndWait();
         }
     }
-
     /**
-     *
-     * modifica el libro cargado
+     * Metodo que escucha por teclado en el btnBUscar
+     * y cuando se pulsa espacio sobre este hace una llamada al metodo handlerBuscar()
+     * @param event Evento que sucede cuando se pulsa una tecla cuando el foco esta en el btnInsertar
      */
     @FXML
-    public void modificar() {
+    public void handlerBuscar2(KeyEvent event) {
+        if (event.getCode() == KeyCode.SPACE) {
+            handlerBuscar();
+        }
+    }
+    /**
+     * Metodo que soporta el onAction del btnModi.
+     * Metodo en el cual se actualiza un libro en la Base de Datos. Controlando los posibles fallos.
+     */
+    @FXML
+    public void handlerModificar() {
+        //Se comprueba que no hay ningun campo vacio
         if (TextIsbn1.getText().equals("") || TextAutor1.getText().equals("") || TextDescripcion1.getText().equals("")
                 || TextEditorial1.getText().equals("") || TextPrecio1.getText().equals("") || TextStock1.getText().equals("")
                 || TextTitulo1.getText().equals("") || comboGeneros1.getSelectionModel().getSelectedIndex() == -1) {
+            //En el caso de estar algun campo en blanco se le informa mediante un error
             Alert alert = new Alert(Alert.AlertType.ERROR, "Rellena todos los campos");
             alert.showAndWait();
         } else {
             try {
+                //Se carga un LibroBean con los datos finales
                 LibroBean modificado = new LibroBean(TextIsbn1.getText(), TextTitulo1.getText(), TextAutor1.getText(),
                         TextEditorial1.getText(), TextDescripcion1.getText(), dateFechaPub1.getValue().toString(), Float.parseFloat(TextPrecio1.getText().replace(',', '.')),
                         Integer.parseInt(TextStock1.getText()),new GeneroBean(comboGeneros1.getSelectionModel().getSelectedIndex()+1, ((String) comboGeneros.getSelectionModel().getSelectedItem())));
-                        //((String) comboGeneros1.getSelectionModel().getSelectedItem()));
+                //Se actualiza el libro en la BD
                 lib.updateLibro(modificado);
                 logger.info("Disco  modificado");
+                //Llamada a metodo que deja en blanco los campos 
                 limpiarModificar();
+                //Se informa al usuario que todo ha ido bien
                 Alert alert = new Alert(Alert.AlertType.INFORMATION, "Libro Modificado");
                 alert.showAndWait();
             } catch (NumberFormatException e) {
+                //Si el precio o stock no son numericos vendra a esta excepcion
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Precio y stock deben ser numéricos");
                 alert.showAndWait();
             } catch (NullPointerException ex) {
+                //Al no insertar un formato valido en el datePicker vendra a esta excepcion
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Revisa la fecha");
                 alert.showAndWait();
             }catch(LibroException e){
+                 //Aqui entrara cuando tenga cualquier problema al hacer la modificacion
                  Alert alert = new Alert(Alert.AlertType.ERROR, "Fallo de servidor");
                  alert.showAndWait();
             }
         }
     }
-
     /**
-     * Metodo modificar() pero por teclado
-     *
-     * @param event
+     * Metodo que escucha por teclado en el btnModi
+     * y cuando se pulsa espacio sobre este hace una llamada al metodo handlerModificar()
+     * @param event Evento que sucede cuando se pulsa una tecla cuando el foco esta en el btnInsertar
      */
     @FXML
-    public void modificar2(KeyEvent event) {
+    public void handlerModificar2(KeyEvent event) {
         if (event.getCode() == KeyCode.SPACE) {
-            modificar();
+            handlerModificar();
         }
     }
-
     /**
-     * Metodo en el cual se borra un libro
+     * Metodo que soporta el onAction del btnBorrar.
+     * Metodo en el cual se borra un libro en la Base de Datos. Controlando los posibles fallos.
      */
     @FXML
-    public void borrar() {
+    public void handlerBorrar() {
+        //Confirmo que realmente lo quiere borrar
         Alert alert = new Alert(AlertType.WARNING,
                 "Seguro que quiere borrar el libro?",
                 ButtonType.YES, ButtonType.NO);
-
+        //Guarda el resultado de la alerta anterior
         Optional<ButtonType> result = alert.showAndWait();
+        //Si el resultado es afirmativo
         if (result.get() == ButtonType.YES) {
             try {
+                //Borra el libro
                 lib.deleteLibro(libro);
                 logger.info("Disco borrado");
                 limpiarModificar();
             } catch (LibroException ex) {
+                //Si hay algun problema al borrar saltara esta excepcion
                 logger.severe(ex.getMessage());
                 logger.severe("Fallo con el servidor");
+                alert = new Alert(Alert.AlertType.ERROR, "Fallo de servidor");
+                alert.showAndWait();
             }
-        } else {
-
         }
     }
-
     /**
-     * Metodo borrar() pero por teclado
-     *
-     * @param event
+     * Metodo que escucha por teclado en el btnBorrar
+     * y cuando se pulsa espacio sobre este hace una llamada al metodo handlerBorrar()
+     * @param event Evento que sucede cuando se pulsa una tecla cuando el foco esta en el btnInsertar
      */
     @FXML
-    public void borrar2(KeyEvent event) {
+    public void handlerBorrar2(KeyEvent event) {
         if (event.getCode() == KeyCode.SPACE) {
-            borrar();
+            handlerBorrar();
         }
     }
-
     /**
-     * Carga la tabla generos y los combos que contienen generos
-     */
-    private void cargarTabla() {
-        try{
-            ObservableList<String> list = FXCollections.observableArrayList(generosManager.getNombresGenero(generosManager.getAllGeneros()));
-            ObservableList<GeneroBean> lista = FXCollections.observableArrayList(generosManager.getAllGeneros());
-
-            tableGenero.setCellValueFactory(new PropertyValueFactory<>("Genero"));
-
-            comboGeneros.setItems(list);
-            comboGeneros1.setItems(list);
-            tablaGeneros.setItems(lista);
-
-            tablaGeneros.setColumnResizePolicy((param) -> true);
-            }catch(GeneroException e){
-            
-            }
-        
-
-    }
-
-  
-
-    /**
-     * Limpia en la pestaña de modificar una vez se haya modificado
+     * Limpia en la pestaña de Modificar/Borrar libro una vez se 
+     * modifica o se borra un libro.
      */
     private void limpiarModificar() {
+        //Deja todos lso campos en blanco
         TextIsbn1.setText("");
         TextAutor1.setText("");
         TextDescripcion1.setText("");
@@ -393,7 +396,7 @@ public class AdminController implements Initializable {
         dateFechaPub1.setValue(null);
         TextEditorial1.setText("");
         comboGeneros1.getSelectionModel().clearSelection();
-
+        //Deshabilita los campos 
         TextAutor1.setDisable(true);
         TextTitulo1.setDisable(true);
         TextEditorial1.setDisable(true);
@@ -402,18 +405,17 @@ public class AdminController implements Initializable {
         TextDescripcion1.setDisable(true);
         comboGeneros1.setDisable(true);
         dateFechaPub1.setDisable(true);
-
+        //Deshabilita los botones
         btnBorrar.setDisable(true);
         btnModi.setDisable(true);
     }
-
     /**
-     *
-     * Carga un libro que se ha seleccionado en otra ventana (BusquedaLibro)
+     * Metodo el cual carga un libroBean en el Ventana
+     * @param libro LibroBean seleccionado en otra ventana BusquedaLibro
      */
     void cargarLibro(LibroBean libro) {
         this.libro = libro;
-
+        //Se habilitan los campos
         TextAutor1.setDisable(false);
         TextTitulo1.setDisable(false);
         TextEditorial1.setDisable(false);
@@ -422,10 +424,10 @@ public class AdminController implements Initializable {
         TextDescripcion1.setDisable(false);
         comboGeneros1.setDisable(false);
         dateFechaPub1.setDisable(false);
-
+        //Se habilitan los botones
         btnBorrar.setDisable(false);
         btnModi.setDisable(false);
-
+        //Se cargan los datos del libro
         TextIsbn1.setText(libro.getIsbn());
         TextAutor1.setText(libro.getAutor());
         TextEditorial1.setText(libro.getEditorial());
@@ -433,22 +435,38 @@ public class AdminController implements Initializable {
         TextStock1.setText(libro.getStock().toString());
         TextDescripcion1.setText(libro.getDescripcion());
         TextTitulo1.setText(libro.getTitulo());
-        
+        //Se da formato a la fecha antes de cargarla
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        System.out.println(libro.getFechaPub());
         LocalDate localDate = LocalDate.parse(libro.getFechaPub(), formatter);
         dateFechaPub1.setValue(localDate);
-
+        //Se selecciona el genero del libro en la combo
         comboGeneros1.getSelectionModel().select(libro.getGenero().getGenero());
-
+        //Pido el focus en la comboBox
         comboGeneros1.requestFocus();
-
         logger.info("Despues de cargar el libro");
+    }
+    
+    /**
+     * Metodo encargado de cargar la tabla de Generos y actualizar las comboBox de Generos
+     * Comentada ya que la pestaña de Insertar/Borrar generos no esta en uso.
+     */
+    private void cargarTabla() {
+        try{   
+            ObservableList<String> list = FXCollections.observableArrayList(generosManager.getNombresGenero(generosManager.getAllGeneros()));
+            comboGeneros.setItems(list);
+            comboGeneros1.setItems(list);
+            ObservableList<GeneroBean> lista = FXCollections.observableArrayList(generosManager.getAllGeneros());
+            tableGenero.setCellValueFactory(new PropertyValueFactory<>("Genero"));
+            tablaGeneros.setItems(lista);
+            tablaGeneros.setColumnResizePolicy((param) -> true);
+            }catch(GeneroException e){
+            }
     }
     
     
     /**
-     * Metodo para insertar generos
+     * Metodo utilizado para insertar genero en un pasado.
+     * Ahora mismo esta inaccesible
      */
     @FXML
     public void insertarGenero() {
@@ -463,11 +481,11 @@ public class AdminController implements Initializable {
             alert.showAndWait();
         }*/
     }
-
     /**
-     * Metodo insertarGenero() pero por teclado
-     *
-     * @param event
+     * Metodo que escucha por teclado en el btnInsertgen
+     * y cuando se pulsa espacio sobre este hace una llamada al metodo insertarGenero()
+     * Ahora mismo esta inaccesible
+     * @param event Evento que sucede cuando se pulsa una tecla cuando el foco esta en el btnInsertar
      */
     @FXML
     public void insertarGenero2(KeyEvent event) {
@@ -475,9 +493,9 @@ public class AdminController implements Initializable {
             insertarGenero();
         }
     }
-
     /**
-     * Metodo para borrar generos
+     * Metodo utilizado para borrar genero en un pasado.
+     * Ahora mismo esta inaccesible
      */
     @FXML
     public void borrarGenero() {
@@ -493,17 +511,17 @@ public class AdminController implements Initializable {
             alert.showAndWait();
         }*/
     }
-
     /**
-     * Metodo borrarGenero() pero por teclado
-     *
-     * @param event
+     * Metodo que escucha por teclado en el btnBorrar2
+     * y cuando se pulsa espacio sobre este hace una llamada al metodo handlerBorrar()
+     * Ahora mismo esta inaccesible
+     * @param event Evento que sucede cuando se pulsa una tecla cuando el foco esta en el btnInsertar
      */
     @FXML
     public void borrarGenero2(KeyEvent event) {
-        if (event.getCode() == KeyCode.SPACE) {
+        /*if (event.getCode() == KeyCode.SPACE) {
             borrarGenero();
-        }
+        }*/
     }
 
 }

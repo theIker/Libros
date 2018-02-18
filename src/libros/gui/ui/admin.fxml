@@ -167,7 +167,7 @@
                                 </HBox>
                                 <HBox layoutX="3.0" layoutY="557.0" prefHeight="97.0" prefWidth="994.0">
                                     <children>
-                                        <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#insertarLibro" onKeyPressed="#insertarLibro2" prefHeight="48.0" prefWidth="182.0" text="Insertar">
+                                        <Button fx:id="btnInsertar" mnemonicParsing="false" onAction="#handlerInsertarLibro" onKeyPressed="#handlerInsertarLibro2" prefHeight="48.0" prefWidth="182.0" text="Insertar">
                                             <HBox.margin>
                                                 <Insets left="400.0" top="20.0" />
                                             </HBox.margin>
@@ -182,7 +182,7 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="600.0">
                             <children>
-                                <Button fx:id="btnBuscar" layoutX="58.0" layoutY="49.0" mnemonicParsing="false" onAction="#buscar" onKeyPressed="#buscar2" prefHeight="48.0" prefWidth="182.0" text="Buscar" />
+                                <Button fx:id="btnBuscar" layoutX="58.0" layoutY="49.0" mnemonicParsing="false" onAction="#handlerBuscar" onKeyPressed="#handlerBuscar2" prefHeight="48.0" prefWidth="182.0" text="Buscar" />
                                 <ComboBox fx:id="comboGeneros1" disable="true" layoutX="695.0" layoutY="51.0" prefHeight="25.0" prefWidth="275.0" />
                                 <GridPane layoutX="21.0" layoutY="89.0" prefHeight="478.0" prefWidth="977.0">
                                     <columnConstraints>
@@ -275,12 +275,12 @@
                                 </GridPane>
                                 <HBox layoutX="1.0" layoutY="554.0" prefHeight="100.0" prefWidth="1000.0">
                                     <children>
-                                        <Button id="borrarLibro" fx:id="btnBorrar" mnemonicParsing="false" onAction="#borrar" onKeyPressed="#borrar2" prefHeight="48.0" prefWidth="182.0" text="Borrar libro">
+                                        <Button id="borrarLibro" fx:id="btnBorrar" mnemonicParsing="false" onAction="#handlerBorrar" onKeyPressed="#handlerBorrar2" prefHeight="48.0" prefWidth="182.0" text="Borrar libro">
                                             <HBox.margin>
                                                 <Insets left="60.0" top="30.0" />
                                             </HBox.margin>
                                         </Button>
-                                        <Button fx:id="btnModi" mnemonicParsing="false" onAction="#modificar" onKeyPressed="#modificar2" prefHeight="48.0" prefWidth="182.0" text="Modificar">
+                                        <Button fx:id="btnModi" mnemonicParsing="false" onAction="#handlerModificar" onKeyPressed="#handlerModificar2" prefHeight="48.0" prefWidth="182.0" text="Modificar">
                                             <HBox.margin>
                                                 <Insets left="150.0" top="30.0" />
                                             </HBox.margin>
@@ -295,7 +295,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Insertar/borrar genero">
+                <Tab disable="true" text="Insertar/borrar genero">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="517.0" prefWidth="832.0">
                             <children>

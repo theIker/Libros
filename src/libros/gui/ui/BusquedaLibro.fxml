@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -24,15 +25,22 @@
                         <TableColumn fx:id="autor" prefWidth="75.0" text="Autor" />
                         <TableColumn fx:id="editorial" prefWidth="75.0" text="Editorial" />
                         <TableColumn fx:id="precio" prefWidth="76.0" text="Precio" />
-                        <TableColumn fx:id="fechaP" prefWidth="73.0" text="FechaP" />
-                        <TableColumn fx:id="descripcion" prefWidth="349.0" text="Descripcion" />
+                        <TableColumn fx:id="fechaP" prefWidth="223.0" text="FechaP" />
+                        <TableColumn fx:id="descripcion" prefWidth="199.0" text="Descripcion" />
                     </columns>
                 </TableView>
                 <Button fx:id="btnCargar" layoutX="286.0" layoutY="409.0" mnemonicParsing="false" onAction="#cargarLibro" onKeyPressed="#cargarLibro2" prefHeight="43.0" prefWidth="158.0" text="Cargar" visible="false" />
                 <Button fx:id="btnAdd" layoutX="754.0" layoutY="409.0" mnemonicParsing="false" onAction="#anadirCompra" onKeyPressed="#anadirCompra2" prefHeight="43.0" prefWidth="111.0" text="Añadir" />
                 <TextField fx:id="textFieldUnidades" layoutX="671.0" layoutY="418.0" prefHeight="26.0" prefWidth="64.0" />
-                <HBox layoutY="501.0" prefHeight="103.0" prefWidth="900.0" style="-fx-background-color: #505050;" />
-            <Label layoutX="607.0" layoutY="422.0" text="Unidades:" />
+                <HBox layoutY="501.0" prefHeight="103.0" prefWidth="900.0" style="-fx-background-color: #505050;">
+               <children>
+                  <Button fx:id="btnInforme" mnemonicParsing="false" onAction="#handleImprimirLibros" text="Imprimir Informe">
+                     <HBox.margin>
+                        <Insets left="600.0" top="30.0" />
+                     </HBox.margin>
+                  </Button>
+               </children></HBox>
+            <Label fx:id="lbUds" layoutX="607.0" layoutY="422.0" text="Unidades:" />
             </children>
         </AnchorPane>
     </children>

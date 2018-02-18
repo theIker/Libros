@@ -6,7 +6,7 @@
 package libros.datos.exceptions;
 
 /**
- *
+ * Excepcion que indica fallo al recoger datos de Genero
  * @author Jon Xabier Gimenez
  */
 public class GeneroException extends Exception {

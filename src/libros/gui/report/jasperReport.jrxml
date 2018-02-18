@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6a1d1ed1-f76f-4b4b-aed9-b5101ed29bd7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="isbn" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="autor" class="java.lang.String"/>
+	<field name="editorial" class="java.lang.String"/>
+	<field name="precio" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="215" y="26" width="163" height="37" uuid="ed923f1b-201c-47ec-bc6c-e54263488b49"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[INFORME LIBROS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="9" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="15" y="11" width="35" height="20" uuid="b30c6047-4725-4045-aaef-38542b11b905"/>
+				<text><![CDATA[ISBN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="11" width="100" height="20" uuid="81e99550-c27c-446f-b7b0-5c8d07da2216"/>
+				<text><![CDATA[TITULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="11" width="100" height="20" uuid="723bf725-9428-4879-b508-c510c9ac4250"/>
+				<text><![CDATA[AUTOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="11" width="100" height="20" uuid="840a8e4f-2e1d-49fe-ace8-c3fc16e3a7c5"/>
+				<text><![CDATA[EDITORIAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="63" splitType="Stretch">
+			<textField>
+				<reportElement x="15" y="20" width="80" height="20" uuid="1beb491a-bf63-4b73-bb8b-9124eebcab95"/>
+				<textFieldExpression><![CDATA[$F{isbn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="125" y="20" width="100" height="20" uuid="2336f53c-3e41-463f-a0da-87065de707db"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="20" width="100" height="20" uuid="9a4215a4-1e35-4d57-bf83-9f435103fbd9"/>
+				<textFieldExpression><![CDATA[$F{autor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="20" width="100" height="20" uuid="20257a03-0557-4f20-9dba-323a088f161f"/>
+				<textFieldExpression><![CDATA[$F{editorial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="18" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="13" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="13" splitType="Stretch"/>
+	</summary>
+</jasperReport>

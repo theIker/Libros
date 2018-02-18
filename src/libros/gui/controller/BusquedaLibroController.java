@@ -36,6 +36,50 @@ import libros.datos.manager.LibrosManager;
 import java.text.DecimalFormat;
 import libros.datos.beans.ComprasBean;
 
+import java.awt.Dialog;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import libros.datos.beans.LibroBean;
+import libros.datos.exceptions.BusquedaLibroException;
+import libros.datos.manager.ComprasManager;
+import libros.datos.manager.LibrosManager;
+import java.text.NumberFormat;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
+
 
 /**
  * FXML Controller class
@@ -84,6 +128,10 @@ public class BusquedaLibroController implements Initializable {
     private TableColumn descripcion;
     @FXML
     private TextField textFieldUnidades;
+    @FXML
+    private Button btnInforme;
+    @FXML
+    private Label lbUds;
     
 
 
@@ -129,6 +177,7 @@ public class BusquedaLibroController implements Initializable {
         btnAdd.setVisible(false);
         textFieldUnidades.setVisible(false);
         stage.setTitle("Busqueda Libro");
+        lbUds.setVisible(false);
 
     }
 
@@ -392,10 +441,7 @@ public class BusquedaLibroController implements Initializable {
         if (list != null) {
             for(LibroBean e: list){
                 String fecha = e.getFechaPub().substring(8, 10) + "/" + e.getFechaPub().substring(5, 7) + "/" + e.getFechaPub().substring(0, 4);
-                e.setFechaPub(fecha);
-
-               
-             
+                e.setFechaPub(fecha);      
             } 
             isbn.setCellValueFactory(new PropertyValueFactory<>("isbn"));
             titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
@@ -409,5 +455,30 @@ public class BusquedaLibroController implements Initializable {
             tablaBusqueda.setColumnResizePolicy((param) -> true);
         }
     }
+    
+    @FXML
+    private void handleImprimirLibros(){
+        try {
+            JasperReport report=JasperCompileManager.compileReport(getClass().getResourceAsStream("/libros/gui/report/jasperReport.jrxml"));
+            //Data for the report: a collection of LibroBean passed as a JRDataSource 
+            //implementation 
+            JRBeanCollectionDataSource dataItems=new JRBeanCollectionDataSource((Collection<LibroBean>)this.tablaBusqueda.getItems());
+            //Map of parameter to be passed to the report
+            Map<String,Object> parameters=new HashMap<>();
+            //Fill report with data
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report,parameters,dataItems);
+            //Create and show the report window.
+            logger.info("Mostrando Informe Jasper");
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint,false);
+            jasperViewer.setTitle("Informe Libros");
+            jasperViewer.setVisible(true);
+            logger.info("Despues de imprimir informe");
+         } catch (JRException ex) {
+                Alert alert=new Alert(Alert.AlertType.ERROR,ex.getMessage(),ButtonType.OK);
+                alert.getDialogPane().getStylesheets().add(getClass().getResource("/libros/gui/ui/Custom.css").toExternalForm());
+                alert.showAndWait();
+        }
+    }
+    
 
 }
