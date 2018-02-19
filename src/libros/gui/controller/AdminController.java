@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -202,11 +203,16 @@ public class AdminController implements Initializable {
                 //Cargo un LibroBean con todos los datos
                 LibroBean aux = new LibroBean(TextIsbn.getText(), TextTitulo.getText(), TextAutor.getText(),
                         TextEditorial.getText(), TextDescripcion.getText(), dateFechaPUb.getValue().toString(), Float.parseFloat(TextPrecio.getText().replace(',', '.')),
-                        Integer.parseInt(TextStock.getText()), new GeneroBean(comboGeneros.getSelectionModel().getSelectedIndex()+1, ((String) comboGeneros.getSelectionModel().getSelectedItem())));  
-                if(lib.getLibrosIsbn(TextIsbn.getText()).size()>0){
-                    throw new BusquedaLibroException();
-                    //lanzamos excepcion
+                        Integer.parseInt(TextStock.getText()), new GeneroBean(comboGeneros.getSelectionModel().getSelectedIndex()+1, ((String) comboGeneros.getSelectionModel().getSelectedItem()))); 
+                //Iterator para recorrer todos los libros que contengan parte del isbn del libro actual
+                for (Iterator it = lib.getLibrosIsbn(TextIsbn.getText()).iterator(); it.hasNext();) {
+                    LibroBean e = (LibroBean) it.next();
+                    if(e.getIsbn().equals(TextIsbn.getText())){
+                        //En el caso de tener mismo ISBN provoco la excepcion
+                        throw new BusquedaLibroException();
+                    }
                 }
+               
                 //llamada para crear el libro 
                 lib.createLibro(aux);
                 logger.info("Libro  insertado");
