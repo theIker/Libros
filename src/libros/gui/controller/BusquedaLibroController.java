@@ -5,38 +5,8 @@
  */
 package libros.gui.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import libros.datos.beans.LibroBean;
-import libros.datos.exceptions.BusquedaLibroException;
-import libros.datos.manager.ComprasManager;
-import libros.datos.manager.LibrosManager;
-import java.text.DecimalFormat;
-import libros.datos.beans.ComprasBean;
 
-import java.awt.Dialog;
+import libros.datos.beans.ComprasBean;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -65,10 +35,8 @@ import libros.datos.beans.LibroBean;
 import libros.datos.exceptions.BusquedaLibroException;
 import libros.datos.manager.ComprasManager;
 import libros.datos.manager.LibrosManager;
-import java.text.NumberFormat;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -240,44 +208,48 @@ public class BusquedaLibroController implements Initializable {
                 libro= new LibroBean();
                 libro = tablaBusqueda.getSelectionModel().getSelectedItem();
                 libro.setStock(Integer.valueOf(textFieldUnidades.getText()));
-                
+                //Añado las unidadesdel libro que se van a comprar
                
                 for (int i = 0; i < compras.size(); i++) {
                     
                     if (compras.get(i).getIsbn().equals(libro.getIsbn())) {
                       
                         esta = true;
-                        
+                        //recorro la lista de compras y en el caso de que ellibro ya este en lalista 
+                        //pongo esta a true
                         break;
                     }
                   
                 
                 }
                     if(!esta){
-                    compras.add(libro);
+                        //si esta es false el libro se añade a la lista (el carrito)
+                        compras.add(libro);
                         usu.setUsuController(usu);
-            usu.setCompras(compras);
-            usu.setComprasManager(comprasManager);
-            
-                        
-                logger.info("Añadido al carro");
-                textFieldUnidades.setText("");
+                        usu.setCompras(compras);
+                        usu.setComprasManager(comprasManager);
+           
+                        logger.info("Añadido al carro");
+                        textFieldUnidades.setText("");
                         
                         
                 }
                     else{
+                        //si esta es true el libro no se añade al carro ya que ya esta
                         Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setContentText("Ese libro ya esta en el carro");
-                alert.showAndWait();
+                        alert.setTitle("Error");
+                        alert.setContentText("Ese libro ya esta en el carro");
+                        alert.showAndWait();
                     }
             } else {
+                    //si no se insertan unidades
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setContentText("Inserta unidades");
                 alert.showAndWait();
             }
         } catch (NumberFormatException e) {
+                //en caso de que el campo no sea numerico
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setContentText("Campo numerico");
@@ -385,40 +357,6 @@ public class BusquedaLibroController implements Initializable {
         }
     }
 
-    /**
-     * Metodo que nos abre otra pestaña para ver el carrito de compra y
-     * confirmar la compra
-     *
-     * @throws IOException
-     */
-    @FXML
-    private void comprarLibro() throws IOException {
-        if (compras.size() > 0) {
-            usu.setUsuController(usu);
-            usu.setCompras(compras);
-            usu.setComprasManager(comprasManager);
-        } else {
-            btnComprar.setVisible(false);
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("Selecciona libro");
-            alert.showAndWait();
-
-        }
-    }
-
-    /**
-     * Metodo comprarLibro() por teclado
-     *
-     * @param event
-     * @throws IOException
-     */
-    @FXML
-    public void comprarLibro2(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.SPACE) {
-            comprarLibro();
-        }
-    }
 
     /**
      * Carga el ObservableList recibido en la TableView de la ventana

@@ -56,7 +56,7 @@ public class LoginFinalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
     }
 
     /**
@@ -123,10 +123,7 @@ public class LoginFinalController implements Initializable {
      */
     @FXML
     private void entrar() throws IOException {
-        
-        
-        
-        
+
         if (textFieldNombreU.getText().equals("u") && textFieldContra.getText().equals("u")) {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/libros/gui/ui/Usu.fxml"));

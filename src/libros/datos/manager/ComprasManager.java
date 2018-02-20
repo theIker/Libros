@@ -7,6 +7,7 @@ package libros.datos.manager;
 
 import java.util.Collection;
 import libros.datos.beans.ComprasBean;
+import libros.datos.exceptions.CompraException;
 
 /**
  *
@@ -14,12 +15,12 @@ import libros.datos.beans.ComprasBean;
  */
 public interface ComprasManager {
 
-    public Collection<ComprasBean> getAllCompras(String usuario);
-    public void createCompras(ComprasBean compra);
-    public void updateCompra(ComprasBean compra);
-    public void deleteCompra(ComprasBean compra);
-    
-    
-    
+    public Collection<ComprasBean> getAllCompras(String usuario) throws CompraException;
+
+    public void createCompras(ComprasBean compra) throws CompraException;
+
+    public void updateCompra(ComprasBean compra) throws CompraException;
+
+    public void deleteCompra(ComprasBean compra) throws CompraException;
 
 }
