@@ -25,11 +25,11 @@
                 <TableView fx:id="tablaBusqueda" layoutX="15.0" layoutY="98.0" prefHeight="300.0" prefWidth="869.0">
                     <columns>
                         <TableColumn fx:id="isbn" prefWidth="75.0" text="ISBN" />
-                        <TableColumn fx:id="titulo" prefWidth="75.0" text="Titulo" />
-                        <TableColumn fx:id="autor" prefWidth="75.0" text="Autor" />
-                        <TableColumn fx:id="editorial" prefWidth="75.0" text="Editorial" />
-                        <TableColumn fx:id="precio" prefWidth="76.0" text="Precio" />
-                        <TableColumn fx:id="fechaP" prefWidth="223.0" text="FechaP" />
+                        <TableColumn fx:id="titulo" prefWidth="153.0" text="Titulo" />
+                        <TableColumn fx:id="autor" prefWidth="99.0" text="Autor" />
+                        <TableColumn fx:id="editorial" prefWidth="102.0" text="Editorial" />
+                        <TableColumn fx:id="precio" prefWidth="59.0" text="Precio" />
+                        <TableColumn fx:id="fechaP" prefWidth="111.0" text="FechaP" />
                         <TableColumn fx:id="descripcion" prefWidth="269.0" text="Descripcion" />
                     </columns>
                 </TableView>

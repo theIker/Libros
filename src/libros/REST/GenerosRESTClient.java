@@ -26,7 +26,7 @@ public class GenerosRESTClient {
 
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8080/Libros_Server_Final/webresources";
+    private static final String BASE_URI = "http://localhost:8080/LibrosSLWebApplication/webresources";
 
     public GenerosRESTClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
