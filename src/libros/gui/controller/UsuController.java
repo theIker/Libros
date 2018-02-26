@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -125,7 +126,9 @@ public class UsuController implements Initializable {
     private Button btnUpdate;
     @FXML
     private TextField tfUnidades;
-
+    @FXML
+    private Button btnElim;
+    
     private Button compra;
 
     private ArrayList<ComprasBean> histo = new ArrayList<ComprasBean>();
@@ -334,6 +337,30 @@ public class UsuController implements Initializable {
         controller.initStage(root);
 
     }
+    @FXML
+    public void eliminarHistorial(){
+        if(tableHisto.getSelectionModel().getSelectedItem() != null){
+            try {
+                //se borra la compra seleccionada
+                comprasManager.deleteCompra(tableHisto.getSelectionModel().getSelectedItem());
+                logger.info("borrando compra");
+                cargarTabla();
+            } catch (CompraException ex) {
+                 logger.severe("Fallo con el servidor");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("Fallo con el servidor");
+                alert.show();
+            }
+        }
+        else{
+              //en el caso de no selecionar compra para borrar
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Selecciona compra");
+            alert.showAndWait();
+        }
+    }
 
     /**
      * Metodo para cargar la tabla historial compras
@@ -480,19 +507,7 @@ public class UsuController implements Initializable {
                     try {
                         comprasManager.createCompras(comp);
                         //se van insertando compras 
-                        logger.info("Compra realizada y guardada");
-                        //compras de busquedalibrocontroller se limpian
-                        controller.resetCompras();
-                        //vompras de usucontroller se limpian
-                        compras.clear();
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Hecho");
-                        alert.setContentText("Compra realizada");
-                        alert.show();
-                        //se carga tabla de carrito
-                        cargarTablaCompras();
-                        //se carga tabla historial compras
-                        cargarTabla();
+                       
                     } catch (CompraException ex) {
                         logger.severe("Fallo con el servidor");
                         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -502,6 +517,20 @@ public class UsuController implements Initializable {
                     }
 
                 }
+                
+                      logger.info("Compra realizada y guardada");
+                        //compras de busquedalibrocontroller se limpian
+                        controller.resetCompras();
+                        //compras de usucontroller se limpian
+                        compras.clear();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Hecho");
+                        alert.setContentText("Compra realizada");
+                        alert.show();
+                        //se carga tabla de carrito
+                        cargarTablaCompras();
+                        //se carga tabla historial compras
+                        cargarTabla();
 
             } else {
                 //en el caso de que compras sea menor que 0 

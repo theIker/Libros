@@ -76,15 +76,16 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
-                                <TableView fx:id="tableHisto" layoutX="27.0" layoutY="47.0" prefHeight="519.0" prefWidth="941.0">
+                                <TableView fx:id="tableHisto" layoutX="27.0" layoutY="67.0" prefHeight="499.0" prefWidth="835.0">
                                     <columns>
-                                        <TableColumn fx:id="tbISBN" prefWidth="219.0" text="ISBN" />
-                                        <TableColumn fx:id="tbTitulo" minWidth="0.0" prefWidth="302.0" text="Titulo" />
-                                        <TableColumn fx:id="tbFecha" prefWidth="202.0" text="Fecha" />
-                                        <TableColumn fx:id="tbUnidades" minWidth="0.0" prefWidth="98.0" text="Unidades" />
-                                        <TableColumn fx:id="tbTotal" minWidth="0.0" prefWidth="121.0" text="Total" />
+                                        <TableColumn fx:id="tbISBN" prefWidth="175.0" text="ISBN" />
+                                        <TableColumn fx:id="tbTitulo" minWidth="0.0" prefWidth="314.0" text="Titulo" />
+                                        <TableColumn fx:id="tbFecha" prefWidth="134.0" text="Fecha" />
+                                        <TableColumn fx:id="tbUnidades" minWidth="0.0" prefWidth="108.0" text="Unidades" />
+                                        <TableColumn fx:id="tbTotal" minWidth="0.0" prefWidth="102.0" text="Total" />
                                     </columns>
                                 </TableView>
+                        <Button fx:id="btnElim" layoutX="874.0" layoutY="301.0" mnemonicParsing="false" onAction="#eliminarHistorial" prefHeight="50.0" prefWidth="100.0" text="Borrar" />
                             </children>
                         </AnchorPane>
                     </content>
